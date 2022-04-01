@@ -1,0 +1,130 @@
+//
+//  TabView.swift
+//  LifeAdmin
+//
+//  Created by Aaron Johncock on 28/03/2022.
+//
+
+import SwiftUI
+
+import SwiftUI
+
+struct TabView: View {
+    
+    
+    @State var isActive = true
+    @Binding var showActive: Bool
+    @Binding var showNewAccount: Bool
+    
+    let height = UIScreen.main.bounds.height / 7.5
+    let largeHeight = UIScreen.main.bounds.height / 8.5
+    
+    var isScreenLarge: Bool {
+        UIScreen.main.bounds.height > 680
+    }
+        
+    var body: some View {
+        
+        ZStack {
+            
+            Rectangle()
+                .fill(Color("RowBackground"))
+                .shadow(color: .black.opacity(0.15), radius: 20, y: -2)
+            
+            // Tab Text Buttons
+            HStack {
+                Button {
+                    showActive = true
+                    withAnimation(.easeInOut) {
+                        isActive = true
+                    }
+                } label: {
+                    Text("Active")
+                        .frame(width: 100)
+                        .offset(y: isActive ? -10 : 0)
+                        .scaleEffect(isActive ? 1.1 : 1)
+                }
+                .buttonStyle(FlatButtonStyle())
+                
+                Spacer()
+                
+                Button {
+                    showActive = false
+                    withAnimation(.easeInOut) {
+                        isActive = false
+                    }
+                } label: {
+                    Text("Inactive")
+                        .frame(width: 100)
+                        .offset(y: isActive ? 0 : -10)
+                        .scaleEffect(isActive ? 1 : 1.1)
+
+                }
+                .buttonStyle(FlatButtonStyle())
+
+                
+            }
+            .font(isScreenLarge ? .title.weight(.light) : .title2.weight(.light))
+            .foregroundColor(Color("TabText"))
+            .padding(.horizontal, 20)
+            
+            
+            // Circles
+            HStack{
+                Circle()
+                    .fill(Color("Green1"))
+                    .frame(width: height)
+                    .frame(width: 100)
+                    .offset(y: isActive ? (isScreenLarge ? largeHeight / 1.5 : height / 1.5) : (isScreenLarge ? largeHeight : height))
+                    .shadow(color: .black.opacity(isActive ? 0.2 : 0), radius: 10, x: 0, y: -10)
+                
+                Spacer()
+                
+                Circle()
+                    .fill(Color("Green1"))
+                    .frame(width: height)
+                    .frame(width: 100)
+                    .offset(y: isActive ? (isScreenLarge ? largeHeight : height) : (isScreenLarge ? largeHeight / 1.5 : height / 1.5))
+                    .shadow(color: .black.opacity(isActive ? 0 : 0.2), radius: 10, x: 0, y: -10)
+
+                
+            }
+            .padding(.horizontal, 20)
+            
+            // New Account Button
+            Button {
+                showNewAccount = true
+
+            } label: {
+                ZStack {
+                    Circle()
+                        .fill(
+                            LinearGradient(colors: [Color("Blue1"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
+                        )
+                        .frame(width: isScreenLarge ? largeHeight : height, height: isScreenLarge ? largeHeight : height)
+                    
+                    Image(systemName: "plus")
+                        .font(.system(size:isScreenLarge ? 60 : 50, weight: .thin))
+                        .foregroundColor(.white)
+                }
+            }
+            .offset(y: -height / 2)
+            .shadow(color: .black.opacity(0.2), radius: 15, x: 5, y: 10)
+            
+        }
+        .frame(height: isScreenLarge ? largeHeight : height)
+        .frame(maxHeight: .infinity, alignment:  .bottom)
+        .ignoresSafeArea()
+    }
+}
+
+struct TabView_Previews: PreviewProvider {
+    static var previews: some View {
+        TabView(showActive: .constant(true), showNewAccount: .constant(false))
+        
+        TabView(showActive: .constant(true), showNewAccount: .constant(false))
+            .previewDevice("iPhone SE (2nd generation)")
+
+    }
+}
+
