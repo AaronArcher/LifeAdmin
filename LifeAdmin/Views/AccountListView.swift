@@ -10,6 +10,8 @@ import SwiftUI
 struct AccountListView: View {
     
     @Environment(\.managedObjectContext) var moc
+    
+    @AppStorage("showTotalAs") var showTotalAs = "month"
    
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.name),
@@ -34,6 +36,7 @@ struct AccountListView: View {
     @State private var showDelete = false
     @State var selectedID: UUID = UUID()
     @Binding var showSettings: Bool
+    
     
     var body: some View {
         
@@ -73,8 +76,8 @@ struct AccountListView: View {
                             
                             HStack(spacing: 3) {
                                 Text("£\(totalPrice, specifier: "%.2f")")
-                                    .font(.title.bold())
-                                Text("/month")
+                                    .font(.title3.bold())
+                                Text("/\(showTotalAs)")
                                     .font(.caption)
                             }
                             .foregroundColor(Color("PrimaryText"))
@@ -132,7 +135,7 @@ struct AccountListView: View {
                                         isActive: account.isActive)
                                     
                                 } label: {
-                                    AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
+                                    AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
 
                                 }
                                 .padding(.bottom, account == activeAccounts.last ? 90 : 0)
@@ -171,6 +174,9 @@ struct AccountListView: View {
             .onChange(of: showActive, perform: { _ in
                 calcTotal(showActive)
             })
+            .onChange(of: showTotalAs, perform: { _ in
+                calcTotal(showActive)
+            })
             .frame(maxHeight: .infinity)
             .ignoresSafeArea()
             .alert("Are you sure you want to delete this account?", isPresented: $showDelete, actions: {
@@ -182,25 +188,41 @@ struct AccountListView: View {
             }) {
                 EditAccountView(showEditAccount: $showNewAccount)
             }
-            .sheet(isPresented: $showSettings) {
+            .fullScreenCover(isPresented: $showSettings) {
                 SettingsView()
             }
+            
 
     }
        
     func calcTotal(_ isActive: Bool) {
-        var total: Double = 0
-        let accounts = isActive ? activeAccounts : inactiveAccounts
-        for active in accounts {
-            if active.per == "year" {
-                total += active.price / 12
+        if showTotalAs == "month" {
+            var total: Double = 0
+            let accounts = isActive ? activeAccounts : inactiveAccounts
+            for active in accounts {
+                if active.per == "year" {
+                    total += active.price / 12
+                }
+                else {
+                    total += active.price
+                }
             }
-            else {
-                total += active.price
+            totalPrice = total
+            
+        } else {
+            var total: Double = 0
+            let accounts = isActive ? activeAccounts : inactiveAccounts
+            for active in accounts {
+                if active.per == "month" {
+                    total += active.price * 12
+                }
+                else {
+                    total += active.price
+                }
             }
+            totalPrice = total
         }
         
-        totalPrice = total
         
     }
     

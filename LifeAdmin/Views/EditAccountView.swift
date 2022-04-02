@@ -13,6 +13,12 @@ struct EditAccountView: View {
     
     @FetchRequest(sortDescriptors: []) var allAccounts: FetchedResults<AccountData>
     
+    @AppStorage("defaultEmail") var defaultEmail = ""
+    @AppStorage("defaultPhone") var defaultPhone = ""
+    @AppStorage("defaultAddress1") var defaultAddress1 = ""
+    @AppStorage("defaultAddress2") var defaultAddress2 = ""
+    @AppStorage("defaultPostcode") var defaultPostcode = ""
+    
     let iconList: [String] = ["play.tv.fill", "phone.fill", "flame.fill", "bolt.fill", "gamecontroller.fill", "book.fill", "desktopcomputer", "computermouse.fill", "heart.fill", "bag.fill", "drop.fill", "envelope.fill", "star.fill", "music.note", "moon.fill", "house.fill", "brain.head.profile", "cross.fill", "waveform.path.ecg", "sterlingsign.circle.fill", "pawprint.fill", "leaf.fill", "airplane", "car.fill", "train.side.front.car", "network", "wifi", "mic.fill"]
     
     let dates: [String] = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th","13th", "14th", "15th", "16th","17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31st", "Select"]
@@ -158,6 +164,23 @@ struct EditAccountView: View {
                         .padding(.leading, 10)
                         .keyboardType(.emailAddress)
                         .textContentType(.emailAddress)
+                        .padding(.trailing, 10)
+                    
+                    if email == "" {
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            email = defaultEmail
+                        } label: {
+                            Text("Use Default")
+                                .foregroundColor(Color("Green1"))
+                                .font(.footnote)
+                        }
+                        .padding(.trailing, 10)
+                    }
+                }
+                    
                 }
                 
                 // Phone
@@ -170,8 +193,23 @@ struct EditAccountView: View {
                     TextField("Phone Number", text: $phone)
                         .padding(.leading, 10)
                         .foregroundColor(Color("PrimaryText"))
-                        .keyboardType(.namePhonePad)
+                        .keyboardType(.phonePad)
                         .textContentType(.telephoneNumber)
+                    
+                    if phone == "" {
+                    HStack {
+                        Spacer()
+                        
+                        Button {
+                            phone = defaultPhone
+                        } label: {
+                            Text("Use Default")
+                                .foregroundColor(Color("Green1"))
+                                .font(.footnote)
+                        }
+                        .padding(.trailing, 10)
+                    }
+                }
                 }
                 
                 // Password
@@ -196,12 +234,34 @@ struct EditAccountView: View {
                         .foregroundColor(Color("RowBackground"))
                         .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                     
+                    
                     VStack {
-                        TextField("Address Line 1", text: $address1)
-                            .padding(.leading, 10)
-                            .foregroundColor(Color("PrimaryText"))
-                            .textInputAutocapitalization(TextInputAutocapitalization.never)
+                        ZStack {
+                            TextField("Address Line 1", text: $address1)
+                                .padding(.leading, 10)
+                                .foregroundColor(Color("PrimaryText"))
+                                .textInputAutocapitalization(TextInputAutocapitalization.never)
                             .disableAutocorrection(true)
+                        
+                            if address1 == "" && address2 == "" && postcode == "" {
+                            HStack {
+                                Spacer()
+                                
+                                Button {
+                                    address1 = defaultAddress1
+                                    address2 = defaultAddress2
+                                    postcode = defaultPostcode
+                                } label: {
+                                    Text("Use Default")
+                                        .foregroundColor(Color("Green1"))
+                                        .font(.footnote)
+                                }
+                                .padding(.trailing, 10)
+                            }
+                        }
+                            
+                        }
+                        
                         
                         TextField("Address Line 2", text: $address2)
                             .padding(.leading, 10)

@@ -26,6 +26,7 @@ struct AccountRow: View {
     var name: String = "Amazon Prime"
     var icon: String = "play.tv.fill"
     var price: Double = 6.99
+    var per: String = ""
     var id: UUID
     @Binding var selectedID: UUID
     @Binding var showDelete: Bool
@@ -70,13 +71,20 @@ struct AccountRow: View {
                 
                 Text(name)
                     .font(.title3)
+                    .lineLimit(1)
                    
                 
                 Spacer()
                 
                 if price != 0.0 {
-                    Text("£\(price, specifier: "%.2f")")
-                        .font(.subheadline.weight(.light))
+                    VStack(spacing: 1) {
+                        Text("£\(price, specifier: "%.2f")")
+                            .font(.subheadline.weight(.light))
+    
+                       Text("/\(per)")
+                            .font(.caption.weight(.light))
+                            .foregroundColor(Color("Green1"))
+                    }
                 }
                 
                 

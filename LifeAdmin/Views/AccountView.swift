@@ -71,8 +71,10 @@ struct AccountView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.title)
+                            .font(.title.weight(.light))
                             .foregroundColor(Color("PrimaryText"))
+                            .frame(width: 30, height: 30)
+
                     }
                     
                     Spacer()
@@ -83,16 +85,17 @@ struct AccountView: View {
                             showEdit = true
                             
                         } label: {
-                            Text("Edit")
-                                .foregroundColor(.white)
-                                .font(.headline.weight(.light))
+                            
+                            Image(systemName: "square.and.pencil")
+                                .font(.title.weight(.light))
+                                .foregroundColor(Color("PrimaryText"))
+                                .frame(width: 30, height: 30)
                         }
                     }
                     
                 }
                 .padding(.horizontal)
-                .padding(.leading, 10)
-                .offset(y: (screen.height / 6) / 2.5)
+                .offset(y: (screen.height / 6) / 2.7)
                 
             }
             .padding(.bottom, 40)
