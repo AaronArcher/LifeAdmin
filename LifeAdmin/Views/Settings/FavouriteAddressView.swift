@@ -131,7 +131,7 @@ struct FavouriteAddressView: View {
             
             Spacer()
         }
-        .alert("Phone number saved!", isPresented: $showingAlert, actions: {
+        .alert("Address saved!", isPresented: $showingAlert, actions: {
             Button("OK", role: .cancel) { }
 
         })

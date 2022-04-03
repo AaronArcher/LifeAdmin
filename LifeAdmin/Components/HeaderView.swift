@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HeaderView: View {
     
+    
     var text: String
     let screen = UIScreen.main.bounds
 
@@ -21,7 +22,6 @@ struct HeaderView: View {
                     LinearGradient(colors: [Color("Green1"), Color("Green1"), Color("Green1"), Color("Green2")], startPoint: .top, endPoint: .bottom)
                 )
                 .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 10)
-                
 
             Text(text)
                 .font(.largeTitle.weight(.light))
@@ -37,6 +37,7 @@ struct HeaderView: View {
     }
 }
 struct HeaderView_Previews: PreviewProvider {
+    
     static var previews: some View {
         HeaderView(text: "Active Accounts")
     }
@@ -57,7 +58,5 @@ struct HeaderShape: Shape {
         
         return path
     }
-    
-    
 }
 

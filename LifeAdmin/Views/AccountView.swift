@@ -20,7 +20,7 @@ struct AccountView: View {
     
     let screen = UIScreen.main.bounds
     @Environment(\.dismiss) var dismiss
-    
+        
     let id: UUID
     let accountName: String
     let icon: String
@@ -71,8 +71,8 @@ struct AccountView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .font(.title.weight(.light))
-                            .foregroundColor(Color("PrimaryText"))
+                            .font(.title2.weight(.light))
+                            .foregroundColor(.white)
                             .frame(width: 30, height: 30)
 
                     }
@@ -87,8 +87,8 @@ struct AccountView: View {
                         } label: {
                             
                             Image(systemName: "square.and.pencil")
-                                .font(.title.weight(.light))
-                                .foregroundColor(Color("PrimaryText"))
+                                .font(.title2.weight(.light))
+                                .foregroundColor(.white)
                                 .frame(width: 30, height: 30)
                         }
                     }
@@ -244,6 +244,7 @@ struct AccountView: View {
 }
 
 struct AccountView_Previews: PreviewProvider {
+        
     static var previews: some View {
         AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true)
     }

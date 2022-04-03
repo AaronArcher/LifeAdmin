@@ -36,6 +36,7 @@ struct AccountListView: View {
     @State private var showDelete = false
     @State var selectedID: UUID = UUID()
     @Binding var showSettings: Bool
+    @Binding var showCategories: Bool
     
     
     var body: some View {
@@ -48,6 +49,17 @@ struct AccountListView: View {
                     HeaderView(text: showActive ? "Active Accounts" : "Inactive Accounts")
 
                     HStack {
+                        
+                        Button {
+                            withAnimation {
+                                showCategories.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .foregroundColor(.white)
+                                .font(.title2)
+                        }
+
 
                         Spacer()
 
@@ -249,7 +261,7 @@ struct AccountListView: View {
 
 struct ActiveView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false))
+        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false), showCategories: .constant(false))
     }
 }
 

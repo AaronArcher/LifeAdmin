@@ -127,6 +127,8 @@ struct SettingsView: View {
                         
                         
                     })
+                        .listRowSeparator(.hidden)
+
                     
                     Section {
                         
@@ -163,12 +165,10 @@ struct SettingsView: View {
                         Text("Default Contact Details")
                             .foregroundColor(Color("Green1"))
                     }
-                    
-                    
+                    .listRowSeparator(.hidden)
                     
                     
                 }
-                .listRowBackground(Color("RowBackground"))
                 .foregroundColor(Color("PrimaryText"))
                 
                 

@@ -9,24 +9,42 @@ import SwiftUI
 
 struct HomeView: View {
     
-        
+    let screenSize = UIScreen.main.bounds.width
+    
     @State private var showNewAccount = false
     
     @State private var showActive = true
     
     @State private var showSettings = false
     
+    @State private var showCategories = false
+    
     var body: some View {
         NavigationView {
             ZStack {
-                              
-                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings)
+                
+                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories)
+                    .disabled(showCategories)
+                    .overlay(
+                        Color.black.opacity(showCategories ? 0.7 : 0)
+                    )
+                    .blur(radius: showCategories ? 3 : 0)
+                    
                 
                 TabView(showActive: $showActive, showNewAccount: $showNewAccount)
+                    .disabled(showCategories)
+                    .overlay(
+                        Color.black.opacity(showCategories ? 0.7 : 0)
+                    )
+                    .blur(radius: showCategories ? 3 : 0)
+                
+                CategoriesView(showCategories: $showCategories)
+                    .offset(x: showCategories ? 0 : -(screenSize))
+                
+                
             }
-            .ignoresSafeArea()
             .background(Color("Background"))
-
+            
         }
     }
 }

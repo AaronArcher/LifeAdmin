@@ -171,7 +171,12 @@ struct EditAccountView: View {
                         Spacer()
                         
                         Button {
-                            email = defaultEmail
+                            if defaultEmail != "" {
+                                email = defaultEmail
+                            } else {
+                                alertTitle = "You have not set a default email address. You can set this in Settings"
+                                showAlert.toggle()
+                            }
                         } label: {
                             Text("Use Default")
                                 .foregroundColor(Color("Green1"))
@@ -201,7 +206,13 @@ struct EditAccountView: View {
                         Spacer()
                         
                         Button {
-                            phone = defaultPhone
+                            if defaultPhone != "" {
+                                phone = defaultPhone
+                            } else {
+                                alertTitle = "You have not set a default phone number. You can set this in Settings"
+                                showAlert.toggle()
+                            }
+
                         } label: {
                             Text("Use Default")
                                 .foregroundColor(Color("Green1"))
@@ -248,9 +259,17 @@ struct EditAccountView: View {
                                 Spacer()
                                 
                                 Button {
-                                    address1 = defaultAddress1
-                                    address2 = defaultAddress2
-                                    postcode = defaultPostcode
+                                    if defaultAddress1 != "" || defaultAddress2 != "" || defaultPostcode != "" {
+                                        
+                                        address1 = defaultAddress1
+                                        address2 = defaultAddress2
+                                        postcode = defaultPostcode
+                                        
+                                    } else {
+                                        alertTitle = "You have not set a default address. You can set this in Settings"
+                                        showAlert.toggle()
+                                    }
+
                                 } label: {
                                     Text("Use Default")
                                         .foregroundColor(Color("Green1"))

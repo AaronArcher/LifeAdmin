@@ -18,7 +18,7 @@ struct AccountRow: View {
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.name),
     ], predicate: NSPredicate(format: "isActive == false")) var inactiveAccounts: FetchedResults<AccountData>
-    
+            
     var isActive: Bool = true
     @State private var showAccount = false
     @State private var showBackground = false
@@ -67,7 +67,9 @@ struct AccountRow: View {
                         .foregroundColor(.white)
                         .font(.title.weight(.thin))
                 }
-                .frame(width: 65, height: 65)                    .offset(x: -25)
+                .frame(width: 65, height: 65)
+                .offset(x: -25)
+
                 
                 Text(name)
                     .font(.title3)
@@ -77,7 +79,7 @@ struct AccountRow: View {
                 Spacer()
                 
                 if price != 0.0 {
-                    VStack(spacing: 1) {
+                    VStack(alignment: .trailing, spacing: 1) {
                         Text("£\(price, specifier: "%.2f")")
                             .font(.subheadline.weight(.light))
     
@@ -182,6 +184,7 @@ struct AccountRow: View {
 }
 
 struct AccountRow_Previews: PreviewProvider {
+    
     static var previews: some View {
         AccountRow(id: UUID(), selectedID: .constant(UUID()), showDelete: .constant(false))
     }
