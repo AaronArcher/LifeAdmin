@@ -19,11 +19,13 @@ struct HomeView: View {
     
     @State private var showCategories = false
     
+    @State private var selectedCategory = "None"
+    
     var body: some View {
         NavigationView {
             ZStack {
                 
-                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories)
+                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory)
                     .disabled(showCategories)
                     .overlay(
                         Color.black.opacity(showCategories ? 0.7 : 0)
@@ -38,7 +40,7 @@ struct HomeView: View {
                     )
                     .blur(radius: showCategories ? 3 : 0)
                 
-                CategoriesView(showCategories: $showCategories)
+                CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories)
                     .offset(x: showCategories ? 0 : -(screenSize))
                 
                 

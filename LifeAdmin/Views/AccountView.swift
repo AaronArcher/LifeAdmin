@@ -24,6 +24,7 @@ struct AccountView: View {
     let id: UUID
     let accountName: String
     let icon: String
+    let category: String
     let email: String
     let phone: String
     let password: String
@@ -98,7 +99,26 @@ struct AccountView: View {
                 .offset(y: (screen.height / 6) / 2.7)
                 
             }
-            .padding(.bottom, 40)
+            .padding(.bottom, 30)
+            
+            // Category
+            if category != "None" {
+                HStack {
+                    Spacer()
+                    
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("Category:")
+                            .foregroundColor(Color("Green1"))
+                        Text(category)
+                            .bold()
+                    }
+                    .foregroundColor(Color("PrimaryText"))
+                    .font(.caption)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, -20)
+            }
+            
             
             VStack {
                 
@@ -203,7 +223,8 @@ struct AccountView: View {
                             price: String(price),
                             per: per,
                             paymentDay:paymentDay,
-                            paymentMonth: paymentMonth
+                            paymentMonth: paymentMonth,
+                            selectedCategory: category
             )
             
         }
@@ -246,7 +267,7 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
         
     static var previews: some View {
-        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true)
+        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true)
     }
 }
 

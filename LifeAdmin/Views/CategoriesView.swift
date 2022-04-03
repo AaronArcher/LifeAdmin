@@ -7,11 +7,11 @@
 
 import SwiftUI
 
+
 struct CategoriesView: View {
     
-    @State private var categories: [String] = ["All", "Bills", "Education", "Finance", "Entertainment", "Social Media", "Travel", "Other"].sorted()
     
-    @State var selectedCategory = "All"
+    @Binding var selectedCategory: String
     
     let screenWidth = UIScreen.main.bounds.width
     @Binding var showCategories: Bool
@@ -29,6 +29,7 @@ struct CategoriesView: View {
                     Button {
                         withAnimation {
                             showCategories.toggle()
+                            
                         }
                     } label: {
                         Image(systemName: "xmark")
@@ -48,34 +49,85 @@ struct CategoriesView: View {
                     Color.clear
                         .frame(width: 30, height: 30)
                 }
-                .padding(.bottom, 30)
+                .padding(.bottom)
+                
+                Text("Filter your accounts by:")
+                    .font(.title3.weight(.light))
+                    .foregroundColor(Color("PrimaryText"))
+                    .padding(.bottom, 40)
 
                 // Categories
-                ForEach(categories, id: \.self) { category in
-                    
-                    Button {
-                        withAnimation {
-                            selectedCategory = category
-                        }
-                    } label: {
-                        ZStack {
-                            if selectedCategory == category {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .frame(height: 40)
-                                    .foregroundColor(Color("Green1"))
-                                    .matchedGeometryEffect(id: "category", in: namespace)
-                            }
-                            Text(category)
-                                .foregroundColor(selectedCategory == category ? .white : Color("PrimaryText"))
-                                .font(selectedCategory == category ? .title3 : .title3.weight(.light))
-                                .matchedGeometryEffect(id: "text\(category)", in: namespace)
-                               
-                        }
+                
+                Button {
+                    withAnimation {
+                        selectedCategory = "None"
                     }
-                    .padding(5)
-                    .font(.title3.weight(.light))
+                } label: {
                     
-                       
+                    ZStack {
+                        if selectedCategory == "None" {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(height: 40)
+                                .foregroundColor(Color("Green1"))
+                                .matchedGeometryEffect(id: "category", in: namespace)
+                            
+                            Text("All")
+                                .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
+                                .font(.title3)
+                            
+                        } else {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(height: 40)
+                                .foregroundColor(.clear)
+                            
+                            
+                        }
+                        Text("All")
+                            .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
+                            .font(.title3)
+                            
+                    }
+                }
+                .buttonStyle(FlatButtonStyle())
+                .font(.title3.weight(.light))
+                
+                ForEach(Constants.categories.sorted(), id: \.self) { category in
+                    if category != "None" {
+                        Button {
+                            withAnimation {
+                                selectedCategory = category
+                            }
+                        } label: {
+                            
+                            ZStack {
+                                if selectedCategory == category {
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(height: 40)
+                                        .foregroundColor(Color("Green1"))
+                                        .matchedGeometryEffect(id: "category", in: namespace)
+                                    
+                                    Text(category)
+                                        .foregroundColor(selectedCategory == category ? .white : Color("PrimaryText"))
+                                        .font(.title3)
+                                    
+                                } else {
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(height: 40)
+                                        .foregroundColor(.clear)
+                                    
+                                    
+                                }
+                                Text(category)
+                                    .foregroundColor(selectedCategory == category ? .white : Color("PrimaryText"))
+                                    .font(.title3)
+                                    
+                            }
+                        }
+                        .buttonStyle(FlatButtonStyle())
+                        .font(.title3.weight(.light))
+                    }
+                    
+                    
                 }
               
 
@@ -103,6 +155,6 @@ struct CategoriesView: View {
 
 struct CategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView(showCategories: .constant(true))
+        CategoriesView(selectedCategory: .constant("All"), showCategories: .constant(true))
     }
 }

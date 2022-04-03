@@ -19,11 +19,7 @@ struct EditAccountView: View {
     @AppStorage("defaultAddress2") var defaultAddress2 = ""
     @AppStorage("defaultPostcode") var defaultPostcode = ""
     
-    let iconList: [String] = ["play.tv.fill", "phone.fill", "flame.fill", "bolt.fill", "gamecontroller.fill", "book.fill", "desktopcomputer", "computermouse.fill", "heart.fill", "bag.fill", "drop.fill", "envelope.fill", "star.fill", "music.note", "moon.fill", "house.fill", "brain.head.profile", "cross.fill", "waveform.path.ecg", "sterlingsign.circle.fill", "pawprint.fill", "leaf.fill", "airplane", "car.fill", "train.side.front.car", "network", "wifi", "mic.fill"]
-    
-    let dates: [String] = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th","13th", "14th", "15th", "16th","17th", "18th", "19th", "20th", "21st", "22nd", "23rd", "24th", "25th", "26th", "27th", "28th", "29th", "30th", "31st", "Select"]
-    
-    let months: [String] = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec", "Select"]
+
     
     @Binding var showEditAccount: Bool
     
@@ -44,6 +40,7 @@ struct EditAccountView: View {
     @State var per: String = ""
     @State var paymentDay: String = ""
     @State var paymentMonth: String = ""
+    @State var selectedCategory: String = ""
     
     @State private var alertTitle = ""
     @State private var showAlert = false
@@ -113,7 +110,7 @@ struct EditAccountView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(iconList, id: \.self) { i in
+                            ForEach(Constants.iconList, id: \.self) { i in
                                 
                                 ZStack {
                                     Circle()
@@ -148,7 +145,35 @@ struct EditAccountView: View {
                         .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                 )
                 
-                
+                // Category
+                ZStack {
+                    
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .frame(height: 45)
+                        .foregroundColor(Color("RowBackground"))
+                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                    
+                    HStack {
+                        Text("Category:")
+                            .font(.callout)
+                            .opacity(0.6)
+                            .foregroundColor(.secondary)
+                        
+                        Spacer()
+                        
+                        Picker("Category", selection: $selectedCategory) {
+                            ForEach(Constants.categories, id: \.self) { category in
+                                Text(category)
+                            }
+                            
+                        }
+                        .pickerStyle(.menu)
+                        .accentColor(Color("PrimaryText"))
+                        .padding(.trailing, 10)
+
+                    }
+                    .padding(.horizontal, 10)
+                }
                 
                 // Email
                 ZStack {
@@ -394,7 +419,7 @@ struct EditAccountView: View {
                                 Spacer()
                                 
                                 Picker("Date", selection: $paymentDay) {
-                                    ForEach(dates.reversed(), id: \.self) { date in
+                                    ForEach(Constants.datesList.reversed(), id: \.self) { date in
                                         Text(date)
                                     }
                                     
@@ -427,7 +452,7 @@ struct EditAccountView: View {
                                 Spacer()
                                 
                                 Picker("Month", selection: $paymentMonth) {
-                                    ForEach(months.reversed(), id: \.self) { month in
+                                    ForEach(Constants.monthsList.reversed(), id: \.self) { month in
                                         Text(month)
                                     }
                                     
@@ -474,12 +499,20 @@ struct EditAccountView: View {
             alertTitle = "Account name and Icon must be set."
             showAlert = true
             
-        } else if !price.isEmpty && per.isEmpty {
+        } else if (!price.isEmpty || actualPrice != Double(0)) && per.isEmpty {
             alertTitle = "You must set the payment date."
             showAlert = true
             
         } else if (price.isEmpty || actualPrice == 0) && !per.isEmpty {
             alertTitle = "You must set the price."
+            showAlert = true
+        }
+        else if per == "month" && paymentDay == "Select" {
+            alertTitle = "You must set the payment date."
+            showAlert = true
+        }
+        else if (per == "year" && paymentDay == "Select") || (per == "year" && paymentMonth == "Select") {
+            alertTitle = "You must set the payment month."
             showAlert = true
         }
         else {
@@ -490,6 +523,7 @@ struct EditAccountView: View {
             newAccount.name = accountName
             newAccount.isActive = true
             newAccount.icon = icon
+            newAccount.category = selectedCategory
             newAccount.email = email
             newAccount.phone = phone
             newAccount.password = password
@@ -533,6 +567,7 @@ struct EditAccountView: View {
                 if account.id == id {
                     account.name = accountName
                     account.icon = icon
+                    account.category = selectedCategory
                     account.email = email
                     account.phone = phone
                     account.password = password

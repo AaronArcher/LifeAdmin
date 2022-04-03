@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */; };
+		EE750B4627FA13A6006768C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE750B4527FA13A6006768C4 /* Constants.swift */; };
 		EE872EFA27F9C73F0047AF43 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE872EF927F9C73F0047AF43 /* CategoriesView.swift */; };
 		EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */; };
 		EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */; };
@@ -25,12 +26,12 @@
 		EEB55C5427F2437E006A90C7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C5327F2437E006A90C7 /* HeaderView.swift */; };
 		EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C5527F24396006A90C7 /* AccountDetailView.swift */; };
 		EEB55C5A27F24666006A90C7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB55C5927F24666006A90C7 /* CloudKit.framework */; };
-		EEB55C6127F4E7D9006A90C7 /* paymentDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C6027F4E7D9006A90C7 /* paymentDates.swift */; };
 		EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C6227F65178006A90C7 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddressView.swift; sourceTree = "<group>"; };
+		EE750B4527FA13A6006768C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE872EF927F9C73F0047AF43 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPhoneView.swift; sourceTree = "<group>"; };
 		EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteEmailView.swift; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		EEB55C5727F24663006A90C7 /* LifeAdmin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeAdmin.entitlements; sourceTree = "<group>"; };
 		EEB55C5927F24666006A90C7 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EEB55C5B27F246DC006A90C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		EEB55C6027F4E7D9006A90C7 /* paymentDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = paymentDates.swift; sourceTree = "<group>"; };
 		EEB55C6227F65178006A90C7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,7 +147,7 @@
 		EEB55C4627F2414D006A90C7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				EEB55C6027F4E7D9006A90C7 /* paymentDates.swift */,
+				EE750B4527FA13A6006768C4 /* Constants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,11 +247,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB55C5027F2434A006A90C7 /* AccountRow.swift in Sources */,
+				EE750B4627FA13A6006768C4 /* Constants.swift in Sources */,
 				EEB55C4C27F242FD006A90C7 /* AccountView.swift in Sources */,
 				EEB55C3B27F1ACAE006A90C7 /* Persistence.swift in Sources */,
 				EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */,
 				EEB55C3427F1ACAD006A90C7 /* HomeView.swift in Sources */,
-				EEB55C6127F4E7D9006A90C7 /* paymentDates.swift in Sources */,
 				EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */,
 				EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */,
 				EE872EFA27F9C73F0047AF43 /* CategoriesView.swift in Sources */,
