@@ -102,7 +102,7 @@ struct AccountView: View {
             .padding(.bottom, 30)
             
             // Category
-            if category != "None" {
+            if category != "None" && !category.isEmpty {
                 HStack {
                     Spacer()
                     
@@ -220,7 +220,7 @@ struct AccountView: View {
                             address1: address1,
                             address2: address2,
                             postcode: postcode,
-                            price: String(price),
+                            price: price == 0 ? "" : String(price),
                             per: per,
                             paymentDay:paymentDay,
                             paymentMonth: paymentMonth,

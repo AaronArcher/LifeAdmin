@@ -152,7 +152,7 @@ struct AccountRow: View {
         .opacity(showAccount ? 1 : 0)
         .onAppear {
             // Show accounts one at a time
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
                 withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.1)) {
                     showAccount = true
                 }

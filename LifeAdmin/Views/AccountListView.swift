@@ -144,32 +144,92 @@ struct AccountListView: View {
                             
                             ForEach(showActive ? activeAccounts : inactiveAccounts) { account in
                                 
-                                NavigationLink {
+                                if selectedCategory == "None" {
+                                    NavigationLink {
+                                        
+                                        AccountView(
+                                            id: account.id ?? UUID(),
+                                            accountName: account.name ?? "",
+                                            icon: account.icon ?? "",
+                                            category: account.category ?? "",
+                                            email: account.email ?? "",
+                                            phone: account.phone ?? "",
+                                            password: account.password ?? "",
+                                            address1: account.address1 ?? "",
+                                            address2: account.address2 ?? "",
+                                            postcode: account.postcode ?? "",
+                                            price: account.price,
+                                            per: account.per ?? "",
+                                            paymentDay: account.paymentDay ?? "",
+                                            paymentMonth: account.paymentMonth ?? "",
+                                            isActive: account.isActive)
+                                        
+                                    } label: {
+                                        AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
+                                        
+                                    }
+                                    .padding(.bottom, account == activeAccounts.last ? 90 : 0)
+                                    .padding(.trailing, 8)
+                                    .buttonStyle(FlatButtonStyle())
                                     
-                                    AccountView(
-                                        id: account.id ?? UUID(),
-                                        accountName: account.name ?? "",
-                                        icon: account.icon ?? "",
-                                        category: account.category ?? "",
-                                        email: account.email ?? "",
-                                        phone: account.phone ?? "",
-                                        password: account.password ?? "",
-                                        address1: account.address1 ?? "",
-                                        address2: account.address2 ?? "",
-                                        postcode: account.postcode ?? "",
-                                        price: account.price,
-                                        per: account.per ?? "",
-                                        paymentDay: account.paymentDay ?? "",
-                                        paymentMonth: account.paymentMonth ?? "",
-                                        isActive: account.isActive)
+                                } else if account.category == selectedCategory {
                                     
-                                } label: {
-                                    AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
+                                    NavigationLink {
+                                        
+                                        AccountView(
+                                            id: account.id ?? UUID(),
+                                            accountName: account.name ?? "",
+                                            icon: account.icon ?? "",
+                                            category: account.category ?? "",
+                                            email: account.email ?? "",
+                                            phone: account.phone ?? "",
+                                            password: account.password ?? "",
+                                            address1: account.address1 ?? "",
+                                            address2: account.address2 ?? "",
+                                            postcode: account.postcode ?? "",
+                                            price: account.price,
+                                            per: account.per ?? "",
+                                            paymentDay: account.paymentDay ?? "",
+                                            paymentMonth: account.paymentMonth ?? "",
+                                            isActive: account.isActive)
+                                        
+                                    } label: {
+                                        AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
+                                        
+                                    }
+                                    .padding(.bottom, account == activeAccounts.last ? 90 : 0)
+                                    .padding(.trailing, 8)
+                                    .buttonStyle(FlatButtonStyle())
                                     
                                 }
-                                .padding(.bottom, account == activeAccounts.last ? 90 : 0)
-                                .padding(.trailing, 8)
-                                .buttonStyle(FlatButtonStyle())
+                                
+//                                NavigationLink {
+//
+//                                    AccountView(
+//                                        id: account.id ?? UUID(),
+//                                        accountName: account.name ?? "",
+//                                        icon: account.icon ?? "",
+//                                        category: account.category ?? "",
+//                                        email: account.email ?? "",
+//                                        phone: account.phone ?? "",
+//                                        password: account.password ?? "",
+//                                        address1: account.address1 ?? "",
+//                                        address2: account.address2 ?? "",
+//                                        postcode: account.postcode ?? "",
+//                                        price: account.price,
+//                                        per: account.per ?? "",
+//                                        paymentDay: account.paymentDay ?? "",
+//                                        paymentMonth: account.paymentMonth ?? "",
+//                                        isActive: account.isActive)
+//
+//                                } label: {
+//                                    AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
+//
+//                                }
+//                                .padding(.bottom, account == activeAccounts.last ? 90 : 0)
+//                                .padding(.trailing, 8)
+//                                .buttonStyle(FlatButtonStyle())
+//
                                 
                             }
                             

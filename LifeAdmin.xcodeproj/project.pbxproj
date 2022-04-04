@@ -67,6 +67,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE65921927FB920D00BAEF99 /* FilteredAccountsViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FilteredAccountsViews;
+			sourceTree = "<group>";
+		};
 		EEAFB65B27F74E7000F203BC /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +135,7 @@
 				EEB55C4B27F242FD006A90C7 /* AccountView.swift */,
 				EEB55C4D27F24320006A90C7 /* EditAccountView.swift */,
 				EE872EF927F9C73F0047AF43 /* CategoriesView.swift */,
+				EE65921927FB920D00BAEF99 /* FilteredAccountsViews */,
 				EEAFB65B27F74E7000F203BC /* Settings */,
 			);
 			path = Views;

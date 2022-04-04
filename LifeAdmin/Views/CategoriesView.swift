@@ -12,6 +12,7 @@ struct CategoriesView: View {
     
     
     @Binding var selectedCategory: String
+    @State private var newCategory = ""
     
     let screenWidth = UIScreen.main.bounds.width
     @Binding var showCategories: Bool
@@ -29,7 +30,6 @@ struct CategoriesView: View {
                     Button {
                         withAnimation {
                             showCategories.toggle()
-                            
                         }
                     } label: {
                         Image(systemName: "xmark")
@@ -58,56 +58,56 @@ struct CategoriesView: View {
 
                 // Categories
                 
-                Button {
-                    withAnimation {
-                        selectedCategory = "None"
-                    }
-                } label: {
-                    
-                    ZStack {
-                        if selectedCategory == "None" {
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .frame(height: 40)
-                                .foregroundColor(Color("Green1"))
-                                .matchedGeometryEffect(id: "category", in: namespace)
-                            
-                            Text("All")
-                                .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
-                                .font(.title3)
-                            
-                        } else {
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .frame(height: 40)
-                                .foregroundColor(.clear)
-                            
-                            
-                        }
-                        Text("All")
-                            .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
-                            .font(.title3)
-                            
-                    }
-                }
-                .buttonStyle(FlatButtonStyle())
-                .font(.title3.weight(.light))
+//                Button {
+//                    withAnimation() {
+//                        selectedCategory = "None"
+//                    }
+//                } label: {
+//
+//                    ZStack {
+//                        if selectedCategory == "None" {
+//                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+//                                .frame(height: 40)
+//                                .foregroundColor(Color("Green1"))
+//                                .matchedGeometryEffect(id: "category", in: namespace)
+//
+//                            Text("All")
+//                                .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
+//                                .font(.title3)
+//
+//                        } else {
+//                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+//                                .frame(height: 40)
+//                                .foregroundColor(.clear)
+//
+//
+//                        }
+//                        Text("All")
+//                            .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
+//                            .font(.title3)
+//
+//                    }
+//                }
+//                .buttonStyle(FlatButtonStyle())
+//                .font(.title3.weight(.light))
                 
                 ForEach(Constants.categories.sorted(), id: \.self) { category in
                     if category != "None" {
                         Button {
                             withAnimation {
-                                selectedCategory = category
+                                newCategory = category
                             }
                         } label: {
                             
                             ZStack {
-                                if selectedCategory == category {
+                                if newCategory == category {
                                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                                         .frame(height: 40)
                                         .foregroundColor(Color("Green1"))
                                         .matchedGeometryEffect(id: "category", in: namespace)
                                     
                                     Text(category)
-                                        .foregroundColor(selectedCategory == category ? .white : Color("PrimaryText"))
+                                        .foregroundColor(newCategory == category ? .white : Color("PrimaryText"))
                                         .font(.title3)
                                     
                                 } else {
@@ -118,7 +118,7 @@ struct CategoriesView: View {
                                     
                                 }
                                 Text(category)
-                                    .foregroundColor(selectedCategory == category ? .white : Color("PrimaryText"))
+                                    .foregroundColor(newCategory == category ? .white : Color("PrimaryText"))
                                     .font(.title3)
                                     
                             }
@@ -128,6 +128,55 @@ struct CategoriesView: View {
                     }
                     
                     
+                }
+                
+                Spacer()
+                
+                HStack {
+                    
+                    Button {
+                        
+                        selectedCategory = "None"
+                        withAnimation {
+                            showCategories.toggle()
+                        }
+                        
+                    } label: {
+                        Text("Clear filter")
+                            .font(.callout)
+                            .foregroundColor(.white)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .foregroundColor(Color("Green1"))
+                            )
+                    }
+                    .disabled(newCategory == "")
+                    
+                    Spacer()
+                    
+                    Button {
+                        
+                        selectedCategory = newCategory
+                        withAnimation {
+                            showCategories.toggle()
+                        }
+                        
+                    } label: {
+                        Text("Apply filter")
+                            .font(.callout)
+                            .foregroundColor(.white)
+                            .padding(.horizontal)
+                            .padding(.vertical, 10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .foregroundColor(Color("Green1"))
+                            )
+                            .opacity(selectedCategory == newCategory ? 0.7 : 1)
+                    }
+                    .disabled(selectedCategory == newCategory)
+                
                 }
               
 

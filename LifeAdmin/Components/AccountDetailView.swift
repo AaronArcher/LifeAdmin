@@ -111,7 +111,7 @@ struct AccountDetailField: View {
                         .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                     
                     if isPrice {
-                        if price != 0.0 {
+                        if price != 0 {
                             HStack(spacing: 2) {
                                 Text("£\(price,specifier: "%.2f")")
                                     .font(.title3)

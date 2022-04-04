@@ -346,11 +346,19 @@ struct EditAccountView: View {
                     
                     // Month
                     Button {
-                        if per == "month" {
-                            per = ""
+                        if price == "" {
+                            alertTitle = "You must set the price first."
+                            showAlert = true
                         } else {
-                            per = "month"
+                            if per == "month" {
+                                per = ""
+                                paymentDay = ""
+                                paymentMonth = ""
+                            } else {
+                                per = "month"
+                            }
                         }
+                       
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -372,10 +380,17 @@ struct EditAccountView: View {
                     
                     // Year
                     Button {
-                        if per == "year" {
-                            per = ""
+                        if price == "" {
+                            alertTitle = "You must set the price first."
+                            showAlert = true
                         } else {
-                            per = "year"
+                            if per == "year" {
+                                per = ""
+                                paymentDay = ""
+                                paymentMonth = ""
+                            } else {
+                                per = "year"
+                            }
                         }
                     } label: {
                         ZStack {
@@ -499,19 +514,13 @@ struct EditAccountView: View {
             alertTitle = "Account name and Icon must be set."
             showAlert = true
             
-        } else if (!price.isEmpty || actualPrice != Double(0)) && per.isEmpty {
-            alertTitle = "You must set the payment date."
-            showAlert = true
-            
-        } else if (price.isEmpty || actualPrice == 0) && !per.isEmpty {
-            alertTitle = "You must set the price."
-            showAlert = true
         }
-        else if per == "month" && paymentDay == "Select" {
-            alertTitle = "You must set the payment date."
+        else if !price.isEmpty && per.isEmpty {
+            alertTitle = "You must set the payment frequency."
             showAlert = true
-        }
-        else if (per == "year" && paymentDay == "Select") || (per == "year" && paymentMonth == "Select") {
+            }
+
+        else if per == "year" && paymentMonth.isEmpty {
             alertTitle = "You must set the payment month."
             showAlert = true
         }
@@ -551,18 +560,28 @@ struct EditAccountView: View {
         
         if !price.isEmpty {
             actualPrice = Double(price) ?? 0
-        } else {
-            actualPrice = Double(price) ?? 0
         }
+//        else {
+//            actualPrice = Double(price) ?? 0
+//        }
         
-        if !price.isEmpty && per.isEmpty {
-            alertTitle = "You must set the payment date."
+        if accountName.isEmpty || icon.isEmpty {
+            // Show alert
+            alertTitle = "Account name and Icon must be set."
             showAlert = true
             
-        } else if (price.isEmpty || actualPrice == 0) && !per.isEmpty {
-            alertTitle = "You must set the price."
+        }
+        else if !price.isEmpty && per.isEmpty {
+            alertTitle = "You must set the payment frequency."
             showAlert = true
-        } else {
+            }
+
+        else if per == "year" && paymentMonth.isEmpty {
+            alertTitle = "You must set the payment month."
+            showAlert = true
+        }
+        
+        else {
             for account in accounts {
                 if account.id == id {
                     account.name = accountName
