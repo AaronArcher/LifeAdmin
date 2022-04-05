@@ -137,6 +137,7 @@ struct CategoriesView: View {
                     Button {
                         
                         selectedCategory = "None"
+                        newCategory = ""
                         withAnimation {
                             showCategories.toggle()
                         }
@@ -153,6 +154,7 @@ struct CategoriesView: View {
                             )
                     }
                     .disabled(newCategory == "")
+                    .opacity(newCategory == "" ? 0.7 : 1)
                     
                     Spacer()
                     
@@ -173,9 +175,10 @@ struct CategoriesView: View {
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .foregroundColor(Color("Green1"))
                             )
-                            .opacity(selectedCategory == newCategory ? 0.7 : 1)
                     }
-                    .disabled(selectedCategory == newCategory)
+                    .opacity((selectedCategory == newCategory) || (newCategory == "") ? 0.7 : 1)
+                    .disabled((selectedCategory == newCategory) || (newCategory == ""))
+                    
                 
                 }
               

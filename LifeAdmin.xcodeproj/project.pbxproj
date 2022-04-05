@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */; };
 		EE750B4627FA13A6006768C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE750B4527FA13A6006768C4 /* Constants.swift */; };
+		EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */; };
+		EE766B2427FCCFFD00AC046C /* FilterPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */; };
+		EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */; };
+		EE766B2C27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */; };
+		EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */; };
+		EE766B3027FCF18200AC046C /* OtherFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */; };
+		EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */; };
+		EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */; };
+		EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */; };
 		EE872EFA27F9C73F0047AF43 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE872EF927F9C73F0047AF43 /* CategoriesView.swift */; };
 		EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */; };
 		EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */; };
@@ -32,6 +41,15 @@
 /* Begin PBXFileReference section */
 		EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddressView.swift; sourceTree = "<group>"; };
 		EE750B4527FA13A6006768C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPredicates.swift; sourceTree = "<group>"; };
+		EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAccountsView.swift; sourceTree = "<group>"; };
+		EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesFilteredAccountView.swift; sourceTree = "<group>"; };
 		EE872EF927F9C73F0047AF43 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPhoneView.swift; sourceTree = "<group>"; };
 		EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteEmailView.swift; sourceTree = "<group>"; };
@@ -70,6 +88,14 @@
 		EE65921927FB920D00BAEF99 /* FilteredAccountsViews */ = {
 			isa = PBXGroup;
 			children = (
+				EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */,
+				EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */,
+				EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */,
+				EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */,
+				EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */,
+				EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */,
+				EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */,
+				EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */,
 			);
 			path = FilteredAccountsViews;
 			sourceTree = "<group>";
@@ -156,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				EE750B4527FA13A6006768C4 /* Constants.swift */,
+				EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -255,21 +282,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB55C5027F2434A006A90C7 /* AccountRow.swift in Sources */,
+				EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */,
+				EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */,
 				EE750B4627FA13A6006768C4 /* Constants.swift in Sources */,
 				EEB55C4C27F242FD006A90C7 /* AccountView.swift in Sources */,
+				EE766B3027FCF18200AC046C /* OtherFilteredAccountView.swift in Sources */,
+				EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */,
 				EEB55C3B27F1ACAE006A90C7 /* Persistence.swift in Sources */,
 				EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */,
 				EEB55C3427F1ACAD006A90C7 /* HomeView.swift in Sources */,
 				EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */,
 				EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */,
+				EE766B2427FCCFFD00AC046C /* FilterPredicates.swift in Sources */,
 				EE872EFA27F9C73F0047AF43 /* CategoriesView.swift in Sources */,
 				EEB55C5427F2437E006A90C7 /* HeaderView.swift in Sources */,
 				EEB55C3E27F1ACAE006A90C7 /* LifeAdmin.xcdatamodeld in Sources */,
+				EE766B2C27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift in Sources */,
 				EEB55C4E27F24320006A90C7 /* EditAccountView.swift in Sources */,
 				EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */,
 				EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */,
 				EEB55C5227F24365006A90C7 /* TabView.swift in Sources */,
+				EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */,
+				EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */,
 				EEB55C4A27F242DC006A90C7 /* AccountListView.swift in Sources */,
+				EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */,
 				EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

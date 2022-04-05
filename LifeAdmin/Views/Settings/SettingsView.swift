@@ -12,9 +12,9 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @Namespace var namespace
     
-    @AppStorage("isDarkMode") private var isDarkMode = false
+    @AppStorage("isDarkMode") var isDarkMode = false
     @AppStorage("showTotalAs") var showTotalAs = "month"
-    
+        
     
     var body: some View {
         
@@ -68,7 +68,9 @@ struct SettingsView: View {
                                 Button {
                                     withAnimation {
                                         showTotalAs = "month"
+                                        
                                     }
+                                    print("changed showtotal to month")
                                 } label: {
                                     if showTotalAs == "month" {
                                         Text("Month")
@@ -96,7 +98,10 @@ struct SettingsView: View {
                                 Button {
                                     withAnimation {
                                         showTotalAs = "year"
+                                        
                                     }
+                                    print("Settings - changed showtotal to year")
+
                                 } label: {
                                     if showTotalAs == "year" {
                                         Text("Year")

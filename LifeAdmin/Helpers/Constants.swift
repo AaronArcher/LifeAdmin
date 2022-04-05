@@ -17,3 +17,5 @@ struct Constants {
     
     static let categories: [String] = ["None", "Education", "Entertainment","Finance", "Social Media", "Travel", "Utilities", "Other"]
 }
+
+

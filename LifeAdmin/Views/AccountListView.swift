@@ -106,6 +106,7 @@ struct AccountListView: View {
                     HStack(spacing: 3) {
                         Text("£\(totalPrice, specifier: "%.2f")")
                             .font(.title3.bold())
+                            
                         Text("/\(showTotalAs)")
                             .font(.caption)
                     }
@@ -137,119 +138,38 @@ struct AccountListView: View {
                 
             } else {
                 
-                //Accounts
-                GeometryReader { geo in
-                    ZStack {
-                        ScrollView(showsIndicators: false) {
-                            
-                            ForEach(showActive ? activeAccounts : inactiveAccounts) { account in
-                                
-                                if selectedCategory == "None" {
-                                    NavigationLink {
-                                        
-                                        AccountView(
-                                            id: account.id ?? UUID(),
-                                            accountName: account.name ?? "",
-                                            icon: account.icon ?? "",
-                                            category: account.category ?? "",
-                                            email: account.email ?? "",
-                                            phone: account.phone ?? "",
-                                            password: account.password ?? "",
-                                            address1: account.address1 ?? "",
-                                            address2: account.address2 ?? "",
-                                            postcode: account.postcode ?? "",
-                                            price: account.price,
-                                            per: account.per ?? "",
-                                            paymentDay: account.paymentDay ?? "",
-                                            paymentMonth: account.paymentMonth ?? "",
-                                            isActive: account.isActive)
-                                        
-                                    } label: {
-                                        AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
-                                        
-                                    }
-                                    .padding(.bottom, account == activeAccounts.last ? 90 : 0)
-                                    .padding(.trailing, 8)
-                                    .buttonStyle(FlatButtonStyle())
-                                    
-                                } else if account.category == selectedCategory {
-                                    
-                                    NavigationLink {
-                                        
-                                        AccountView(
-                                            id: account.id ?? UUID(),
-                                            accountName: account.name ?? "",
-                                            icon: account.icon ?? "",
-                                            category: account.category ?? "",
-                                            email: account.email ?? "",
-                                            phone: account.phone ?? "",
-                                            password: account.password ?? "",
-                                            address1: account.address1 ?? "",
-                                            address2: account.address2 ?? "",
-                                            postcode: account.postcode ?? "",
-                                            price: account.price,
-                                            per: account.per ?? "",
-                                            paymentDay: account.paymentDay ?? "",
-                                            paymentMonth: account.paymentMonth ?? "",
-                                            isActive: account.isActive)
-                                        
-                                    } label: {
-                                        AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
-                                        
-                                    }
-                                    .padding(.bottom, account == activeAccounts.last ? 90 : 0)
-                                    .padding(.trailing, 8)
-                                    .buttonStyle(FlatButtonStyle())
-                                    
-                                }
-                                
-//                                NavigationLink {
-//
-//                                    AccountView(
-//                                        id: account.id ?? UUID(),
-//                                        accountName: account.name ?? "",
-//                                        icon: account.icon ?? "",
-//                                        category: account.category ?? "",
-//                                        email: account.email ?? "",
-//                                        phone: account.phone ?? "",
-//                                        password: account.password ?? "",
-//                                        address1: account.address1 ?? "",
-//                                        address2: account.address2 ?? "",
-//                                        postcode: account.postcode ?? "",
-//                                        price: account.price,
-//                                        per: account.per ?? "",
-//                                        paymentDay: account.paymentDay ?? "",
-//                                        paymentMonth: account.paymentMonth ?? "",
-//                                        isActive: account.isActive)
-//
-//                                } label: {
-//                                    AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
-//
-//                                }
-//                                .padding(.bottom, account == activeAccounts.last ? 90 : 0)
-//                                .padding(.trailing, 8)
-//                                .buttonStyle(FlatButtonStyle())
-//
-                                
-                            }
-                            
-                        }
-                        
-                        Rectangle()
-                            .fill(
-                                LinearGradient(colors: [Color("Background").opacity(0.0),
-                                                        Color("Background").opacity(0.5),
-                                                        Color("Background")], startPoint: .top, endPoint: .bottom)
-                            )
-                            .frame(height: 0.4 * geo.size.height)
-                            .frame(maxHeight: .infinity, alignment: .bottom)
-                            .allowsHitTesting(false)
-                        
-                    }
-                    .padding(.horizontal)
-                    .frame(height: screen.height / 1.7)
+                
+                // List of Accounts
+                
+                switch selectedCategory {
                     
+                case "Education":
+                    EducationFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                case "Entertainment":
+                    EntertainmentFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                case "Finance":
+                    FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                case "Other":
+                    OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                case "Social Media":
+                    SocialMediaFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                case "Travel":
+                    TravelFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                case "Utilities":
+                    UtilitiesFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                    
+                default:
+                    AllAccountsView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                                        
+                
                 }
+
                 
             }
             
@@ -257,15 +177,20 @@ struct AccountListView: View {
         }
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            calcTotal(showActive)
-        }
-        .onChange(of: showActive, perform: { _ in
-            calcTotal(showActive)
-        })
-        .onChange(of: showTotalAs, perform: { _ in
-            calcTotal(showActive)
-        })
+//        .onAppear {
+//            calcTotal(showActive)
+//        }
+//        .onChange(of: showActive, perform: { _ in
+//            calcTotal(showActive)
+//        })
+//        .onChange(of: showTotalAs, perform: { _ in
+//            print("Home - show total is now: \(showTotalAs)")
+//
+//            calcTotal(showActive)
+//        })
+//        .onChange(of: selectedCategory, perform: { _ in
+//            calcTotal(showActive)
+//        })
         .frame(maxHeight: .infinity)
         .ignoresSafeArea()
         .alert("Are you sure you want to delete this account?", isPresented: $showDelete, actions: {
@@ -297,7 +222,9 @@ struct AccountListView: View {
                 }
             }
             totalPrice = total
-            
+            print(" all calc total performed against month")
+
+
         } else {
             var total: Double = 0
             let accounts = isActive ? activeAccounts : inactiveAccounts
@@ -310,9 +237,9 @@ struct AccountListView: View {
                 }
             }
             totalPrice = total
+            print(" all calc total performed against year")
+
         }
-        
-        
     }
     
     func deleteAccount(id: UUID, accounts: FetchedResults<AccountData>) {
