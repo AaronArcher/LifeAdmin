@@ -7,8 +7,8 @@
 
 import CoreData
 import SwiftUI
-import SwiftKeychainWrapper
 import LocalAuthentication
+import KeychainAccess
 
 
 struct AccountView: View {
@@ -46,6 +46,8 @@ struct AccountView: View {
         UIScreen.main.bounds.height > 680
     }
     @State private var showPass = false
+
+    let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
 
     
     var body: some View {
@@ -96,7 +98,7 @@ struct AccountView: View {
                     if isActive {
                         Button {
                             
-                            showEdit = true
+                            authenticate(reason: "Unlock to edit your account details", authenticatingPassword: false)
                             
                         } label: {
                             
@@ -156,9 +158,9 @@ struct AccountView: View {
                             .frame(height: 45)
                             .foregroundColor(Color("RowBackground"))
                             .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                            .onTapGesture {
-                                print(password)
-                            }
+//                            .onTapGesture {
+//                                print(password)
+//                            }
                         
                         if password != "" {
                             if showPass {
@@ -166,8 +168,8 @@ struct AccountView: View {
                                     .font(.title3)
                                     .foregroundColor(Color("PrimaryText"))
                                     .padding(.leading, 10)
-                                    
-                                
+
+
                             }
                             else {
                                 SecureField("N/A", text: $password)
@@ -195,7 +197,7 @@ struct AccountView: View {
                                     if showPass {
                                         showPass = false
                                     } else {
-                                        authenticate()
+                                        authenticate(reason: "Unlock your password", authenticatingPassword: true)
                                     }
                                     
                                 } label: {
@@ -286,18 +288,27 @@ struct AccountView: View {
             Button("Cancel", role: .cancel) { }
         })
         .onAppear(perform: {
-            
-            if let securePass = KeychainWrapper.standard.string(forKey: "\(id)", isSynchronizable: true) {
-                password = securePass
-                
-                print(password)
 
+            do {
+                password = try keychain.get("\(id)") ?? ""
+
+            } catch let error {
+                print("error: \(error)")
             }
-           
+
         })
+        .onChange(of: showEdit) { _ in
+            do {
+                password = try keychain.get("\(id)") ?? ""
+
+            } catch let error {
+                print("error: \(error)")
+            }
+        }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .background || newPhase == .inactive {
                 showPass = false
+                showEdit = false
             }
         }
         .background(Color("Background"))
@@ -360,20 +371,24 @@ struct AccountView: View {
         
     }
     
-    func authenticate() {
+    func authenticate(reason: String, authenticatingPassword: Bool) {
         let context = LAContext()
         var error: NSError?
         
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             // Can use biometrics
             
-            let reason = "Unlock your password"
+            let reason = reason
             
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
                 
                 if success {
                     // authentication successful
-                    showPass = true
+                    if authenticatingPassword {
+                        showPass.toggle()
+                    } else {
+                        showEdit.toggle()
+                    }
                     
                 } else {
                     // authentication unsuccessful

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftKeychainWrapper
+import KeychainAccess
 
 struct EditAccountView: View {
     
@@ -45,6 +45,8 @@ struct EditAccountView: View {
     
     @State private var alertTitle = ""
     @State private var showAlert = false
+    
+    let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -521,10 +523,6 @@ struct EditAccountView: View {
             showAlert = true
             }
 
-        else if per == "year" && paymentMonth.isEmpty {
-            alertTitle = "You must set the payment month."
-            showAlert = true
-        }
         else {
             
             let newAccount = AccountData(context: moc)
@@ -548,8 +546,12 @@ struct EditAccountView: View {
             do {
                 try moc.save()
                 
-                if password != "" {
-                    KeychainWrapper.standard.set(password, forKey: "\(id)", isSynchronizable: true)
+                do {
+                    try keychain
+                        .synchronizable(true)
+                        .set(password, key: "\(id)")
+                } catch let error {
+                    print("error: \(error)")
                 }
                 
                 showEditAccount = false
@@ -583,11 +585,6 @@ struct EditAccountView: View {
             alertTitle = "You must set the payment frequency."
             showAlert = true
             }
-
-        else if per == "year" && paymentMonth.isEmpty {
-            alertTitle = "You must set the payment month."
-            showAlert = true
-        }
         
         else {
             
@@ -599,7 +596,7 @@ struct EditAccountView: View {
                     account.category = selectedCategory
                     account.email = email
                     account.phone = phone
-                    account.password = password
+//                    account.password = password
                     account.address1 = address1
                     account.address2 = address2
                     account.postcode = postcode
@@ -612,6 +609,14 @@ struct EditAccountView: View {
         }
         do {
             try moc.save()
+            
+            do {
+                try keychain
+                    .synchronizable(true)
+                    .set(password, key: "\(id)")
+            } catch let error {
+                print("error: \(error)")
+            }
             
             showEditAccount = false
         } catch {

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import SwiftKeychainWrapper
+import KeychainAccess
 
 struct AccountListView: View {
     
@@ -41,6 +41,8 @@ struct AccountListView: View {
     @Binding var showCategories: Bool
     @Binding var selectedCategory: String
     
+    let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
+
     
     var body: some View {
         
@@ -252,7 +254,12 @@ struct AccountListView: View {
         }
         do {
             try moc.save()
-            KeychainWrapper.standard.removeObject(forKey: "\(id)")
+            
+            do {
+                try keychain.remove("\(id)")
+            } catch let error {
+                print("error: \(error)")
+            }
 
                     } catch {
             // handle the Core Data error
