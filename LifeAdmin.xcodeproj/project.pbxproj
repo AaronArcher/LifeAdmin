@@ -18,6 +18,7 @@
 		EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */; };
 		EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */; };
 		EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */; };
+		EE766B3B27FF61BD00AC046C /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = EE766B3A27FF61BD00AC046C /* SwiftKeychainWrapper */; };
 		EE872EFA27F9C73F0047AF43 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE872EF927F9C73F0047AF43 /* CategoriesView.swift */; };
 		EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */; };
 		EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */; };
@@ -78,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE766B3B27FF61BD00AC046C /* SwiftKeychainWrapper in Frameworks */,
 				EEB55C5A27F24666006A90C7 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,6 +229,9 @@
 			dependencies = (
 			);
 			name = LifeAdmin;
+			packageProductDependencies = (
+				EE766B3A27FF61BD00AC046C /* SwiftKeychainWrapper */,
+			);
 			productName = LifeAdmin;
 			productReference = EEB55C2E27F1ACAD006A90C7 /* LifeAdmin.app */;
 			productType = "com.apple.product-type.application";
@@ -255,6 +260,9 @@
 				Base,
 			);
 			mainGroup = EEB55C2527F1ACAD006A90C7;
+			packageReferences = (
+				EE766B3927FF61BD00AC046C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
+			);
 			productRefGroup = EEB55C2F27F1ACAD006A90C7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -517,6 +525,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EE766B3927FF61BD00AC046C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE766B3A27FF61BD00AC046C /* SwiftKeychainWrapper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE766B3927FF61BD00AC046C /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */;
+			productName = SwiftKeychainWrapper;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		EEB55C3C27F1ACAE006A90C7 /* LifeAdmin.xcdatamodeld */ = {

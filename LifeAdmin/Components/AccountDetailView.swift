@@ -17,9 +17,10 @@ struct AccountDetailField: View {
         UIScreen.main.bounds.height > 680
     }
     
+    var id: UUID?
     var title: String = ""
     var text: String = ""
-    @State var password = ""
+    @State var password: String = ""
     @State private var showPass = false
     var fieldWidth: CGFloat = .infinity
     var fieldHeight: CGFloat = 45
@@ -45,21 +46,26 @@ struct AccountDetailField: View {
                         .frame(height: 45)
                         .foregroundColor(Color("RowBackground"))
                         .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                        .onTapGesture {
+                            print(password)
+                        }
                     
                     if password != "" {
-                        if showPass {
+                        if !showPass {
                             Text(password)
                                 .font(.title3)
                                 .foregroundColor(Color("PrimaryText"))
                                 .padding(.leading, 10)
+                                
                             
-                        } else {
+                        }
+                        else {
                             SecureField("N/A", text: $password)
                                 .font(.title3)
                                 .foregroundColor(Color("Green1"))
                                 .padding(.leading, 10)
                                 .disabled(true)
-                                
+
                         }
                     } else {
                         Text("-")
@@ -154,6 +160,12 @@ struct AccountDetailField: View {
                 showPass = false
             }
         }
+//        .onAppear {
+//            if isPassword {
+//                    password = KeychainWrapper.standard.string(forKey: "\(id)") ?? ""
+//                    print(password)
+//            }
+//        }
     
     
     }
@@ -182,7 +194,6 @@ struct AccountDetailField: View {
             // no biometrics
             
         }
-        
         
     }
     

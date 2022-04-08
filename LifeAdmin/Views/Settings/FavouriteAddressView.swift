@@ -71,8 +71,23 @@ struct FavouriteAddressView: View {
 
             } else {
                 VStack(alignment:.leading) {
-                    Text(defaultAddress1)
-                        .fontWeight(.light)
+                    HStack {
+                        Text(defaultAddress1)
+                            .fontWeight(.light)
+                        
+                        Spacer()
+                        
+                        Button {
+                            defaultAddress1 = ""
+                            defaultAddress2 = ""
+                            defaultPostcode = ""
+                        } label: {
+                            Text("Clear")
+                                .fontWeight(.light)
+                                .foregroundColor(Color("PrimaryText"))
+                        }
+
+                    }
                     Text(defaultAddress2)
                         .fontWeight(.light)
                     Text(defaultPostcode)
@@ -81,6 +96,7 @@ struct FavouriteAddressView: View {
                 }
                 .padding(.top, -5)
                 .padding(.bottom, 40)
+                .padding(.trailing)
                 
             }
          

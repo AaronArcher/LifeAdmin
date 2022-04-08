@@ -38,6 +38,10 @@ struct TravelFilteredAccountView: View {
                 .frame(width: screen.width / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
+                .onAppear {
+                    calcTotal(showActive)
+                }
+
             
         } else if !showActive && inactiveAccounts.count == 0 {
             Text("You do not have any inactive accounts in this category...")
@@ -46,6 +50,10 @@ struct TravelFilteredAccountView: View {
                 .frame(width: screen.width / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
+                .onAppear {
+                    calcTotal(showActive)
+                }
+
             
         } else {
             

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 
 struct EditAccountView: View {
     
@@ -24,7 +25,7 @@ struct EditAccountView: View {
     @Binding var showEditAccount: Bool
     
     @State var isEditing: Bool = false
-    
+        
     @State var id: UUID = UUID()
     @State var accountName: String = ""
     @State var icon: String = ""
@@ -528,14 +529,14 @@ struct EditAccountView: View {
             
             let newAccount = AccountData(context: moc)
             
-            newAccount.id = UUID()
+            newAccount.id = id
             newAccount.name = accountName
             newAccount.isActive = true
             newAccount.icon = icon
             newAccount.category = selectedCategory
             newAccount.email = email
             newAccount.phone = phone
-            newAccount.password = password
+//            newAccount.password = password
             newAccount.address1 = address1
             newAccount.address2 = address2
             newAccount.postcode = postcode
@@ -546,7 +547,13 @@ struct EditAccountView: View {
             
             do {
                 try moc.save()
+                
+                if password != "" {
+                    KeychainWrapper.standard.set(password, forKey: "\(id)", isSynchronizable: true)
+                }
+                
                 showEditAccount = false
+                
                 
             } catch let error {
                 alertTitle = "Could not create an account \(error.localizedDescription)"
@@ -554,6 +561,7 @@ struct EditAccountView: View {
             }
             
         }
+       
     }
     
     func updateAccount(id: UUID, accounts: FetchedResults<AccountData>) {
@@ -582,6 +590,8 @@ struct EditAccountView: View {
         }
         
         else {
+            
+            
             for account in accounts {
                 if account.id == id {
                     account.name = accountName
@@ -602,6 +612,7 @@ struct EditAccountView: View {
         }
         do {
             try moc.save()
+            
             showEditAccount = false
         } catch {
             print("Error updating Account \(error.localizedDescription)")

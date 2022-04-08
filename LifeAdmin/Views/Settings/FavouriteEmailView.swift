@@ -66,9 +66,25 @@ struct FavouriteEmailView: View {
                     .padding(.bottom, 40)
 
             } else {
-                Text(defaultEmail)
-                    .padding(.top, -5)
-                    .padding(.bottom, 40)
+                HStack {
+                    Text(defaultEmail)
+                    
+                    Spacer()
+                    
+                    Button {
+                        defaultEmail = ""
+                    } label: {
+                        Text("Clear")
+                            .fontWeight(.light)
+                            .foregroundColor(Color("PrimaryText"))
+                        
+                    }
+
+                    
+                }
+                .padding(.top, -5)
+                .padding(.bottom, 40)
+                .padding(.trailing)
                 
             }
          

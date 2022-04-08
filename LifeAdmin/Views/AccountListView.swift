@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftKeychainWrapper
 
 struct AccountListView: View {
     
@@ -251,7 +252,9 @@ struct AccountListView: View {
         }
         do {
             try moc.save()
-        } catch {
+            KeychainWrapper.standard.removeObject(forKey: "\(id)")
+
+                    } catch {
             // handle the Core Data error
             print("Error saving CoreData after delete")
         }

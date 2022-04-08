@@ -67,10 +67,23 @@ struct DefaultPhoneView: View {
                     .padding(.bottom, 40)
 
             } else {
-                Text(defaultPhone)
-                    .padding(.top, -5)
-                    .padding(.bottom, 40)
-                
+                HStack {
+                    Text(defaultPhone)
+                      
+                    Spacer()
+                    
+                    Button {
+                        defaultPhone = ""
+                    } label: {
+                        Text("Clear")
+                            .fontWeight(.light)
+                            .foregroundColor(Color("PrimaryText"))
+                    }
+
+                }
+                .padding(.top, -5)
+                .padding(.bottom, 40)
+                .padding(.trailing)
             }
          
             

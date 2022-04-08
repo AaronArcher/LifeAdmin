@@ -27,6 +27,7 @@ struct AllAccountsView: View {
     @Binding var showDelete: Bool
     @Binding var selectedID: UUID
     @Binding var totalPrice: Double
+    
 
     var body: some View {
         
@@ -64,7 +65,6 @@ struct AllAccountsView: View {
                                 category: account.category ?? "",
                                 email: account.email ?? "",
                                 phone: account.phone ?? "",
-                                password: account.password ?? "",
                                 address1: account.address1 ?? "",
                                 address2: account.address2 ?? "",
                                 postcode: account.postcode ?? "",
@@ -112,6 +112,10 @@ struct AllAccountsView: View {
         .onChange(of: showTotalAs, perform: { _ in
                 calcTotal(showActive)
         })
+//        .onChange(of: accountSelected) { _ in
+//            password = KeychainWrapper.standard.string(forKey: "\(id)") ?? ""
+//            print(password)
+//        }
         
         }
         

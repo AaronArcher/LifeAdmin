@@ -7,8 +7,13 @@
 
 import CoreData
 import SwiftUI
+import SwiftKeychainWrapper
+import LocalAuthentication
+
 
 struct AccountView: View {
+    
+    @Environment(\.scenePhase) var scenePhase
     
     @Environment(\.managedObjectContext) var moc
     
@@ -27,7 +32,7 @@ struct AccountView: View {
     let category: String
     let email: String
     let phone: String
-    let password: String
+    @State var password: String = ""
     let address1: String
     let address2: String
     let postcode: String
@@ -37,6 +42,11 @@ struct AccountView: View {
     let paymentMonth: String
     let isActive: Bool
     
+    var isScreenLarge: Bool {
+        UIScreen.main.bounds.height > 680
+    }
+    @State private var showPass = false
+
     
     var body: some View {
         
@@ -66,6 +76,9 @@ struct AccountView: View {
                 }
                 .frame(width: 65, height: 65)
                 .offset(y: (screen.height / 6) - 33)
+                .onTapGesture {
+                    print(password)
+                }
                 
                 HStack {
                     Button {
@@ -129,17 +142,87 @@ struct AccountView: View {
                 AccountDetailField(title: "Phone", text: phone)
                 
                 // Password
-                AccountDetailField(title: "Password", password: password, isPassword: true)
+//                AccountDetailField(id: id, title: "Password", password: password)
+                
+                // Secure Password
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Password")
+                        .font(isScreenLarge ? .headline.weight(.light) : .caption.weight(.light))
+                        .foregroundColor(Color("PrimaryText"))
+                        .padding(.leading, 10)
+                    
+                    ZStack(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .frame(height: 45)
+                            .foregroundColor(Color("RowBackground"))
+                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                            .onTapGesture {
+                                print(password)
+                            }
+                        
+                        if password != "" {
+                            if showPass {
+                                Text(password)
+                                    .font(.title3)
+                                    .foregroundColor(Color("PrimaryText"))
+                                    .padding(.leading, 10)
+                                    
+                                
+                            }
+                            else {
+                                SecureField("N/A", text: $password)
+                                    .font(.title3)
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+                                    .disabled(true)
+
+                            }
+                        } else {
+                            Text("-")
+                                .foregroundColor(.gray.opacity(0.7))
+                                .font(.title3)
+                                .padding(10)
+                        }
+                            
+                        
+                        
+                        HStack {
+                            Spacer()
+                            
+                            if password != "" {
+                                Button{
+                                    
+                                    if showPass {
+                                        showPass = false
+                                    } else {
+                                        authenticate()
+                                    }
+                                    
+                                } label: {
+                                    Image(systemName: showPass ? "eye.fill" : "eye.slash.fill")
+                                        .font(.title3)
+                                        .foregroundColor(Color("PrimaryText"))
+                                }
+                            }
+                        }
+                        .padding(.trailing)
+                        
+                        
+                    }
+                    
+                }
+                
+                
                 
                 // Address
                 AccountDetailField(title: "Address", text: "\(address1)\n\(address2)\n\(postcode)", fieldHeight: 95)
-                
+
                 HStack {
                     // Price
                     AccountDetailField(title: "Price", fieldWidth: screen.width / 2.5, fieldHeight: 45, isPrice: true, price: price, per: per)
-                    
+
                     Spacer()
-                    
+
                     // payment date
                     if per == "" {
                         AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)", fieldWidth: screen.width / 2.5, fieldHeight: 45)
@@ -148,10 +231,10 @@ struct AccountView: View {
                     } else {
                         AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)", fieldWidth: screen.width / 2.5, fieldHeight: 45)
                     }
-                        
-                    
-                        
-                    
+
+
+
+
                 }
                 
                 Spacer()
@@ -202,6 +285,21 @@ struct AccountView: View {
             Button("OK") { deleteAccount(id: id, accounts: allAccounts) }
             Button("Cancel", role: .cancel) { }
         })
+        .onAppear(perform: {
+            
+            if let securePass = KeychainWrapper.standard.string(forKey: "\(id)", isSynchronizable: true) {
+                password = securePass
+                
+                print(password)
+
+            }
+           
+        })
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .background || newPhase == .inactive {
+                showPass = false
+            }
+        }
         .background(Color("Background"))
         .ignoresSafeArea()
         .navigationBarHidden(true)
@@ -258,6 +356,33 @@ struct AccountView: View {
         } catch {
             // handle the Core Data error
             print("Error updating CoreData")
+        }
+        
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            // Can use biometrics
+            
+            let reason = "Unlock your password"
+            
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+                
+                if success {
+                    // authentication successful
+                    showPass = true
+                    
+                } else {
+                    // authentication unsuccessful
+                    print(authenticationError!.localizedDescription)
+                }
+            }
+        } else {
+            // no biometrics
+            
         }
         
     }
@@ -336,4 +461,5 @@ struct PasswordField: View {
     }
     
 }
+
 
