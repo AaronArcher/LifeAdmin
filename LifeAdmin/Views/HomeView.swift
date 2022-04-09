@@ -21,24 +21,54 @@ struct HomeView: View {
     
     @State private var selectedCategory = "None"
     
+    @State private var showSave = false
+    
     var body: some View {
         NavigationView {
             ZStack {
                 
-                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory)
-                    .disabled(showCategories)
+                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, showSave: $showSave)
+                    .disabled(showCategories || showSave)
                     .overlay(
-                        Color.black.opacity(showCategories ? 0.7 : 0)
+                        Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                     )
                     .blur(radius: showCategories ? 3 : 0)
                     
                 
                 TabView(showActive: $showActive, showNewAccount: $showNewAccount)
-                    .disabled(showCategories)
+                    .disabled(showCategories || showSave)
                     .overlay(
-                        Color.black.opacity(showCategories ? 0.7 : 0)
+                        Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                     )
                     .blur(radius: showCategories ? 3 : 0)
+                
+                if showSave {
+                    VStack {
+                        Text("Saved!")
+                        Button {
+                            withAnimation {
+                                showSave.toggle()
+                            }
+                        } label: {
+                            Text("OK")
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding()
+                    .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("Background"))
+                    )
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            if showSave {
+                                withAnimation {
+                                    showSave = false
+                                }
+                            }
+                        }
+                    }
+                }
                 
                 CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories)
                     .offset(x: showCategories ? 0 : -(screenSize))

@@ -11,6 +11,7 @@ import KeychainAccess
 struct EditAccountView: View {
     
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.dismiss) var dismiss
     
     @FetchRequest(sortDescriptors: []) var allAccounts: FetchedResults<AccountData>
     
@@ -45,6 +46,7 @@ struct EditAccountView: View {
     
     @State private var alertTitle = ""
     @State private var showAlert = false
+    @Binding var showSave: Bool
     
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
     
@@ -534,7 +536,6 @@ struct EditAccountView: View {
             newAccount.category = selectedCategory
             newAccount.email = email
             newAccount.phone = phone
-//            newAccount.password = password
             newAccount.address1 = address1
             newAccount.address2 = address2
             newAccount.postcode = postcode
@@ -554,7 +555,13 @@ struct EditAccountView: View {
                     print("error: \(error)")
                 }
                 
+               
+                savedHaptic()
+                
                 showEditAccount = false
+                withAnimation {
+                    showSave = true
+                }
                 
                 
             } catch let error {
@@ -596,7 +603,6 @@ struct EditAccountView: View {
                     account.category = selectedCategory
                     account.email = email
                     account.phone = phone
-//                    account.password = password
                     account.address1 = address1
                     account.address2 = address2
                     account.postcode = postcode
@@ -624,11 +630,16 @@ struct EditAccountView: View {
         }
     }
     
+    func savedHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+    
 }
 
 struct NewAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        EditAccountView(showEditAccount: .constant(true))
+        EditAccountView(showEditAccount: .constant(true), showSave: .constant(false))
     }
 }
 

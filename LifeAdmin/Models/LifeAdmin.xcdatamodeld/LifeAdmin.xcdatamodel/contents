@@ -9,7 +9,6 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="password" optional="YES" attributeType="String"/>
         <attribute name="paymentDay" optional="YES" attributeType="String"/>
         <attribute name="paymentMonth" optional="YES" attributeType="String"/>
         <attribute name="per" optional="YES" attributeType="String"/>
@@ -17,7 +16,9 @@
         <attribute name="postcode" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="DefaultDetails" representedClassName="DefaultDetails" syncable="YES" codeGenerationType="class"/>
     <elements>
-        <element name="AccountData" positionX="-63" positionY="-18" width="128" height="254"/>
+        <element name="AccountData" positionX="-63" positionY="-18" width="128" height="239"/>
+        <element name="DefaultDetails" positionX="-63" positionY="90" width="128" height="29"/>
     </elements>
 </model>

@@ -48,6 +48,8 @@ struct AccountView: View {
     @State private var showPass = false
 
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
+    
+    @State private var showSave = false
 
     
     var body: some View {
@@ -333,7 +335,8 @@ struct AccountView: View {
                             per: per,
                             paymentDay:paymentDay,
                             paymentMonth: paymentMonth,
-                            selectedCategory: category
+                            selectedCategory: category,
+                            showSave: $showSave
             )
             
         }

@@ -41,143 +41,147 @@ struct AccountListView: View {
     @Binding var showCategories: Bool
     @Binding var selectedCategory: String
     
+    @Binding var showSave: Bool
+    
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
 
     
     var body: some View {
         
         
-        VStack {
-            
-            ZStack(alignment: .top) {
+      
+            VStack {
                 
-                HeaderView(text: showActive ? "Active Accounts" : "Inactive Accounts")
+                ZStack(alignment: .top) {
+                    
+                    HeaderView(text: showActive ? "Active Accounts" : "Inactive Accounts")
+                    
+                    HStack {
+                        
+                        Button {
+                            withAnimation {
+                                showCategories.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .foregroundColor(.white)
+                                .font(.title2)
+                        }
+                        
+                        
+                        Spacer()
+                        
+                        Button {
+                            showSettings = true
+                        } label: {
+                            Image(systemName: "gearshape.fill")
+                                .foregroundColor(.white)
+                                .font(.title2)
+                        }
+                        
+                    }
+                    .padding(.horizontal)
+                    .offset(y: (screen.height / 6) / 2.5)
+                    
+                }
+                
+                // Total
                 
                 HStack {
                     
-                    Button {
-                        withAnimation {
-                            showCategories.toggle()
+                    if selectedCategory != "None" {
+                        
+                        VStack(alignment: .leading) {
+                            
+                            Text("Filtered by:")
+                                .foregroundColor(Color("Green1"))
+                            
+                            Text(selectedCategory)
+                                .font(.title3.bold())
+                                .foregroundColor(Color("PrimaryText"))
                         }
-                    } label: {
-                        Image(systemName: "slider.horizontal.3")
-                            .foregroundColor(.white)
-                            .font(.title2)
                     }
-                    
                     
                     Spacer()
                     
-                    Button {
-                        showSettings = true
-                    } label: {
-                        Image(systemName: "gearshape.fill")
-                            .foregroundColor(.white)
-                            .font(.title2)
-                    }
-                    
-                }
-                .padding(.horizontal)
-                .offset(y: (screen.height / 6) / 2.5)
-                
-            }
-            
-            // Total
-            
-            HStack {
-                
-                if selectedCategory != "None" {
-                    
                     VStack(alignment: .leading) {
                         
-                        Text("Filtered by:")
+                        Text("Total")
                             .foregroundColor(Color("Green1"))
                         
-                        Text(selectedCategory)
-                            .font(.title3.bold())
-                            .foregroundColor(Color("PrimaryText"))
+                        HStack(spacing: 3) {
+                            Text("£\(totalPrice, specifier: "%.2f")")
+                                .font(.title3.bold())
+                                
+                            Text("/\(showTotalAs)")
+                                .font(.caption)
+                        }
+                        .foregroundColor(Color("PrimaryText"))
+                        
+                        
                     }
+                }
+                .padding(.trailing, 8)
+                .padding()
+                
+                
+                if showActive && activeAccounts.count == 0 {
+                    
+                    Text("You haven't created any accounts yet...")
+                        .foregroundColor(Color("PrimaryText"))
+                        .font(.title3.weight(.light))
+                        .frame(width: screen.width / 1.5)
+                        .multilineTextAlignment(.center)
+                        .padding(.top)
+                    
+                } else if !showActive && inactiveAccounts.count == 0 {
+                    Text("You do not have any inactive accounts...")
+                        .foregroundColor(Color("PrimaryText"))
+                        .font(.title3.weight(.light))
+                        .frame(width: screen.width / 1.5)
+                        .multilineTextAlignment(.center)
+                        .padding(.top)
+                    
+                } else {
+                    
+                    
+                    // List of Accounts
+                    
+                    switch selectedCategory {
+                        
+                    case "Education":
+                        EducationFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    case "Entertainment":
+                        EntertainmentFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    case "Finance":
+                        FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    case "Other":
+                        OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    case "Social Media":
+                        SocialMediaFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    case "Travel":
+                        TravelFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    case "Utilities":
+                        UtilitiesFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                        
+                    default:
+                        AllAccountsView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
+                                            
+                    
+                    }
+
+                    
                 }
                 
                 Spacer()
-                
-                VStack(alignment: .leading) {
-                    
-                    Text("Total")
-                        .foregroundColor(Color("Green1"))
-                    
-                    HStack(spacing: 3) {
-                        Text("£\(totalPrice, specifier: "%.2f")")
-                            .font(.title3.bold())
-                            
-                        Text("/\(showTotalAs)")
-                            .font(.caption)
-                    }
-                    .foregroundColor(Color("PrimaryText"))
-                    
-                    
-                }
             }
-            .padding(.trailing, 8)
-            .padding()
-            
-            
-            if showActive && activeAccounts.count == 0 {
-                
-                Text("You haven't created any accounts yet...")
-                    .foregroundColor(Color("PrimaryText"))
-                    .font(.title3.weight(.light))
-                    .frame(width: screen.width / 1.5)
-                    .multilineTextAlignment(.center)
-                    .padding(.top)
-                
-            } else if !showActive && inactiveAccounts.count == 0 {
-                Text("You do not have any inactive accounts...")
-                    .foregroundColor(Color("PrimaryText"))
-                    .font(.title3.weight(.light))
-                    .frame(width: screen.width / 1.5)
-                    .multilineTextAlignment(.center)
-                    .padding(.top)
-                
-            } else {
-                
-                
-                // List of Accounts
-                
-                switch selectedCategory {
-                    
-                case "Education":
-                    EducationFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                case "Entertainment":
-                    EntertainmentFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                case "Finance":
-                    FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                case "Other":
-                    OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                case "Social Media":
-                    SocialMediaFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                case "Travel":
-                    TravelFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                case "Utilities":
-                    UtilitiesFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                    
-                default:
-                    AllAccountsView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                                        
-                
-                }
-
-                
-            }
-            
-            Spacer()
-        }
+      
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
 //        .onAppear {
@@ -200,14 +204,14 @@ struct AccountListView: View {
             Button("OK") { deleteAccount(id: selectedID, accounts: allAccounts) }
             Button("Cancel", role: .cancel) { }
         })
-        .sheet(isPresented: $showNewAccount, onDismiss: {
+        .fullScreenCover(isPresented: $showNewAccount, onDismiss: {
             calcTotal(showActive)
         }) {
-            EditAccountView(showEditAccount: $showNewAccount)
+            EditAccountView(showEditAccount: $showNewAccount, showSave: $showSave)
         }
         .fullScreenCover(isPresented: $showSettings) {
             SettingsView()
-        }
+    }
         
         
     }
@@ -275,7 +279,7 @@ struct AccountListView: View {
 
 struct ActiveView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false), showCategories: .constant(false), selectedCategory: .constant("Entertainment"))
+        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false), showCategories: .constant(false), selectedCategory: .constant("Entertainment"), showSave: .constant(false))
     }
 }
 

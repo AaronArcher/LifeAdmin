@@ -31,7 +31,7 @@ struct EntertainmentFilteredAccountView: View {
         
         if showActive && activeAccounts.count == 0 {
             
-            Text("You do not have any active accounts in this category")
+            Text("You do not have any active accounts in this category...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
                 .frame(width: screen.width / 1.5)
@@ -71,7 +71,6 @@ struct EntertainmentFilteredAccountView: View {
                                 category: account.category ?? "",
                                 email: account.email ?? "",
                                 phone: account.phone ?? "",
-                                password: account.password ?? "",
                                 address1: account.address1 ?? "",
                                 address2: account.address2 ?? "",
                                 postcode: account.postcode ?? "",

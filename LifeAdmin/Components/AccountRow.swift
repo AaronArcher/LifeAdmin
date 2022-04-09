@@ -105,6 +105,7 @@ struct AccountRow: View {
                 
                 Button {
                     selectedID = id
+                    deleteHaptic()
                     showDelete = true
                 } label: {
                     Image(systemName: "trash.fill")
@@ -136,6 +137,7 @@ struct AccountRow: View {
                     } else if -translation > 150 {
                         offset = -60
                         selectedID = id
+                        deleteHaptic()
                         showDelete = true
                     } else {
                         offset = 0
@@ -178,6 +180,11 @@ struct AccountRow: View {
         return inactiveAccounts.firstIndex { currentAccount in
             return id == currentAccount.id
         } ?? 0
+    }
+    
+    func deleteHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.warning)
     }
 
     
