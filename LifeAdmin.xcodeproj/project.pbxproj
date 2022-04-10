@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */; };
 		EE750B4627FA13A6006768C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE750B4527FA13A6006768C4 /* Constants.swift */; };
+		EE761A152803340D000006BB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EE761A142803340D000006BB /* Lottie */; };
+		EE761A1A28033457000006BB /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1928033457000006BB /* LottieView.swift */; };
+		EE761A1C28033760000006BB /* success-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = EE761A1B28033760000006BB /* success-animation.json */; };
+		EE761A1E28033DAC000006BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1D28033DAC000006BB /* Extensions.swift */; };
 		EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */; };
 		EE766B2427FCCFFD00AC046C /* FilterPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */; };
 		EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */; };
@@ -42,6 +46,9 @@
 /* Begin PBXFileReference section */
 		EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddressView.swift; sourceTree = "<group>"; };
 		EE750B4527FA13A6006768C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EE761A1928033457000006BB /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		EE761A1B28033760000006BB /* success-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-animation.json"; sourceTree = "<group>"; };
+		EE761A1D28033DAC000006BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationFilteredAccountView.swift; sourceTree = "<group>"; };
 		EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPredicates.swift; sourceTree = "<group>"; };
 		EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAccountsView.swift; sourceTree = "<group>"; };
@@ -81,6 +88,7 @@
 			files = (
 				EE766B402800CBF200AC046C /* KeychainAccess in Frameworks */,
 				EEB55C5A27F24666006A90C7 /* CloudKit.framework in Frameworks */,
+				EE761A152803340D000006BB /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +108,14 @@
 				EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */,
 			);
 			path = FilteredAccountsViews;
+			sourceTree = "<group>";
+		};
+		EE761A162803341B000006BB /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				EE761A1928033457000006BB /* LottieView.swift */,
+			);
+			path = Lottie;
 			sourceTree = "<group>";
 		};
 		EEAFB65B27F74E7000F203BC /* Settings */ = {
@@ -134,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				EEB55C5B27F246DC006A90C7 /* Info.plist */,
+				EE761A1B28033760000006BB /* success-animation.json */,
 				EEB55C5727F24663006A90C7 /* LifeAdmin.entitlements */,
 				EEB55C3127F1ACAD006A90C7 /* LifeAdminApp.swift */,
 				EEB55C4427F24137006A90C7 /* Views */,
@@ -141,6 +158,7 @@
 				EEB55C4627F2414D006A90C7 /* Helpers */,
 				EEB55C4727F24160006A90C7 /* ViewModels */,
 				EEB55C4827F24169006A90C7 /* Models */,
+				EE761A162803341B000006BB /* Lottie */,
 				EEB55C3527F1ACAE006A90C7 /* Assets.xcassets */,
 				EEB55C3727F1ACAE006A90C7 /* Preview Content */,
 			);
@@ -185,6 +203,7 @@
 			children = (
 				EE750B4527FA13A6006768C4 /* Constants.swift */,
 				EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */,
+				EE761A1D28033DAC000006BB /* Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -231,6 +250,7 @@
 			name = LifeAdmin;
 			packageProductDependencies = (
 				EE766B3F2800CBF200AC046C /* KeychainAccess */,
+				EE761A142803340D000006BB /* Lottie */,
 			);
 			productName = LifeAdmin;
 			productReference = EEB55C2E27F1ACAD006A90C7 /* LifeAdmin.app */;
@@ -262,6 +282,7 @@
 			mainGroup = EEB55C2527F1ACAD006A90C7;
 			packageReferences = (
 				EE766B3E2800CBF200AC046C /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				EE761A132803340D000006BB /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = EEB55C2F27F1ACAD006A90C7 /* Products */;
 			projectDirPath = "";
@@ -278,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB55C3927F1ACAE006A90C7 /* Preview Assets.xcassets in Resources */,
+				EE761A1C28033760000006BB /* success-animation.json in Resources */,
 				EEB55C3627F1ACAE006A90C7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +313,7 @@
 			files = (
 				EEB55C5027F2434A006A90C7 /* AccountRow.swift in Sources */,
 				EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */,
+				EE761A1A28033457000006BB /* LottieView.swift in Sources */,
 				EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */,
 				EE750B4627FA13A6006768C4 /* Constants.swift in Sources */,
 				EEB55C4C27F242FD006A90C7 /* AccountView.swift in Sources */,
@@ -315,6 +338,7 @@
 				EEB55C4A27F242DC006A90C7 /* AccountListView.swift in Sources */,
 				EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */,
 				EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */,
+				EE761A1E28033DAC000006BB /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +551,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EE761A132803340D000006BB /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		EE766B3E2800CBF200AC046C /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
@@ -538,6 +570,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EE761A142803340D000006BB /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE761A132803340D000006BB /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		EE766B3F2800CBF200AC046C /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EE766B3E2800CBF200AC046C /* XCRemoteSwiftPackageReference "KeychainAccess" */;

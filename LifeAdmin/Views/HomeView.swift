@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    let screenSize = UIScreen.main.bounds.width
+    let screenWidth = UIScreen.main.bounds.width
     
     @State private var showNewAccount = false
     
@@ -45,33 +45,49 @@ struct HomeView: View {
                 if showSave {
                     VStack {
                         Text("Saved!")
+                            .foregroundColor(Color("PrimaryText"))
+                            .font(.title.weight(.light))
+                        
+                        Spacer()
+                        
+                        LottieView()
+                            .frame(width: screenWidth / 4, height: screenWidth / 4)
+                        
+                        Spacer()
+                        
                         Button {
-                            withAnimation {
                                 showSave.toggle()
-                            }
                         } label: {
-                            Text("OK")
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .frame(width: screenWidth / 3, height: 40)
+                                    .foregroundColor(Color("Blue1"))
+                                Text("OK")
+                                    .foregroundColor(.white)
+                            }
+                                
                         }
-                        .buttonStyle(.bordered)
+                        
+
                     }
                     .padding()
                     .background(
                     RoundedRectangle(cornerRadius: 10)
                         .foregroundColor(Color("Background"))
+                        .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
                     )
+                    .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
                     .onAppear {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             if showSave {
-                                withAnimation {
                                     showSave = false
-                                }
                             }
                         }
                     }
                 }
                 
                 CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories)
-                    .offset(x: showCategories ? 0 : -(screenSize))
+                    .offset(x: showCategories ? 0 : -(screenWidth))
                 
                 
             }

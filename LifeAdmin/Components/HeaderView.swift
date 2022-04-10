@@ -23,11 +23,12 @@ struct HeaderView: View {
                 )
                 .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 10)
 
-            Text(text)
-                .font(.largeTitle.weight(.light))
-                .foregroundColor(.white)
-                .frame(width: screen.width / 1.4, height: 40)
-                .fixedSize(horizontal: true, vertical: true)
+                Text(text)
+                    .font(.largeTitle.weight(.light))
+                    .foregroundColor(.white)
+                    .frame(width: screen.width / 1.4, height: 40)
+                    .fixedSize(horizontal: true, vertical: true)
+         
             
             
         }

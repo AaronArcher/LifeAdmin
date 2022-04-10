@@ -55,7 +55,7 @@ struct AccountView: View {
     var body: some View {
         
         VStack(alignment: .leading, spacing: 18) {
-            // Header
+            //MARK: Header
             ZStack(alignment: .top) {
                 HeaderView(text: accountName)
                 
@@ -118,7 +118,7 @@ struct AccountView: View {
             }
             .padding(.bottom, 30)
             
-            // Category
+            //MARK: Category
             if category != "None" && !category.isEmpty {
                 HStack {
                     Spacer()
@@ -139,16 +139,15 @@ struct AccountView: View {
             
             VStack {
                 
-                // Email
+                ScrollView {
+                    
+                //MARK: Email
                 AccountDetailField(title: "Email", text: email)
                 
-                // Phone
+                //MARK: Phone
                 AccountDetailField(title: "Phone", text: phone)
                 
-                // Password
-//                AccountDetailField(id: id, title: "Password", password: password)
-                
-                // Secure Password
+                //MARK: Secure Password
                 VStack(alignment: .leading, spacing: 3) {
                     Text("Password")
                         .font(isScreenLarge ? .headline.weight(.light) : .caption.weight(.light))
@@ -160,10 +159,7 @@ struct AccountView: View {
                             .frame(height: 45)
                             .foregroundColor(Color("RowBackground"))
                             .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-//                            .onTapGesture {
-//                                print(password)
-//                            }
-                        
+//
                         if password != "" {
                             if showPass {
                                 Text(password)
@@ -216,18 +212,16 @@ struct AccountView: View {
                     
                 }
                 
-                
-                
-                // Address
+                //MARK: Address
                 AccountDetailField(title: "Address", text: "\(address1)\n\(address2)\n\(postcode)", fieldHeight: 95)
 
                 HStack {
-                    // Price
+                    //MARK: Price
                     AccountDetailField(title: "Price", fieldWidth: screen.width / 2.5, fieldHeight: 45, isPrice: true, price: price, per: per)
 
                     Spacer()
 
-                    // payment date
+                    //MARK: payment date
                     if per == "" {
                         AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)", fieldWidth: screen.width / 2.5, fieldHeight: 45)
                     } else if per == "month" {
@@ -237,12 +231,14 @@ struct AccountView: View {
                     }
 
 
-
-
                 }
                 
-                Spacer()
+            }
+                .frame(maxHeight: screen.height / 1.7)
+                .padding(.bottom)
                 
+                
+                //MARK: Delete/Disable Buttons
                 HStack {
                     
                     Spacer()
@@ -317,7 +313,7 @@ struct AccountView: View {
         .ignoresSafeArea()
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .sheet(isPresented: $showEdit) {
+        .fullScreenCover(isPresented: $showEdit) {
             
             // Show edit view
             EditAccountView(showEditAccount: $showEdit,
@@ -415,69 +411,5 @@ struct AccountView_Previews: PreviewProvider {
 }
 
 
-struct PasswordField: View {
-    
-    var title: String = "Email"
-    @State var text: String = ""
-    @State var showText = false
-    
-    var body: some View {
-        
-        VStack(alignment: .leading, spacing: 3) {
-            Text(title)
-                .font(.caption.weight(.light))
-                .foregroundColor(Color("Blue1"))
-                .padding(.leading, 10)
-            
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .frame(height: 45)
-                    .foregroundColor(.white)
-                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                
-                if text != "" {
-                    if showText {
-                        Text(text)
-                            .font(.title3)
-                            .foregroundColor(Color("Green1"))
-                            .padding(.leading, 10)
-                        
-                    } else {
-                        SecureField("N/A", text: $text)
-                            .font(.title3)
-                            .foregroundColor(Color("Green1"))
-                            .padding(.leading, 10)
-                            .disabled(true)
-                    }
-                } else {
-                    Text("-")
-                        .foregroundColor(.gray.opacity(0.7))
-                        .font(.title3)
-                        .padding(10)
-                }
-                
-                
-                HStack {
-                    Spacer()
-                    Button{
-                        withAnimation {
-                            showText.toggle()
-                        }
-                    } label: {
-                        Image(systemName: showText ? "eye.fill" : "eye.slash.fill")
-                            .font(.title3)
-                            .foregroundColor(Color("Blue1"))
-                    }
-                }
-                .padding(.trailing)
-                
-                
-            }
-            
-        }
-        
-    }
-    
-}
 
 
