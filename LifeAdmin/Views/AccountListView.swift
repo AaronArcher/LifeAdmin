@@ -40,6 +40,8 @@ struct AccountListView: View {
     @Binding var showSettings: Bool
     @Binding var showCategories: Bool
     @Binding var selectedCategory: String
+    @Binding var animatePath: Bool
+    @Binding var animateBG: Bool
     
     @Binding var showSave: Bool
     
@@ -60,8 +62,15 @@ struct AccountListView: View {
                         
                         Button {
                             withAnimation {
+                                animateBG.toggle()
+                            }
+                            withAnimation(.spring()) {
                                 showCategories.toggle()
                             }
+                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
+                                animatePath.toggle()
+                            }
+                            
                         } label: {
                             Image(systemName: "slider.horizontal.3")
                                 .foregroundColor(.white)
@@ -279,7 +288,7 @@ struct AccountListView: View {
 
 struct ActiveView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false), showCategories: .constant(false), selectedCategory: .constant("Entertainment"), showSave: .constant(false))
+        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false), showCategories: .constant(false), selectedCategory: .constant("Entertainment"), animatePath: .constant(false), animateBG: .constant(false), showSave: .constant(false))
     }
 }
 

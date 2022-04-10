@@ -18,6 +18,8 @@ struct HomeView: View {
     @State private var showSettings = false
     
     @State private var showCategories = false
+    @State private var animatePath = false
+    @State private var animateBG = false
     
     @State private var selectedCategory = "None"
     
@@ -27,12 +29,11 @@ struct HomeView: View {
         NavigationView {
             ZStack {
                 
-                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, showSave: $showSave)
+                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, animatePath: $animatePath, animateBG: $animateBG, showSave: $showSave)
                     .disabled(showCategories || showSave)
                     .overlay(
                         Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                     )
-                    .blur(radius: showCategories ? 3 : 0)
                     
                 
                 TabView(showActive: $showActive, showNewAccount: $showNewAccount)
@@ -40,7 +41,6 @@ struct HomeView: View {
                     .overlay(
                         Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                     )
-                    .blur(radius: showCategories ? 3 : 0)
                 
                 if showSave {
                     VStack {
@@ -86,7 +86,7 @@ struct HomeView: View {
                     }
                 }
                 
-                CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories)
+                CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
                     .offset(x: showCategories ? 0 : -(screenWidth))
                 
                 

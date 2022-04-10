@@ -2,35 +2,50 @@
 //  CategoriesView.swift
 //  LifeAdmin
 //
-//  Created by Aaron Johncock on 03/04/2022.
+//  Created by Aaron Johncock on 10/04/2022.
 //
 
 import SwiftUI
 
-
 struct CategoriesView: View {
-    
     
     @Binding var selectedCategory: String
     @State private var newCategory = ""
     
-    let screenWidth = UIScreen.main.bounds.width
     @Binding var showCategories: Bool
+    let screenWidth = UIScreen.main.bounds.width
+    
+    var isScreenLarge: Bool {
+        UIScreen.main.bounds.height > 680
+    }
+    
+    @Binding var animatePath: Bool
+    @Binding var animateBG: Bool
     
     @Namespace var namespace
     
     var body: some View {
-        
-        HStack {
+
+        ZStack(alignment: .leading) {
+            
+            Color("Background")
+            
             VStack(alignment: .leading) {
 
                 // Header
                 HStack {
 
                     Button {
+                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                            animatePath.toggle()
+                        }
                         withAnimation {
+                            animateBG.toggle()
+                        }
+                        withAnimation(.spring().delay(0.1)) {
                             showCategories.toggle()
                         }
+                        
                     } label: {
                         Image(systemName: "xmark")
                             .foregroundColor(Color("PrimaryText"))
@@ -56,45 +71,11 @@ struct CategoriesView: View {
                     .foregroundColor(Color("PrimaryText"))
                     .padding(.bottom, 40)
 
-                // Categories
-                
-//                Button {
-//                    withAnimation() {
-//                        selectedCategory = "None"
-//                    }
-//                } label: {
-//
-//                    ZStack {
-//                        if selectedCategory == "None" {
-//                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-//                                .frame(height: 40)
-//                                .foregroundColor(Color("Green1"))
-//                                .matchedGeometryEffect(id: "category", in: namespace)
-//
-//                            Text("All")
-//                                .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
-//                                .font(.title3)
-//
-//                        } else {
-//                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-//                                .frame(height: 40)
-//                                .foregroundColor(.clear)
-//
-//
-//                        }
-//                        Text("All")
-//                            .foregroundColor(selectedCategory == "None" ? .white : Color("PrimaryText"))
-//                            .font(.title3)
-//
-//                    }
-//                }
-//                .buttonStyle(FlatButtonStyle())
-//                .font(.title3.weight(.light))
                 
                 ForEach(Constants.categories.sorted(), id: \.self) { category in
                     if category != "None" {
                         Button {
-                            withAnimation {
+                            withAnimation(.interactiveSpring(response: 0.4, dampingFraction: 0.6, blendDuration: 0.3)) {
                                 newCategory = category
                             }
                         } label: {
@@ -123,6 +104,7 @@ struct CategoriesView: View {
                                     
                             }
                         }
+                        .padding(.horizontal)
                         .buttonStyle(FlatButtonStyle())
                         .font(.title3.weight(.light))
                     }
@@ -138,7 +120,13 @@ struct CategoriesView: View {
                         
                         selectedCategory = "None"
                         newCategory = ""
+                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                            animatePath.toggle()
+                        }
                         withAnimation {
+                            animateBG.toggle()
+                        }
+                        withAnimation(.spring().delay(0.1)) {
                             showCategories.toggle()
                         }
                         
@@ -161,7 +149,13 @@ struct CategoriesView: View {
                     Button {
                         
                         selectedCategory = newCategory
+                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                            animatePath.toggle()
+                        }
                         withAnimation {
+                            animateBG.toggle()
+                        }
+                        withAnimation(.spring().delay(0.1)) {
                             showCategories.toggle()
                         }
                         
@@ -181,32 +175,60 @@ struct CategoriesView: View {
                     
                 
                 }
+                .padding(.horizontal)
               
 
                 Spacer()
             }
+            .frame(width: screenWidth / 1.45)
             .padding()
-            .padding(.top,5)
-
-            Spacer()
+            .padding(.top, isScreenLarge ? 40 : 25)
             
-            Rectangle()
-                .frame(width: 1)
-                .foregroundColor(Color("Green1"))
-                .ignoresSafeArea()
-           
         }
-        .frame(width: screenWidth - 100, alignment: .leading)
-        .background(Color("Background"))
-        .frame(maxHeight: .infinity)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        
+        .clipShape(CategoryShape(curveValue: animatePath ? 70 : 0))
+        .background(
+            
+            CategoryShape(curveValue: animatePath ? 70 : 0)
+                .stroke(Color("Green1"), lineWidth: animatePath ? 9 : 0
+                )
+                .padding(.leading, -10)
+        )
+        .ignoresSafeArea()
 
     }
 }
 
-struct CategoriesView_Previews: PreviewProvider {
+struct NewCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView(selectedCategory: .constant("All"), showCategories: .constant(true))
+        CategoriesView(selectedCategory: .constant("All"), showCategories: .constant(true), animatePath: .constant(false), animateBG: .constant(false))
+    }
+}
+
+struct CategoryShape: Shape {
+    
+    var curveValue: CGFloat
+    
+    // animate path
+    var animatableData: CGFloat {
+        get { return curveValue }
+        set { curveValue = newValue }
+    }
+    
+    func path(in rect: CGRect) -> Path {
+        
+        return Path { path in
+            let width = rect.width / 1.38
+            let height = rect.height
+            
+            path.move(to: CGPoint(x: width, y: height))
+            path.addLine(to: CGPoint(x: 0, y: height))
+            path.addLine(to: CGPoint(x: 0, y: 0))
+            path.addLine(to: CGPoint(x: width, y: 0))
+            
+            //Curve
+            path.move(to: CGPoint(x: width, y: 0))
+            path.addQuadCurve(to: CGPoint(x: width, y: height), control: CGPoint(x: width + curveValue, y: height / 2))
+            
+        }
     }
 }
