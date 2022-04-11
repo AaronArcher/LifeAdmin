@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Constants {
     
@@ -15,7 +16,13 @@ struct Constants {
     
     static let monthsList: [String] = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sep", "Oct", "Nov", "Dec", "Select"]
     
-    static let categories: [String] = ["None", "Education", "Entertainment","Finance", "Social Media", "Travel", "Utilities", "Other"]
+    static let categories: [String] = ["None", "Education", "Entertainment","Finance", "Health", "Social Media", "Travel", "Utilities", "Other"]
+    
+    static func deleteHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.warning)
+    }
+    
 }
 
 

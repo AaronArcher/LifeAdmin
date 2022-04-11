@@ -67,7 +67,7 @@ struct AccountListView: View {
                             withAnimation(.spring()) {
                                 showCategories.toggle()
                             }
-                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
+                            withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
                                 animatePath.toggle()
                             }
                             

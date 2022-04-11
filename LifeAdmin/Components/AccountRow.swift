@@ -46,8 +46,10 @@ struct AccountRow: View {
                 .foregroundColor(isActive ? Color("RowBackground") : Color("Gray2"))
                 .shadow(color: .black.opacity(0.15), radius: 5, x: 2, y: 3)
                 .frame(height: 60)
+            
             HStack {
                 
+                //MARK: Icon
                 ZStack {
                     
                     if isActive {
@@ -91,7 +93,7 @@ struct AccountRow: View {
                 
                 
             }
-            .padding(.trailing, 30)
+            .padding(.trailing)
             .foregroundColor(Color("PrimaryText"))
             
 
@@ -105,7 +107,7 @@ struct AccountRow: View {
                 
                 Button {
                     selectedID = id
-                    deleteHaptic()
+                    Constants.deleteHaptic()
                     showDelete = true
                 } label: {
                     Image(systemName: "trash.fill")
@@ -137,7 +139,7 @@ struct AccountRow: View {
                     } else if -translation > 150 {
                         offset = -60
                         selectedID = id
-                        deleteHaptic()
+                        Constants.deleteHaptic()
                         showDelete = true
                     } else {
                         offset = 0
@@ -166,6 +168,9 @@ struct AccountRow: View {
                     showBackground = true
                 }
             }
+            
+            // reset offset when going back to the account list view
+            offset = 0
         }
     
     }
@@ -180,11 +185,6 @@ struct AccountRow: View {
         return inactiveAccounts.firstIndex { currentAccount in
             return id == currentAccount.id
         } ?? 0
-    }
-    
-    func deleteHaptic() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.warning)
     }
 
     

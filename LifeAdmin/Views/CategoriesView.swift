@@ -13,7 +13,7 @@ struct CategoriesView: View {
     @State private var newCategory = ""
     
     @Binding var showCategories: Bool
-    let screenWidth = UIScreen.main.bounds.width
+    let screen = UIScreen.main.bounds
     
     var isScreenLarge: Bool {
         UIScreen.main.bounds.height > 680
@@ -45,6 +45,7 @@ struct CategoriesView: View {
                         withAnimation(.spring().delay(0.1)) {
                             showCategories.toggle()
                         }
+                        newCategory = ""
                         
                     } label: {
                         Image(systemName: "xmark")
@@ -69,9 +70,10 @@ struct CategoriesView: View {
                 Text("Filter your accounts by:")
                     .font(.title3.weight(.light))
                     .foregroundColor(Color("PrimaryText"))
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 25)
 
-                
+                ScrollView {
+                    
                 ForEach(Constants.categories.sorted(), id: \.self) { category in
                     if category != "None" {
                         Button {
@@ -111,6 +113,8 @@ struct CategoriesView: View {
                     
                     
                 }
+            }
+                .frame(height: screen.height / 1.7)
                 
                 Spacer()
                 
@@ -176,11 +180,11 @@ struct CategoriesView: View {
                 
                 }
                 .padding(.horizontal)
+                .padding(.bottom)
               
 
-                Spacer()
             }
-            .frame(width: screenWidth / 1.45)
+            .frame(width: screen.width / 1.45)
             .padding()
             .padding(.top, isScreenLarge ? 40 : 25)
             
@@ -189,9 +193,9 @@ struct CategoriesView: View {
         .background(
             
             CategoryShape(curveValue: animatePath ? 70 : 0)
-                .stroke(Color("Green1"), lineWidth: animatePath ? 9 : 0
+                .stroke(Color("Green1"), lineWidth: animatePath ? 4 : 0
                 )
-                .padding(.leading, -10)
+//                .padding(.leading, -10)
         )
         .ignoresSafeArea()
 
@@ -220,14 +224,14 @@ struct CategoryShape: Shape {
             let width = rect.width / 1.38
             let height = rect.height
             
-            path.move(to: CGPoint(x: width, y: height))
-            path.addLine(to: CGPoint(x: 0, y: height))
-            path.addLine(to: CGPoint(x: 0, y: 0))
-            path.addLine(to: CGPoint(x: width, y: 0))
+            path.move(to: CGPoint(x: width, y: height + 10))
+            path.addLine(to: CGPoint(x: -10, y: height + 10))
+            path.addLine(to: CGPoint(x: -10, y: -10))
+            path.addLine(to: CGPoint(x: width, y: -10))
             
             //Curve
-            path.move(to: CGPoint(x: width, y: 0))
-            path.addQuadCurve(to: CGPoint(x: width, y: height), control: CGPoint(x: width + curveValue, y: height / 2))
+            path.move(to: CGPoint(x: width, y: -10))
+            path.addQuadCurve(to: CGPoint(x: width, y: height + 10), control: CGPoint(x: width + curveValue, y: height / 2))
             
         }
     }

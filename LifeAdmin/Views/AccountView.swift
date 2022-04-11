@@ -116,7 +116,7 @@ struct AccountView: View {
                 .offset(y: (screen.height / 6) / 2.7)
                 
             }
-            .padding(.bottom, 30)
+            .padding(.bottom, 20)
             
             //MARK: Category
             if category != "None" && !category.isEmpty {
@@ -139,7 +139,7 @@ struct AccountView: View {
             
             VStack {
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     
                 //MARK: Email
                 AccountDetailField(title: "Email", text: email)
@@ -148,24 +148,21 @@ struct AccountView: View {
                 AccountDetailField(title: "Phone", text: phone)
                 
                 //MARK: Secure Password
-                VStack(alignment: .leading, spacing: 3) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text("Password")
                         .font(isScreenLarge ? .headline.weight(.light) : .caption.weight(.light))
                         .foregroundColor(Color("PrimaryText"))
                         .padding(.leading, 10)
                     
                     ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-//
+
                         if password != "" {
                             if showPass {
                                 Text(password)
                                     .font(.title3)
                                     .foregroundColor(Color("PrimaryText"))
-                                    .padding(.leading, 10)
+                                    .padding(10)
+                                    .lineLimit(1)
 
 
                             }
@@ -173,8 +170,9 @@ struct AccountView: View {
                                 SecureField("N/A", text: $password)
                                     .font(.title3)
                                     .foregroundColor(Color("Green1"))
-                                    .padding(.leading, 10)
+                                    .padding(10)
                                     .disabled(true)
+                                    .lineLimit(1)
 
                             }
                         } else {
@@ -209,33 +207,42 @@ struct AccountView: View {
                         
                         
                     }
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .frame(minHeight: 45)
+                            .foregroundColor(Color("RowBackground"))
+                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                    )
                     
                 }
                 
                 //MARK: Address
-                AccountDetailField(title: "Address", text: "\(address1)\n\(address2)\n\(postcode)", fieldHeight: 95)
+                AccountDetailField(title: "Address", text: "\(address1)\n\(address2)\n\(postcode)")
 
-                HStack {
-                    //MARK: Price
-                    AccountDetailField(title: "Price", fieldWidth: screen.width / 2.5, fieldHeight: 45, isPrice: true, price: price, per: per)
+                        HStack(alignment: .top) {
+                        //MARK: Price
+                        AccountDetailField(title: "Price", isPrice: true, price: price, per: per)
 
-                    Spacer()
+                        Spacer()
 
-                    //MARK: payment date
-                    if per == "" {
-                        AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)", fieldWidth: screen.width / 2.5, fieldHeight: 45)
-                    } else if per == "month" {
-                        AccountDetailField(title: "Payment Date", text: "\(paymentDay)", fieldWidth: screen.width / 2.5, fieldHeight: 45)
-                    } else {
-                        AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)", fieldWidth: screen.width / 2.5, fieldHeight: 45)
-                    }
+                        //MARK: payment date
+                        if per == "" {
+                            AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)")
+                        } else if per == "month" {
+                            AccountDetailField(title: "Payment Date", text: "\(paymentDay)")
+                        } else {
+                            AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)")
+                        }
 
 
-                }
+                        }
+                    
+                Color.clear
+                    .frame(height: 30)
                 
             }
                 .frame(maxHeight: screen.height / 1.7)
-                .padding(.bottom)
+                .padding(.bottom, 10)
                 
                 
                 //MARK: Delete/Disable Buttons
@@ -245,6 +252,7 @@ struct AccountView: View {
                     
                     Button {
                         showDelete = true
+                        Constants.deleteHaptic()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
