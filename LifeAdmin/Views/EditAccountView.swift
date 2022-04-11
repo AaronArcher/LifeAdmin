@@ -92,17 +92,16 @@ struct EditAccountView: View {
                 VStack(spacing: 15) {
                     
                     //MARK: Account Name
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                        
                         TextField("Account Name", text: $accountName)
-                            .padding(.leading, 10)
+                            .padding(10)
                             .disableAutocorrection(true)
                             .foregroundColor(Color("PrimaryText"))
-                    }
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 45)
+                                    .foregroundColor(Color("RowBackground"))
+                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                            )
                     
                     //MARK: Account Icon
                     
@@ -152,12 +151,6 @@ struct EditAccountView: View {
                     )
                     
                     //MARK: Category
-                    ZStack {
-                        
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                         
                         HStack {
                             Text("Category:")
@@ -175,27 +168,27 @@ struct EditAccountView: View {
                             }
                             .pickerStyle(.menu)
                             .accentColor(Color("PrimaryText"))
-                            .padding(.trailing, 10)
                             
                         }
-                        .padding(.horizontal, 10)
-                    }
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(minHeight: 45)
+                                .foregroundColor(Color("RowBackground"))
+                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                        )
+                    
                     
                     //MARK: Email
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                         
                         TextField("Email Address", text: $email)
                             .foregroundColor(Color("PrimaryText"))
                             .textInputAutocapitalization(TextInputAutocapitalization.never)
                             .disableAutocorrection(true)
-                            .padding(.leading, 10)
+                            .padding(10)
                             .keyboardType(.emailAddress)
                             .textContentType(.emailAddress)
-                            .padding(.trailing, 10)
                         
                         if email == "" {
                             HStack {
@@ -218,16 +211,17 @@ struct EditAccountView: View {
                         }
                         
                     }
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .frame(minHeight: 45)
+                            .foregroundColor(Color("RowBackground"))
+                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                    )
                     
                     //MARK: Phone
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                         
                         TextField("Phone Number", text: $phone)
-                            .padding(.leading, 10)
                             .foregroundColor(Color("PrimaryText"))
                             .keyboardType(.phonePad)
                             .textContentType(.telephoneNumber)
@@ -249,38 +243,38 @@ struct EditAccountView: View {
                                         .foregroundColor(Color("Green1"))
                                         .font(.footnote)
                                 }
-                                .padding(.trailing, 10)
                             }
                         }
                     }
-                    
-                    //MARK: Password
-                    ZStack {
+                    .padding(10)
+                    .background(
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 45)
+                            .frame(minHeight: 45)
                             .foregroundColor(Color("RowBackground"))
                             .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                    )
+                    
+                    //MARK: Password
+                    
                         
                         TextField("Password", text: $password)
-                            .padding(.leading, 10)
+                            .padding(10)
                             .foregroundColor(Color("PrimaryText"))
                             .textInputAutocapitalization(TextInputAutocapitalization.never)
                             .disableAutocorrection(true)
-                        
-                    }
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 45)
+                                    .foregroundColor(Color("RowBackground"))
+                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                            )
                     
                     //MARK: Address
                     ZStack {
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(height: 100)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                        
                         
                         VStack {
                             ZStack {
                                 TextField("Address Line 1", text: $address1)
-                                    .padding(.leading, 10)
                                     .foregroundColor(Color("PrimaryText"))
                                     .textInputAutocapitalization(TextInputAutocapitalization.never)
                                     .disableAutocorrection(true)
@@ -306,7 +300,6 @@ struct EditAccountView: View {
                                                 .foregroundColor(Color("Green1"))
                                                 .font(.footnote)
                                         }
-                                        .padding(.trailing, 10)
                                     }
                                 }
                                 
@@ -314,35 +307,37 @@ struct EditAccountView: View {
                             
                             
                             TextField("Address Line 2", text: $address2)
-                                .padding(.leading, 10)
                                 .foregroundColor(Color("PrimaryText"))
                                 .textInputAutocapitalization(TextInputAutocapitalization.never)
                                 .disableAutocorrection(true)
                             
                             TextField("Postcode", text: $postcode)
-                                .padding(.leading, 10)
                                 .foregroundColor(Color("PrimaryText"))
                                 .textInputAutocapitalization(TextInputAutocapitalization.never)
                                 .disableAutocorrection(true)
                         }
                     }
+                    .padding(10)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .frame(minHeight: 45)
+                            .foregroundColor(Color("RowBackground"))
+                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                    )
                     
                     //MARK: Price
                     HStack {
-                        
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .frame(width: 100, height: 45)
-                                .foregroundColor(Color("RowBackground"))
-                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                             
                             TextField("Price", text: $price)
                                 .keyboardType(.decimalPad)
-                                .padding(.leading, 10)
+                                .padding(10)
                                 .foregroundColor(Color("PrimaryText"))
-                                .frame(width: 100)
-                            
-                        }
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(minHeight: 45)
+                                        .foregroundColor(Color("RowBackground"))
+                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                                )
                         
                         Spacer()
                         
@@ -366,11 +361,6 @@ struct EditAccountView: View {
                             }
                             
                         } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .frame(width: 80, height: 45)
-                                    .foregroundColor(Color("RowBackground"))
-                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                                 
                                 if per == "month" {
                                     Text("Month")
@@ -380,9 +370,16 @@ struct EditAccountView: View {
                                     Text("Month")
                                         .fontWeight(.light)
                                 }
-                            }
+                            
                         }
                         .foregroundColor(.gray.opacity(0.7))
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(minHeight: 45)
+                                .foregroundColor(Color("RowBackground"))
+                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                        )
                         
                         // Year
                         Button {
@@ -399,11 +396,6 @@ struct EditAccountView: View {
                                 }
                             }
                         } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .frame(width: 80, height: 45)
-                                    .foregroundColor(Color("RowBackground"))
-                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                                 
                                 if per == "year" {
                                     Text("Year")
@@ -413,21 +405,22 @@ struct EditAccountView: View {
                                     Text("Year")
                                         .fontWeight(.light)
                                 }
-                            }
+                
                         }
                         .foregroundColor(.gray.opacity(0.7))
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(minHeight: 45)
+                                .foregroundColor(Color("RowBackground"))
+                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                        )
                     }
                     
                     //MARK: Payment Date
                     VStack (spacing: 10){
                         
                         if per == "month" || per == "year" {
-                            ZStack {
-                                
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .frame(height: 45)
-                                    .foregroundColor(Color("RowBackground"))
-                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                                 
                                 HStack {
                                     
@@ -446,22 +439,20 @@ struct EditAccountView: View {
                                     }
                                     .pickerStyle(.menu)
                                     .accentColor(Color("PrimaryText"))
-                                    .padding(.trailing, 10)
-                                    
                                     
                                 }
-                                .padding(.horizontal, 10)
-                            }
+                                .padding(10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(minHeight: 45)
+                                        .foregroundColor(Color("RowBackground"))
+                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                                )
+                            
                         }
                         
                         // Payment Month
                         if per == "year" {
-                            ZStack {
-                                
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .frame(height: 45)
-                                    .foregroundColor(Color("RowBackground"))
-                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                                 
                                 HStack {
                                     Text("Payment Month:")
@@ -479,11 +470,16 @@ struct EditAccountView: View {
                                     }
                                     .pickerStyle(.menu)
                                     .accentColor(Color("PrimaryText"))
-                                    .padding(.trailing, 10)
                                     
                                 }
-                                .padding(.horizontal, 10)
-                            }
+                                .padding(10)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(minHeight: 45)
+                                        .foregroundColor(Color("RowBackground"))
+                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                                )
+                            
                         }
                         
                     }
@@ -558,9 +554,8 @@ struct EditAccountView: View {
                 } catch let error {
                     print("error: \(error)")
                 }
-                
-                
-                savedHaptic()
+                                
+                Constants.savedHaptic()
                 
                 showEditAccount = false
                 withAnimation {
@@ -625,17 +620,13 @@ struct EditAccountView: View {
                 print("error: \(error)")
             }
             
+            Constants.savedHaptic()
             showEditAccount = false
         } catch {
             print("Error updating Account \(error.localizedDescription)")
         }
     }
-    
-    func savedHaptic() {
-        let generator = UINotificationFeedbackGenerator()
-        generator.notificationOccurred(.success)
-    }
-    
+        
 }
 
 struct NewAccountView_Previews: PreviewProvider {

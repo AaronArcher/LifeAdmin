@@ -23,6 +23,12 @@ struct Constants {
         generator.notificationOccurred(.warning)
     }
     
+    static func savedHaptic() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+    }
+
+    
 }
 
 

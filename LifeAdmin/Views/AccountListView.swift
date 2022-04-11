@@ -75,6 +75,7 @@ struct AccountListView: View {
                             Image(systemName: "slider.horizontal.3")
                                 .foregroundColor(.white)
                                 .font(.title2)
+                                .dynamicTypeSize(.medium)
                         }
                         
                         
@@ -86,6 +87,8 @@ struct AccountListView: View {
                             Image(systemName: "gearshape.fill")
                                 .foregroundColor(.white)
                                 .font(.title2)
+                                .dynamicTypeSize(.medium)
+
                         }
                         
                     }

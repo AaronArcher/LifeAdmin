@@ -92,6 +92,8 @@ struct AccountView: View {
                             .font(.title2.weight(.light))
                             .foregroundColor(.white)
                             .frame(width: 30, height: 30)
+                            .dynamicTypeSize(.medium)
+
 
                     }
                     
@@ -108,6 +110,8 @@ struct AccountView: View {
                                 .font(.title2.weight(.light))
                                 .foregroundColor(.white)
                                 .frame(width: 30, height: 30)
+                                .dynamicTypeSize(.medium)
+
                         }
                     }
                     

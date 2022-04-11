@@ -28,6 +28,7 @@ struct HeaderView: View {
                     .foregroundColor(.white)
                     .frame(width: screen.width / 1.4, height: 40)
                     .fixedSize(horizontal: true, vertical: true)
+                    .dynamicTypeSize(.large)
          
             
             

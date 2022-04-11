@@ -52,13 +52,13 @@ struct AccountDetailField: View {
                                     .foregroundColor(Color("PrimaryText"))
 
                             }
-                            .padding(8)
+                            .padding(10)
 
                         } else {
                             Text("-")
                                 .foregroundColor(.gray.opacity(0.7))
                                 .font(.title3)
-                                .padding(8)
+                                .padding(10)
 
                         }
                         
@@ -67,14 +67,14 @@ struct AccountDetailField: View {
                             Text(verbatim: text)
                                 .foregroundColor(Color("PrimaryText"))
                                 .font(.title3)
-                                .padding(8)
+                                .padding(10)
                                 .lineLimit(title == "Address" ? 3 : 1)
 
                         } else {
                             Text("-")
                                 .foregroundColor(.gray.opacity(0.7))
                                 .font(.title3)
-                                .padding(8)
+                                .padding(10)
                                 .lineLimit(1)
 
                         }

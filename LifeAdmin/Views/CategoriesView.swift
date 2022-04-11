@@ -72,7 +72,7 @@ struct CategoriesView: View {
                     .foregroundColor(Color("PrimaryText"))
                     .padding(.bottom, 25)
 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     
                 ForEach(Constants.categories.sorted(), id: \.self) { category in
                     if category != "None" {
@@ -114,7 +114,7 @@ struct CategoriesView: View {
                     
                 }
             }
-                .frame(height: screen.height / 1.7)
+                .frame(height: screen.height / 1.8)
                 
                 Spacer()
                 
@@ -180,7 +180,7 @@ struct CategoriesView: View {
                 
                 }
                 .padding(.horizontal)
-                .padding(.bottom)
+                .padding(.bottom, 20)
               
 
             }
