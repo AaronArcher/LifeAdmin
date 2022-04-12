@@ -9,18 +9,23 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Environment(\.openURL) var openURL
     @Environment(\.dismiss) var dismiss
     @Namespace var namespace
     
     @AppStorage("isDarkMode") var isDarkMode = false
     @AppStorage("showTotalAs") var showTotalAs = "month"
         
+    private var bugEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "Support Email", messageHeader: "Please describe the bug below:")
+    
+    private var featureEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "New Feature Request", messageHeader: "Please include your feature request below:")
     
     var body: some View {
         
         NavigationView {
             VStack {
                 
+                //MARK: Header
                 HStack {
                     
                     Button {
@@ -50,6 +55,7 @@ struct SettingsView: View {
                 
                 List {
                     
+                    //MARK: Display Preferences
                     Section(content: {
                         
                         // Dark Mode
@@ -134,7 +140,7 @@ struct SettingsView: View {
                     })
                         .listRowSeparator(.hidden)
 
-                    
+                    //MARK: Default Contact Details
                     Section {
                         
                         // Email Address
@@ -175,6 +181,38 @@ struct SettingsView: View {
                     
                 }
                 .foregroundColor(Color("PrimaryText"))
+                
+                HStack {
+                    Button {
+                        bugEmail.sendEmail(openURL: openURL)
+                    } label: {
+                        Text("Report a bug")
+                            .foregroundColor(.white)
+                            .font(.title3.weight(.light))
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .foregroundColor(Color("Blue1"))
+                            )
+                    }
+                    
+                    Spacer()
+                    
+                    Button {
+                        featureEmail.sendEmail(openURL: openURL)
+                    } label: {
+                        Text("Suggest a feature")
+                            .foregroundColor(.white)
+                            .font(.title3.weight(.light))
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .foregroundColor(Color("Green1"))
+                            )
+                    }
+
+                }
+                .padding()
                 
                 
                 Spacer()

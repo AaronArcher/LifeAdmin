@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */; };
+		EE707A36280623EC00704AB8 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE707A35280623EC00704AB8 /* Bundle+Extension.swift */; };
+		EE707A382806243900704AB8 /* DeviceModels.json in Resources */ = {isa = PBXBuildFile; fileRef = EE707A372806243900704AB8 /* DeviceModels.json */; };
+		EE707A3A2806266400704AB8 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE707A392806266400704AB8 /* SupportEmail.swift */; };
 		EE750B4627FA13A6006768C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE750B4527FA13A6006768C4 /* Constants.swift */; };
 		EE761A152803340D000006BB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EE761A142803340D000006BB /* Lottie */; };
 		EE761A1A28033457000006BB /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1928033457000006BB /* LottieView.swift */; };
@@ -45,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		EE06E6B027F7684200658E13 /* FavouriteAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAddressView.swift; sourceTree = "<group>"; };
+		EE707A35280623EC00704AB8 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
+		EE707A372806243900704AB8 /* DeviceModels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DeviceModels.json; sourceTree = "<group>"; };
+		EE707A392806266400704AB8 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
 		EE750B4527FA13A6006768C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE761A1928033457000006BB /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		EE761A1B28033760000006BB /* success-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-animation.json"; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 				EEB55C4727F24160006A90C7 /* ViewModels */,
 				EEB55C4827F24169006A90C7 /* Models */,
 				EE761A162803341B000006BB /* Lottie */,
+				EE707A372806243900704AB8 /* DeviceModels.json */,
 				EEB55C3527F1ACAE006A90C7 /* Assets.xcassets */,
 				EEB55C3727F1ACAE006A90C7 /* Preview Content */,
 			);
@@ -204,6 +211,7 @@
 				EE750B4527FA13A6006768C4 /* Constants.swift */,
 				EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */,
 				EE761A1D28033DAC000006BB /* Extensions.swift */,
+				EE707A35280623EC00704AB8 /* Bundle+Extension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -220,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				EEB55C3C27F1ACAE006A90C7 /* LifeAdmin.xcdatamodeld */,
+				EE707A392806266400704AB8 /* SupportEmail.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -299,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB55C3927F1ACAE006A90C7 /* Preview Assets.xcassets in Resources */,
+				EE707A382806243900704AB8 /* DeviceModels.json in Resources */,
 				EE761A1C28033760000006BB /* success-animation.json in Resources */,
 				EEB55C3627F1ACAE006A90C7 /* Assets.xcassets in Resources */,
 			);
@@ -325,6 +335,7 @@
 				EEB55C3427F1ACAD006A90C7 /* HomeView.swift in Sources */,
 				EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */,
 				EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */,
+				EE707A36280623EC00704AB8 /* Bundle+Extension.swift in Sources */,
 				EE766B2427FCCFFD00AC046C /* FilterPredicates.swift in Sources */,
 				EEB55C5427F2437E006A90C7 /* HeaderView.swift in Sources */,
 				EEB55C3E27F1ACAE006A90C7 /* LifeAdmin.xcdatamodeld in Sources */,
@@ -336,6 +347,7 @@
 				EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */,
 				EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */,
 				EEB55C4A27F242DC006A90C7 /* AccountListView.swift in Sources */,
+				EE707A3A2806266400704AB8 /* SupportEmail.swift in Sources */,
 				EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */,
 				EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */,
 				EE761A1E28033DAC000006BB /* Extensions.swift in Sources */,
