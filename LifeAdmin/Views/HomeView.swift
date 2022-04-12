@@ -34,6 +34,9 @@ struct HomeView: View {
                     .overlay(
                         Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                     )
+                    .accessibilityHidden(showCategories || showSave)
+                    .accessibilityAddTraits(.isModal)
+
                     
                 
                 TabView(showActive: $showActive, showNewAccount: $showNewAccount)
@@ -41,6 +44,9 @@ struct HomeView: View {
                     .overlay(
                         Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                     )
+                    .accessibilityHidden(showCategories || showSave)
+                    .accessibilityAddTraits(.isModal)
+
                 
                 if showSave {
                     VStack {
@@ -84,10 +90,12 @@ struct HomeView: View {
                             }
                         }
                     }
+                    
                 }
                 
                 CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
                     .offset(x: showCategories ? 0 : -(screenWidth))
+                    .accessibilityAddTraits(.isModal)
                 
                 
             }

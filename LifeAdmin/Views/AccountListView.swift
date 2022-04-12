@@ -76,6 +76,7 @@ struct AccountListView: View {
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .dynamicTypeSize(.medium)
+                                .accessibilityLabel("Category filter")
                         }
                         
                         
@@ -88,6 +89,7 @@ struct AccountListView: View {
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .dynamicTypeSize(.medium)
+                                .accessibilityLabel("Settings")
 
                         }
                         

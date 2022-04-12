@@ -29,6 +29,7 @@ struct CategoriesView: View {
         ZStack(alignment: .leading) {
             
             Color("Background")
+                .accessibility(hidden: true)
             
             VStack(alignment: .leading) {
 
@@ -114,7 +115,7 @@ struct CategoriesView: View {
                     
                 }
             }
-                .frame(height: screen.height / 1.8)
+                .frame(height: screen.height / 1.75)
                 
                 Spacer()
                 

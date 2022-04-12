@@ -52,7 +52,7 @@ struct EditAccountView: View {
     
     var body: some View {
         
-        Group {
+        VStack {
             // Header buttons
             HStack {
                 Button {
@@ -85,7 +85,7 @@ struct EditAccountView: View {
             }
             .font(.body.weight(.light))
             .foregroundColor(Color("Blue1"))
-            .padding()
+            .padding(.horizontal, 5)
             
             ScrollView(showsIndicators: false) {
                 
@@ -451,7 +451,7 @@ struct EditAccountView: View {
                             
                         }
                         
-                        // Payment Month
+                        //MARK: Payment Month
                         if per == "year" {
                                 
                                 HStack {

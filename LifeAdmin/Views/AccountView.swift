@@ -111,6 +111,7 @@ struct AccountView: View {
                                 .foregroundColor(.white)
                                 .frame(width: 30, height: 30)
                                 .dynamicTypeSize(.medium)
+                                .accessibilityLabel("Edit Account")
 
                         }
                     }
