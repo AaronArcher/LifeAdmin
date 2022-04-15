@@ -47,6 +47,9 @@ struct AccountListView: View {
     
     @Binding var showTabBar: Bool
     
+    @EnvironmentObject var spotlight: SpotlightVM
+
+    
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
 
     
@@ -81,6 +84,7 @@ struct AccountListView: View {
                                     .dynamicTypeSize(.medium)
                                     .accessibilityLabel("Category filter")
                             }
+                            .spotlight(enabled: spotlight.currentSpotlight == 5, title: "You can filter your accounts by category here.")
                             
                             
                             Spacer()
@@ -135,12 +139,20 @@ struct AccountListView: View {
                             }
                             .foregroundColor(Color("PrimaryText"))
                             
-                            
                         }
+                        .spotlight(enabled: spotlight.currentSpotlight == 3, title: "Your total expenditure is shown here, you can toggle this between monthly or yearly in the settings page.")
+                        
                     }
                     .padding(.trailing, 8)
                     .padding()
                     
+                
+                ZStack(alignment: .top) {
+                
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(width: screen.width / 1.1, height: screen.height / 3)
+                        .spotlight(enabled: spotlight.currentSpotlight == 4, title: "View all of your accounts here. Select an account to view or edit your account information")
                     
                     if showActive && activeAccounts.count == 0 {
                         
@@ -192,9 +204,11 @@ struct AccountListView: View {
                                                 
                         
                         }
-
                         
                     }
+                        
+                    }
+              
                     
                     Spacer()
                 }

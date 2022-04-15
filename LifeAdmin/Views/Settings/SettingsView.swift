@@ -20,6 +20,9 @@ struct SettingsView: View {
     
     private var featureEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "LifeAdmin - New Feature Request", messageHeader: "Please include your feature request below:")
     
+    @EnvironmentObject var spotlight: SpotlightVM
+//    @Binding var isOnboarding: Bool
+    
     var body: some View {
         
         NavigationView {
@@ -32,7 +35,6 @@ struct SettingsView: View {
                         dismiss()
                     } label: {
                         Image(systemName: "xmark")
-                            .foregroundColor(Color("PrimaryText"))
                             .font(.title.weight(.light))
                     }
                     .frame(width: 30, height: 30)
@@ -42,15 +44,23 @@ struct SettingsView: View {
                     
                     Text("Settings")
                         .font(.largeTitle)
-                        .foregroundColor(Color("PrimaryText"))
                     
                     Spacer()
                     
-                    Color.clear
+                    Button(action: {
+                        dismiss()
+                        spotlight.currentSpotlight = 1
+                        spotlight.isOnboarding = true
+                    }, label: {
+                        Image(systemName: "questionmark.square")
+                            .font(.title.weight(.light))
+
+                    })
                         .frame(width: 30, height: 30)
                     
                     
                 }
+                .foregroundColor(Color("PrimaryText"))
                 .padding()
                 
                 List {

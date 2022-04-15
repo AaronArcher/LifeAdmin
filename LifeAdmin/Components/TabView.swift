@@ -22,7 +22,9 @@ struct TabView: View {
     var isScreenLarge: Bool {
         UIScreen.main.bounds.height > 680
     }
-        
+    
+    @EnvironmentObject var spotlight: SpotlightVM
+
     var body: some View {
         
         ZStack {
@@ -30,6 +32,7 @@ struct TabView: View {
             Rectangle()
                 .fill(Color("RowBackground"))
                 .shadow(color: .black.opacity(0.15), radius: 20, y: -2)
+                .spotlight(enabled: spotlight.currentSpotlight == 6, title: "Switch between active and inactive/old accounts here")
             
             // Tab Text Buttons
             HStack {
@@ -109,7 +112,8 @@ struct TabView: View {
                 }
             }
             //MARK: Spotlight
-//            .spotlight(enabled: true, title: "Create a new account gfdgdfgdflnfdlsdgl lk sdlfgl dlfgk dlkf dfg lkdd dlfg ldfg kkldfg dlkdfflkd")
+            .spotlight(enabled: spotlight.currentSpotlight == 1, title: "Welcome to LifeAdmin! \n \n \nThe best app to keep all of your separate account information securely in one place!")
+            .spotlight(enabled: spotlight.currentSpotlight == 2, title: "You can set up a new account here.")
             .offset(y: -height / 2)
             .shadow(color: .black.opacity(0.2), radius: 15, x: 5, y: 10)
                         

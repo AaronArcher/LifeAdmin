@@ -69,6 +69,9 @@ struct SpotlightView<Content: View>: View {
             .onAppear {
                 addOverlayView()
             }
+            .onDisappear {
+                removeOverlay()
+            }
     }
     
     // Remove the overlay when the view disappears
@@ -120,7 +123,7 @@ struct SpotlightView<Content: View>: View {
                 .mask({
                     
                     // If the height and width are almost the same then make it a circle, otherwise a rounded rectangle
-                    let radius = (rect.height / rect.width) > 0.7 ? rect.width : 6
+                    let radius = (rect.height / rect.width) > 0.9 ? rect.width : 10
                     
                     Rectangle()
                         .overlay {

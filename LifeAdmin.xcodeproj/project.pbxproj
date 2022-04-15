@@ -28,6 +28,7 @@
 		EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */; };
 		EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */; };
 		EE766B402800CBF200AC046C /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = EE766B3F2800CBF200AC046C /* KeychainAccess */; };
+		EE85A2A5280995B5009482B8 /* SpotlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85A2A4280995B5009482B8 /* SpotlightViewModel.swift */; };
 		EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */; };
 		EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */; };
 		EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C3127F1ACAD006A90C7 /* LifeAdminApp.swift */; };
@@ -67,6 +68,7 @@
 		EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaFilteredAccountView.swift; sourceTree = "<group>"; };
 		EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelFilteredAccountView.swift; sourceTree = "<group>"; };
 		EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesFilteredAccountView.swift; sourceTree = "<group>"; };
+		EE85A2A4280995B5009482B8 /* SpotlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightViewModel.swift; sourceTree = "<group>"; };
 		EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPhoneView.swift; sourceTree = "<group>"; };
 		EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteEmailView.swift; sourceTree = "<group>"; };
 		EEB55C2E27F1ACAD006A90C7 /* LifeAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				EEB55C3A27F1ACAE006A90C7 /* Persistence.swift */,
+				EE85A2A4280995B5009482B8 /* SpotlightViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				EEB55C4A27F242DC006A90C7 /* AccountListView.swift in Sources */,
 				EE707A3A2806266400704AB8 /* SupportEmail.swift in Sources */,
 				EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */,
+				EE85A2A5280995B5009482B8 /* SpotlightViewModel.swift in Sources */,
 				EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */,
 				EE761A1E28033DAC000006BB /* Extensions.swift in Sources */,
 			);

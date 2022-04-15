@@ -14,12 +14,14 @@ struct LifeAdminApp: App {
     
     @AppStorage("isDarkMode") private var isDarkMode = false
     
+    @StateObject var spotlight = SpotlightVM()
     
     var body: some Scene {
         WindowGroup {
             HomeView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .preferredColorScheme(isDarkMode ? .dark : .light)
+                .environmentObject(spotlight)
         }
     }
 }

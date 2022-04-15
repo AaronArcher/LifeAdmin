@@ -9,6 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @AppStorage("showOnboarding") var showOnboarding = true
+
+    
     let screenWidth = UIScreen.main.bounds.width
     
     let height = UIScreen.main.bounds.height / 7.5
@@ -32,13 +35,13 @@ struct HomeView: View {
     
     @State private var showSave = false
     
-    @State var currentSpotlight: Int = 0
+    @EnvironmentObject var spotlight: SpotlightVM
     
     @State var showTabBar = true
     
     var body: some View {
-//        NavigationView {
-                ZStack {
+
+        ZStack {
                     
                     AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, animatePath: $animatePath, animateBG: $animateBG, showSave: $showSave, showTabBar: $showTabBar)
                         .disabled(showCategories || showSave)
@@ -116,10 +119,29 @@ struct HomeView: View {
                     
                     
                 }
+                .onAppear(perform: {
+                    if showOnboarding {
+                        spotlight.isOnboarding = true
+                        spotlight.currentSpotlight = 1
+                    }
+                })
                 .background(Color("Background"))
+                .onTapGesture {
+                    if spotlight.isOnboarding {
+                        if spotlight.currentSpotlight > 6 {
+                            spotlight.currentSpotlight = 0
+                            spotlight.isOnboarding = false
+                            if showOnboarding {
+                                showOnboarding = false
+                            }
+                        } else {
+                            spotlight.currentSpotlight += 1
+
+                        }
+                    }
+                }
 
             
-//        }
     }
 }
 
