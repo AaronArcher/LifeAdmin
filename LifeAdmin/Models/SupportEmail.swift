@@ -14,14 +14,16 @@ struct SupportEmail {
     let subject: String
     let messageHeader: String
     var body: String {"""
+        \(messageHeader)
+        -------------------
+    
+    
+    
         Application Name: \(Bundle.main.displayName)
         iOS: \(UIDevice.current.systemVersion)
         Device Model: \(UIDevice.current.modelName)
         App Version: \(Bundle.main.appVersion)
         App Build: \(Bundle.main.appBuild)
-        \(messageHeader)
-        -----------------
-    
     
     """}
     

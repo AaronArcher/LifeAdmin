@@ -44,3 +44,4 @@ extension UIDevice {
             return DeviceModel.all.first {$0.identifier == identifier }?.model ?? identifier
         }
 }
+

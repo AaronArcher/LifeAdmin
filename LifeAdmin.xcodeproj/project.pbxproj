@@ -11,6 +11,7 @@
 		EE707A36280623EC00704AB8 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE707A35280623EC00704AB8 /* Bundle+Extension.swift */; };
 		EE707A382806243900704AB8 /* DeviceModels.json in Resources */ = {isa = PBXBuildFile; fileRef = EE707A372806243900704AB8 /* DeviceModels.json */; };
 		EE707A3A2806266400704AB8 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE707A392806266400704AB8 /* SupportEmail.swift */; };
+		EE707A3C28077ADF00704AB8 /* Spotlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE707A3B28077ADF00704AB8 /* Spotlight.swift */; };
 		EE750B4627FA13A6006768C4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE750B4527FA13A6006768C4 /* Constants.swift */; };
 		EE761A152803340D000006BB /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EE761A142803340D000006BB /* Lottie */; };
 		EE761A1A28033457000006BB /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1928033457000006BB /* LottieView.swift */; };
@@ -51,6 +52,7 @@
 		EE707A35280623EC00704AB8 /* Bundle+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extension.swift"; sourceTree = "<group>"; };
 		EE707A372806243900704AB8 /* DeviceModels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DeviceModels.json; sourceTree = "<group>"; };
 		EE707A392806266400704AB8 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
+		EE707A3B28077ADF00704AB8 /* Spotlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotlight.swift; sourceTree = "<group>"; };
 		EE750B4527FA13A6006768C4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EE761A1928033457000006BB /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		EE761A1B28033760000006BB /* success-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-animation.json"; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */,
 				EE761A1D28033DAC000006BB /* Extensions.swift */,
 				EE707A35280623EC00704AB8 /* Bundle+Extension.swift */,
+				EE707A3B28077ADF00704AB8 /* Spotlight.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -331,6 +334,7 @@
 				EE766B3027FCF18200AC046C /* OtherFilteredAccountView.swift in Sources */,
 				EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */,
 				EEB55C3B27F1ACAE006A90C7 /* Persistence.swift in Sources */,
+				EE707A3C28077ADF00704AB8 /* Spotlight.swift in Sources */,
 				EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */,
 				EEB55C3427F1ACAD006A90C7 /* HomeView.swift in Sources */,
 				EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */,

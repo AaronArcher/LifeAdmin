@@ -27,6 +27,8 @@ struct TravelFilteredAccountView: View {
     @Binding var showDelete: Bool
     @Binding var selectedID: UUID
     @Binding var totalPrice: Double
+    @Binding var showTabBar: Bool
+
 
     var body: some View {
         
@@ -79,7 +81,8 @@ struct TravelFilteredAccountView: View {
                                 per: account.per ?? "",
                                 paymentDay: account.paymentDay ?? "",
                                 paymentMonth: account.paymentMonth ?? "",
-                                isActive: account.isActive)
+                                isActive: account.isActive,
+                                showTabBar: $showTabBar)
 
                         } label: {
                             AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
@@ -159,6 +162,6 @@ struct TravelFilteredAccountView: View {
 
 struct TravelFilteredAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        TravelFilteredAccountView(showTotalAs: .constant(""), showActive: .constant(true), showDelete: .constant(false), selectedID: .constant(UUID()), totalPrice: .constant(0))
+        TravelFilteredAccountView(showTotalAs: .constant(""), showActive: .constant(true), showDelete: .constant(false), selectedID: .constant(UUID()), totalPrice: .constant(0), showTabBar: .constant(false))
     }
 }

@@ -50,6 +50,9 @@ struct AccountView: View {
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
     
     @State private var showSave = false
+    
+    @Binding var showTabBar: Bool
+
 
     
     var body: some View {
@@ -178,6 +181,7 @@ struct AccountView: View {
                                     .padding(10)
                                     .disabled(true)
                                     .lineLimit(1)
+                                    .accessibilityLabel("Password is hidden, unlock to view")
 
                             }
                         } else {
@@ -205,6 +209,7 @@ struct AccountView: View {
                                     Image(systemName: showPass ? "eye.fill" : "eye.slash.fill")
                                         .font(.title3)
                                         .foregroundColor(Color("PrimaryText"))
+                                        .accessibilityLabel(showPass ? "Hide password" : "Unlock password")
                                 }
                             }
                         }
@@ -300,6 +305,10 @@ struct AccountView: View {
         })
         .onAppear(perform: {
 
+            withAnimation(.spring()) {
+                showTabBar = false
+            }
+            
             do {
                 password = try keychain.get("\(id)") ?? ""
 
@@ -419,7 +428,7 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
         
     static var previews: some View {
-        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true)
+        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true, showTabBar: .constant(false))
     }
 }
 

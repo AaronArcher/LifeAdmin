@@ -46,7 +46,9 @@ struct CategoriesView: View {
                         withAnimation(.spring().delay(0.1)) {
                             showCategories.toggle()
                         }
-                        newCategory = ""
+                        if selectedCategory != newCategory {
+                            newCategory = ""
+                        }
                         
                     } label: {
                         Image(systemName: "xmark")
@@ -196,7 +198,6 @@ struct CategoriesView: View {
             CategoryShape(curveValue: animatePath ? 70 : 0)
                 .stroke(Color("Green1"), lineWidth: animatePath ? 4 : 0
                 )
-//                .padding(.leading, -10)
         )
         .ignoresSafeArea()
 

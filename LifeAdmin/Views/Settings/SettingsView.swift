@@ -16,9 +16,9 @@ struct SettingsView: View {
     @AppStorage("isDarkMode") var isDarkMode = false
     @AppStorage("showTotalAs") var showTotalAs = "month"
         
-    private var bugEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "Support Email", messageHeader: "Please describe the bug below:")
+    private var bugEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "LifeAdmin - Support Email", messageHeader: "Please describe the bug below:")
     
-    private var featureEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "New Feature Request", messageHeader: "Please include your feature request below:")
+    private var featureEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "LifeAdmin - New Feature Request", messageHeader: "Please include your feature request below:")
     
     var body: some View {
         
@@ -188,7 +188,7 @@ struct SettingsView: View {
                     } label: {
                         Text("Report a bug")
                             .foregroundColor(.white)
-                            .font(.title3.weight(.light))
+                            .fontWeight(.light)
                             .padding(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -203,7 +203,7 @@ struct SettingsView: View {
                     } label: {
                         Text("Suggest a feature")
                             .foregroundColor(.white)
-                            .font(.title3.weight(.light))
+                            .fontWeight(.light)
                             .padding(10)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)

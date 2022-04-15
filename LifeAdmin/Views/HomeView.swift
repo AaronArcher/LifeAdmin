@@ -11,6 +11,13 @@ struct HomeView: View {
     
     let screenWidth = UIScreen.main.bounds.width
     
+    let height = UIScreen.main.bounds.height / 7.5
+    let largeHeight = UIScreen.main.bounds.height / 8.5
+    
+    var isScreenLarge: Bool {
+        UIScreen.main.bounds.height > 680
+    }
+    
     @State private var showNewAccount = false
     
     @State private var showActive = true
@@ -25,83 +32,94 @@ struct HomeView: View {
     
     @State private var showSave = false
     
+    @State var currentSpotlight: Int = 0
+    
+    @State var showTabBar = true
+    
     var body: some View {
-        NavigationView {
-            ZStack {
-                
-                AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, animatePath: $animatePath, animateBG: $animateBG, showSave: $showSave)
-                    .disabled(showCategories || showSave)
-                    .overlay(
-                        Color.black.opacity(showCategories || showSave ? 0.7 : 0)
-                    )
-                    .accessibilityHidden(showCategories || showSave)
-                    .accessibilityAddTraits(.isModal)
+//        NavigationView {
+                ZStack {
+                    
+                    AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, animatePath: $animatePath, animateBG: $animateBG, showSave: $showSave, showTabBar: $showTabBar)
+                        .disabled(showCategories || showSave)
+                        .overlay(
+                            Color.black.opacity(showCategories || showSave ? 0.7 : 0)
+                        )
+                        .accessibilityHidden(showCategories || showSave)
+                        .accessibilityAddTraits(.isModal)
+            
+                    
+
+                        
+                    
+                    TabView(showActive: $showActive, showNewAccount: $showNewAccount)
+                        .disabled(showCategories || showSave)
+                        .overlay(
+                            Color.black.opacity(showCategories || showSave ? 0.7 : 0)
+                        )
+                        .accessibilityHidden(showCategories || showSave)
+                        .accessibilityAddTraits(.isModal)
+                        .offset(y: showTabBar ? 0 : (isScreenLarge ? largeHeight * 2 : height * 2))
 
                     
-                
-                TabView(showActive: $showActive, showNewAccount: $showNewAccount)
-                    .disabled(showCategories || showSave)
-                    .overlay(
-                        Color.black.opacity(showCategories || showSave ? 0.7 : 0)
-                    )
-                    .accessibilityHidden(showCategories || showSave)
-                    .accessibilityAddTraits(.isModal)
-
-                
-                if showSave {
-                    VStack {
-                        Text("Saved!")
-                            .foregroundColor(Color("PrimaryText"))
-                            .font(.title.weight(.light))
-                        
-                        Spacer()
-                        
-                        LottieView()
-                            .frame(width: screenWidth / 4, height: screenWidth / 4)
-                        
-                        Spacer()
-                        
-                        Button {
-                                showSave.toggle()
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .frame(width: screenWidth / 3, height: 40)
-                                    .foregroundColor(Color("Blue1"))
-                                Text("OK")
-                                    .foregroundColor(.white)
+                    if showSave {
+                        VStack {
+                            Text("Saved!")
+                                .foregroundColor(Color("PrimaryText"))
+                                .font(.title.weight(.light))
+                            
+                            Spacer()
+                            
+                            LottieView()
+                                .frame(width: screenWidth / 4, height: screenWidth / 4)
+                            
+                            Spacer()
+                            
+                            Button {
+                                    showSave.toggle()
+                            } label: {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .frame(width: screenWidth / 3, height: 40)
+                                        .foregroundColor(Color("Blue1"))
+                                    Text("OK")
+                                        .foregroundColor(.white)
+                                }
+                                    
                             }
-                                
-                        }
-                        
+                            
 
-                    }
-                    .padding()
-                    .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("Background"))
+                        }
+                        .padding()
+                        .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .foregroundColor(Color("Background"))
+                            .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
+                        )
                         .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
-                    )
-                    .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            if showSave {
-                                    showSave = false
+                        .accessibilityAddTraits(.isModal)
+                        .accessibilityLabel("Account saved")
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                if showSave {
+                                        showSave = false
+                                }
                             }
                         }
+                        
                     }
+                    
+                    CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
+                        .offset(x: showCategories ? 0 : -(screenWidth))
+                        .accessibilityAddTraits(.isModal)
+                    
+                    
                     
                 }
-                
-                CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
-                    .offset(x: showCategories ? 0 : -(screenWidth))
-                    .accessibilityAddTraits(.isModal)
-                
-                
-            }
-            .background(Color("Background"))
+                .background(Color("Background"))
+
             
-        }
+//        }
     }
 }
 

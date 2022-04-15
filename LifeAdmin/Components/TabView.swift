@@ -108,9 +108,11 @@ struct TabView: View {
                         .foregroundColor(.white)
                 }
             }
+            //MARK: Spotlight
+//            .spotlight(enabled: true, title: "Create a new account gfdgdfgdflnfdlsdgl lk sdlfgl dlfgk dlkf dfg lkdd dlfg ldfg kkldfg dlkdfflkd")
             .offset(y: -height / 2)
             .shadow(color: .black.opacity(0.2), radius: 15, x: 5, y: 10)
-            
+                        
         }
         .frame(height: isScreenLarge ? largeHeight : height)
         .frame(maxHeight: .infinity, alignment:  .bottom)
