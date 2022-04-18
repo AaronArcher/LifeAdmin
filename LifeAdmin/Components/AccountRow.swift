@@ -57,11 +57,11 @@ struct AccountRow: View {
                             .fill(
                                 LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
                             )
-                            .shadow(color: .black.opacity(0.2), radius: 10, x: 4, y: 4)
+                            .shadow(color: .black.opacity(0.2), radius: 5, x: 4, y: 4)
                     } else {
                         Circle()
                             .fill(Color("Gray1"))
-                            .shadow(color: .black.opacity(0.2), radius: 10, x: 4, y: 4)
+                            .shadow(color: .black.opacity(0.2), radius: 5, x: 4, y: 4)
 
                     }
                     
@@ -153,14 +153,14 @@ struct AccountRow: View {
         .onChange(of: gestureOffset) { newValue in
             offset = (gestureOffset + lastStoredOffset) > 0 ? 0 : (gestureOffset + lastStoredOffset)
         }
-        .opacity(showAccount ? 1 : 0)
+//        .opacity(showAccount ? 1 : 0)
         .onAppear {
             // Show accounts one at a time
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.0)) {
-                    showAccount = true
-                }
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+//                withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.0)) {
+//                    showAccount = true
+//                }
+//            }
 
             // Stop Background flashing first
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -168,7 +168,7 @@ struct AccountRow: View {
                     showBackground = true
                 }
             }
-            
+
             // reset offset when going back to the account list view
             offset = 0
         }

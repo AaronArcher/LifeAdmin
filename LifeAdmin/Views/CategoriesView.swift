@@ -183,7 +183,7 @@ struct CategoriesView: View {
                 
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 20)
+                .padding(.bottom, isScreenLarge ? 50 : 20)
               
 
             }

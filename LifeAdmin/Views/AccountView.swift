@@ -42,9 +42,6 @@ struct AccountView: View {
     let paymentMonth: String
     let isActive: Bool
     
-    var isScreenLarge: Bool {
-        UIScreen.main.bounds.height > 680
-    }
     @State private var showPass = false
 
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
@@ -158,7 +155,7 @@ struct AccountView: View {
                 //MARK: Secure Password
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Password")
-                        .font(isScreenLarge ? .headline.weight(.light) : .caption.weight(.light))
+                        .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
                         .foregroundColor(Color("PrimaryText"))
                         .padding(.leading, 10)
                     

@@ -114,7 +114,7 @@ struct SpotlightView<Content: View>: View {
     
     @ViewBuilder
     func overlaySwiftUIView() -> some View {
-        ZStack {
+        ZStack(alignment: .center) {
             
             
             Rectangle()
@@ -142,12 +142,12 @@ struct SpotlightView<Content: View>: View {
             // Display Text
             if title != "" {
                 Text(title)
-                .font(.title.bold())
+                .font(.title2.bold())
+                .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .position()
-                .offset(x: screenBounds().midX, y: rect.maxY > (screenBounds().height - 150) ? (rect.minY - 150) : (rect.maxY + 150))
+                .offset(x: screenBounds().midX - 18, y: rect.maxY > (screenBounds().height - 100) ? (rect.minY - 150) : (rect.maxY + 100))
                 .padding()
-//                .lineLimit(2)
             }
         }
             .frame(width: screenBounds().width, height: screenBounds().height)

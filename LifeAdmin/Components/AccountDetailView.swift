@@ -13,9 +13,6 @@ struct AccountDetailField: View {
     
     @Environment(\.scenePhase) var scenePhase
     
-    var isScreenLarge: Bool {
-        UIScreen.main.bounds.height > 680
-    }
     
     var id: UUID?
     var title: String = ""
@@ -31,7 +28,7 @@ struct AccountDetailField: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(isScreenLarge ? .headline.weight(.light) : .caption.weight(.light))
+                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
                     .foregroundColor(Color("PrimaryText"))
                     .padding(.leading, 10)
                     .lineLimit(1)

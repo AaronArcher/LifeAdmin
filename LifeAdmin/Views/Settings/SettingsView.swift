@@ -21,7 +21,6 @@ struct SettingsView: View {
     private var featureEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "LifeAdmin - New Feature Request", messageHeader: "Please include your feature request below:")
     
     @EnvironmentObject var spotlight: SpotlightVM
-//    @Binding var isOnboarding: Bool
     
     var body: some View {
         

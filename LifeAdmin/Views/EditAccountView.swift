@@ -47,13 +47,14 @@ struct EditAccountView: View {
     @State private var alertTitle = ""
     @State private var showAlert = false
     @Binding var showSave: Bool
-    
+        
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
     
     var body: some View {
         
         VStack {
-            // Header buttons
+            
+            //MARK: Header buttons
             HStack {
                 Button {
                     showEditAccount = false
@@ -92,23 +93,32 @@ struct EditAccountView: View {
                 VStack(spacing: 15) {
                     
                     //MARK: Account Name
+                    VStack(alignment: .leading, spacing: 2) {
+                        
+                        if accountName != "" {
+                            Text("Account Name")
+                                        .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                        .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+                        }
+                        
                         TextField("Account Name", text: $accountName)
-                            .padding(10)
-                            .disableAutocorrection(true)
-                            .foregroundColor(Color("PrimaryText"))
-                            .background(
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .frame(minHeight: 45)
-                                    .foregroundColor(Color("RowBackground"))
-                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                                .padding(10)
+                                .disableAutocorrection(true)
+                                .foregroundColor(Color("PrimaryText"))
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(minHeight: 45)
+                                        .foregroundColor(Color("RowBackground"))
+                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                             )
+                    }
                     
                     //MARK: Account Icon
-                    
-                    VStack {
+                    VStack(alignment: .leading, spacing: 2) {
                         
-                        Text("Select an Icon : ")
-                            .foregroundColor(.secondary).opacity(0.6)
+                        Text("Select an icon: ")
+                            .foregroundColor(Color("Green1"))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 10)
                         
@@ -128,6 +138,11 @@ struct EditAccountView: View {
                                             .foregroundColor(.white)
                                             .font(.title.weight(.thin))
                                         
+                                        if icon == i {
+                                            Circle()
+                                                .stroke(Color("Green1"), lineWidth: 1)
+                                        }
+                                        
                                     }
                                     .opacity((i == icon || icon == "") ? 1 : 0.5)
                                     .animation(.easeInOut, value: icon)
@@ -137,10 +152,12 @@ struct EditAccountView: View {
                                     .frame(width: 55, height: 55)
                                 }
                             }
+                            .padding(.top, 5)
                             .padding(.bottom)
                             
                         }
                         .padding(.horizontal)
+                        .padding(.top, 5)
                         
                     }
                     .padding(.top)
@@ -151,12 +168,10 @@ struct EditAccountView: View {
                     )
                     
                     //MARK: Category
-                        
                         HStack {
                             Text("Category:")
                                 .font(.callout)
-                                .opacity(0.6)
-                                .foregroundColor(.secondary)
+                                .foregroundColor(Color("Green1"))
                             
                             Spacer()
                             
@@ -180,241 +195,288 @@ struct EditAccountView: View {
                     
                     
                     //MARK: Email
-                    ZStack {
+                    VStack(alignment: .leading, spacing: 2) {
                         
-                        TextField("Email Address", text: $email)
-                            .foregroundColor(Color("PrimaryText"))
-                            .textInputAutocapitalization(TextInputAutocapitalization.never)
-                            .disableAutocorrection(true)
-                            .padding(10)
-                            .keyboardType(.emailAddress)
-                            .textContentType(.emailAddress)
-                        
-                        if email == "" {
-                            HStack {
-                                Spacer()
-                                
-                                Button {
-                                    if defaultEmail != "" {
-                                        email = defaultEmail
-                                    } else {
-                                        alertTitle = "You have not set a default email address. You can set this in Settings"
-                                        showAlert.toggle()
-                                    }
-                                } label: {
-                                    Text("Use Default")
-                                        .foregroundColor(Color("Green1"))
-                                        .font(.footnote)
-                                }
-                                .padding(.trailing, 10)
-                            }
+                        if email != "" {
+                            Text("Email Address")
+                                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
                         }
                         
-                    }
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(minHeight: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                        ZStack {
+                            
+                            TextField("Email Address", text: $email)
+                                .foregroundColor(Color("PrimaryText"))
+                                .textInputAutocapitalization(TextInputAutocapitalization.never)
+                                .disableAutocorrection(true)
+                                .padding(10)
+                                .keyboardType(.emailAddress)
+                                .textContentType(.emailAddress)
+                            
+                            if email == "" {
+                                HStack {
+                                    Spacer()
+                                    
+                                    Button {
+                                        if defaultEmail != "" {
+                                            email = defaultEmail
+                                        } else {
+                                            alertTitle = "You have not set a default email address. You can set this in Settings"
+                                            showAlert.toggle()
+                                        }
+                                    } label: {
+                                        Text("Use Default")
+                                            .foregroundColor(Color("Green1"))
+                                            .font(.footnote)
+                                    }
+                                    .padding(.trailing, 10)
+                                }
+                            }
+                            
+                        }
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(minHeight: 45)
+                                .foregroundColor(Color("RowBackground"))
+                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                     )
+                    }
                     
                     //MARK: Phone
-                    ZStack {
+                    VStack(alignment: .leading, spacing: 2) {
                         
-                        TextField("Phone Number", text: $phone)
-                            .foregroundColor(Color("PrimaryText"))
-                            .keyboardType(.phonePad)
-                            .textContentType(.telephoneNumber)
+                        if phone != "" {
+                            Text("Phone Number")
+                                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+                        }
                         
-                        if phone == "" {
-                            HStack {
-                                Spacer()
-                                
-                                Button {
-                                    if defaultPhone != "" {
-                                        phone = defaultPhone
-                                    } else {
-                                        alertTitle = "You have not set a default phone number. You can set this in Settings"
-                                        showAlert.toggle()
-                                    }
+                        ZStack {
+                            
+                            TextField("Phone Number", text: $phone)
+                                .foregroundColor(Color("PrimaryText"))
+                                .keyboardType(.phonePad)
+                                .textContentType(.telephoneNumber)
+                            
+                            if phone == "" {
+                                HStack {
+                                    Spacer()
                                     
-                                } label: {
-                                    Text("Use Default")
-                                        .foregroundColor(Color("Green1"))
-                                        .font(.footnote)
+                                    Button {
+                                        if defaultPhone != "" {
+                                            phone = defaultPhone
+                                        } else {
+                                            alertTitle = "You have not set a default phone number. You can set this in Settings"
+                                            showAlert.toggle()
+                                        }
+                                        
+                                    } label: {
+                                        Text("Use Default")
+                                            .foregroundColor(Color("Green1"))
+                                            .font(.footnote)
+                                    }
                                 }
                             }
                         }
-                    }
-                    .padding(10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(minHeight: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(minHeight: 45)
+                                .foregroundColor(Color("RowBackground"))
+                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                     )
+                    }
                     
                     //MARK: Password
-                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        
+                        if password != "" {
+                            Text("Password")
+                                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+                        }
                         
                         TextField("Password", text: $password)
+                                .padding(10)
+                                .foregroundColor(Color("PrimaryText"))
+                                .textInputAutocapitalization(TextInputAutocapitalization.never)
+                                .disableAutocorrection(true)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(minHeight: 45)
+                                        .foregroundColor(Color("RowBackground"))
+                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                            )
+                    }
+                    
+                    //MARK: Address
+                    VStack(alignment: .leading, spacing: 2) {
+                        
+                        if address1 != "" || address2 != "" || postcode != "" {
+                            Text("Address")
+                                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+                        }
+                        
+                        ZStack {
+                            VStack {
+                                ZStack {
+                                    TextField("Address Line 1", text: $address1)
+                                        .foregroundColor(Color("PrimaryText"))
+                                        .textInputAutocapitalization(TextInputAutocapitalization.never)
+                                        .disableAutocorrection(true)
+                                    
+                                    if address1 == "" && address2 == "" && postcode == "" {
+                                        HStack {
+                                            Spacer()
+                                            
+                                            Button {
+                                                if defaultAddress1 != "" || defaultAddress2 != "" || defaultPostcode != "" {
+                                                    
+                                                    address1 = defaultAddress1
+                                                    address2 = defaultAddress2
+                                                    postcode = defaultPostcode
+                                                    
+                                                } else {
+                                                    alertTitle = "You have not set a default address. You can set this in Settings"
+                                                    showAlert.toggle()
+                                                }
+                                                
+                                            } label: {
+                                                Text("Use Default")
+                                                    .foregroundColor(Color("Green1"))
+                                                    .font(.footnote)
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                
+                                TextField("Address Line 2", text: $address2)
+                                    .foregroundColor(Color("PrimaryText"))
+                                    .textInputAutocapitalization(TextInputAutocapitalization.never)
+                                    .disableAutocorrection(true)
+                                
+                                TextField("Postcode", text: $postcode)
+                                    .foregroundColor(Color("PrimaryText"))
+                                    .textInputAutocapitalization(TextInputAutocapitalization.never)
+                                    .disableAutocorrection(true)
+                            }
+                        }
+                        .padding(10)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .frame(minHeight: 45)
+                                .foregroundColor(Color("RowBackground"))
+                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                    )
+                    }
+                    
+                    //MARK: Price
+                    VStack(alignment: .leading, spacing: 2) {
+                        
+                        if price != "" {
+                            Text("Price")
+                                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+                        }
+                        
+                        HStack {
+                                
+                                TextField("Price", text: $price)
+                                    .keyboardType(.decimalPad)
+                                    .padding(10)
+                                    .foregroundColor(Color("PrimaryText"))
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                            .frame(minHeight: 45)
+                                            .foregroundColor(Color("RowBackground"))
+                                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                                    )
+                            
+                            Spacer()
+                            
+                            Text("Per")
+                                .foregroundColor(.secondary)
+                            
+                            
+                            // Month
+                            Button {
+                                if price == "" {
+                                    alertTitle = "You must set the price first."
+                                    showAlert = true
+                                } else {
+                                    if per == "month" {
+                                        per = ""
+                                        paymentDay = ""
+                                        paymentMonth = ""
+                                    } else {
+                                        per = "month"
+                                    }
+                                }
+                                
+                            } label: {
+                                    
+                                    if per == "month" {
+                                        Text("Month")
+                                            .foregroundColor(Color("PrimaryText"))
+                                            .bold()
+                                    } else {
+                                        Text("Month")
+                                            .fontWeight(.light)
+                                    }
+                                
+                            }
+                            .foregroundColor(.gray.opacity(0.7))
                             .padding(10)
-                            .foregroundColor(Color("PrimaryText"))
-                            .textInputAutocapitalization(TextInputAutocapitalization.never)
-                            .disableAutocorrection(true)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .frame(minHeight: 45)
                                     .foregroundColor(Color("RowBackground"))
                                     .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                             )
-                    
-                    //MARK: Address
-                    ZStack {
-                        
-                        VStack {
-                            ZStack {
-                                TextField("Address Line 1", text: $address1)
-                                    .foregroundColor(Color("PrimaryText"))
-                                    .textInputAutocapitalization(TextInputAutocapitalization.never)
-                                    .disableAutocorrection(true)
-                                
-                                if address1 == "" && address2 == "" && postcode == "" {
-                                    HStack {
-                                        Spacer()
-                                        
-                                        Button {
-                                            if defaultAddress1 != "" || defaultAddress2 != "" || defaultPostcode != "" {
-                                                
-                                                address1 = defaultAddress1
-                                                address2 = defaultAddress2
-                                                postcode = defaultPostcode
-                                                
-                                            } else {
-                                                alertTitle = "You have not set a default address. You can set this in Settings"
-                                                showAlert.toggle()
-                                            }
-                                            
-                                        } label: {
-                                            Text("Use Default")
-                                                .foregroundColor(Color("Green1"))
-                                                .font(.footnote)
-                                        }
+                            
+                            // Year
+                            Button {
+                                if price == "" {
+                                    alertTitle = "You must set the price first."
+                                    showAlert = true
+                                } else {
+                                    if per == "year" {
+                                        per = ""
+                                        paymentDay = ""
+                                        paymentMonth = ""
+                                    } else {
+                                        per = "year"
                                     }
                                 }
-                                
-                            }
-                            
-                            
-                            TextField("Address Line 2", text: $address2)
-                                .foregroundColor(Color("PrimaryText"))
-                                .textInputAutocapitalization(TextInputAutocapitalization.never)
-                                .disableAutocorrection(true)
-                            
-                            TextField("Postcode", text: $postcode)
-                                .foregroundColor(Color("PrimaryText"))
-                                .textInputAutocapitalization(TextInputAutocapitalization.never)
-                                .disableAutocorrection(true)
-                        }
-                    }
-                    .padding(10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .frame(minHeight: 45)
-                            .foregroundColor(Color("RowBackground"))
-                            .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                    )
+                            } label: {
+                                    
+                                    if per == "year" {
+                                        Text("Year")
+                                            .foregroundColor(Color("PrimaryText"))
+                                            .bold()
+                                    } else {
+                                        Text("Year")
+                                            .fontWeight(.light)
+                                    }
                     
-                    //MARK: Price
-                    HStack {
-                            
-                            TextField("Price", text: $price)
-                                .keyboardType(.decimalPad)
-                                .padding(10)
-                                .foregroundColor(Color("PrimaryText"))
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .frame(minHeight: 45)
-                                        .foregroundColor(Color("RowBackground"))
-                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                                )
-                        
-                        Spacer()
-                        
-                        Text("Per")
-                            .foregroundColor(.secondary)
-                        
-                        
-                        // Month
-                        Button {
-                            if price == "" {
-                                alertTitle = "You must set the price first."
-                                showAlert = true
-                            } else {
-                                if per == "month" {
-                                    per = ""
-                                    paymentDay = ""
-                                    paymentMonth = ""
-                                } else {
-                                    per = "month"
-                                }
                             }
-                            
-                        } label: {
-                                
-                                if per == "month" {
-                                    Text("Month")
-                                        .foregroundColor(Color("PrimaryText"))
-                                        .bold()
-                                } else {
-                                    Text("Month")
-                                        .fontWeight(.light)
-                                }
-                            
+                            .foregroundColor(.gray.opacity(0.7))
+                            .padding(10)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .frame(minHeight: 45)
+                                    .foregroundColor(Color("RowBackground"))
+                                    .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                            )
                         }
-                        .foregroundColor(.gray.opacity(0.7))
-                        .padding(10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .frame(minHeight: 45)
-                                .foregroundColor(Color("RowBackground"))
-                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                        )
-                        
-                        // Year
-                        Button {
-                            if price == "" {
-                                alertTitle = "You must set the price first."
-                                showAlert = true
-                            } else {
-                                if per == "year" {
-                                    per = ""
-                                    paymentDay = ""
-                                    paymentMonth = ""
-                                } else {
-                                    per = "year"
-                                }
-                            }
-                        } label: {
-                                
-                                if per == "year" {
-                                    Text("Year")
-                                        .foregroundColor(Color("PrimaryText"))
-                                        .bold()
-                                } else {
-                                    Text("Year")
-                                        .fontWeight(.light)
-                                }
-                
-                        }
-                        .foregroundColor(.gray.opacity(0.7))
-                        .padding(10)
-                        .background(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .frame(minHeight: 45)
-                                .foregroundColor(Color("RowBackground"))
-                                .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
-                        )
                     }
                     
                     //MARK: Payment Date
@@ -425,9 +487,8 @@ struct EditAccountView: View {
                                 HStack {
                                     
                                     Text("Payment Date:")
-                                        .font(.title3)
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color("PrimaryText"))
+                                        .font(.callout)
+                                        .foregroundColor(Color("Green1"))
                                     
                                     Spacer()
                                     
@@ -456,9 +517,8 @@ struct EditAccountView: View {
                                 
                                 HStack {
                                     Text("Payment Month:")
-                                        .font(.title3)
-                                        .fontWeight(.light)
-                                        .foregroundColor(Color("PrimaryText"))
+                                        .font(.callout)
+                                        .foregroundColor(Color("Green1"))
                                     
                                     Spacer()
                                     
@@ -608,23 +668,26 @@ struct EditAccountView: View {
                     account.paymentMonth = paymentMonth
                 }
             }
-        }
-        do {
-            try moc.save()
-            
             do {
-                try keychain
-                    .synchronizable(true)
-                    .set(password, key: "\(id)")
+                try moc.save()
+                
+                do {
+                    try keychain
+                        .synchronizable(true)
+                        .set(password, key: "\(id)")
+                } catch let error {
+                    print("error: \(error)")
+                }
+                
+                Constants.savedHaptic()
+                showEditAccount = false
+                
             } catch let error {
-                print("error: \(error)")
+                alertTitle = "Could not create an account \(error.localizedDescription)"
+                showAlert.toggle()
             }
-            
-            Constants.savedHaptic()
-            showEditAccount = false
-        } catch {
-            print("Error updating Account \(error.localizedDescription)")
         }
+        
     }
         
 }

@@ -128,7 +128,7 @@ struct HomeView: View {
                 .background(Color("Background"))
                 .onTapGesture {
                     if spotlight.isOnboarding {
-                        if spotlight.currentSpotlight > 6 {
+                        if spotlight.currentSpotlight >= 6 {
                             spotlight.currentSpotlight = 0
                             spotlight.isOnboarding = false
                             if showOnboarding {
