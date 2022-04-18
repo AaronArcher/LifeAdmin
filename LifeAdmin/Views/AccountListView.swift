@@ -84,7 +84,7 @@ struct AccountListView: View {
                                     .dynamicTypeSize(.medium)
                                     .accessibilityLabel("Category filter")
                             }
-                            .spotlight(enabled: spotlight.currentSpotlight == 5, title: "You can filter your accounts by category here.")
+                            .spotlight(enabled: spotlight.currentSpotlight == 5, title: "Filter your accounts by category using this button.")
                             
                             
                             Spacer()
@@ -152,7 +152,7 @@ struct AccountListView: View {
                     Rectangle()
                         .fill(.clear)
                         .frame(width: screen.width / 1.1, height: screen.height / 3)
-                        .spotlight(enabled: spotlight.currentSpotlight == 4, title: "View all of your accounts here. Select an account to view or edit your account information")
+                        .spotlight(enabled: spotlight.currentSpotlight == 4, title: "View all of your accounts here.\nSelect an account to view/edit your account information or swipe to delete an account.")
                     
                     if showActive && activeAccounts.count == 0 {
                         
@@ -186,6 +186,9 @@ struct AccountListView: View {
                             
                         case "Finance":
                             FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+                            
+                        case "Health":
+                            HealthFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
                             
                         case "Other":
                             OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)

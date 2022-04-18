@@ -46,6 +46,7 @@
 		EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C5527F24396006A90C7 /* AccountDetailView.swift */; };
 		EEB55C5A27F24666006A90C7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB55C5927F24666006A90C7 /* CloudKit.framework */; };
 		EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C6227F65178006A90C7 /* SettingsView.swift */; };
+		EEEEE691280DDA6400805AFD /* HealthFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 		EEB55C5927F24666006A90C7 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EEB55C5B27F246DC006A90C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EEB55C6227F65178006A90C7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthFilteredAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */,
 				EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */,
 				EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */,
+				EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */,
 				EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */,
 				EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */,
 				EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */,
@@ -350,6 +353,7 @@
 				EEB55C4E27F24320006A90C7 /* EditAccountView.swift in Sources */,
 				EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */,
 				EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */,
+				EEEEE691280DDA6400805AFD /* HealthFilteredAccountView.swift in Sources */,
 				EEB55C5227F24365006A90C7 /* TabView.swift in Sources */,
 				EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */,
 				EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */,

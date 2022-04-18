@@ -24,6 +24,10 @@ struct FilterPredicates {
     static let financePredicate = NSPredicate(format: "category == %@", "Finance")
     static let activeFinancePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activePredicate, financePredicate])
     static let inactiveFinancePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [inactivePredicate, financePredicate])
+    
+    static let healthPredicate = NSPredicate(format: "category == %@", "Health")
+    static let activeHealthPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activePredicate, healthPredicate])
+    static let inactiveHealthPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [inactivePredicate, healthPredicate])
 
     static let otherPredicate = NSPredicate(format: "category == %@", "Other")
     static let activeOtherPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [activePredicate, otherPredicate])
