@@ -12,15 +12,6 @@ struct HomeView: View {
     @AppStorage("showOnboarding") var showOnboarding = true
 
     
-    let screenWidth = UIScreen.main.bounds.width
-    
-    let height = UIScreen.main.bounds.height / 7.5
-    let largeHeight = UIScreen.main.bounds.height / 8.5
-    
-    var isScreenLarge: Bool {
-        UIScreen.main.bounds.height > 680
-    }
-    
     @State private var showNewAccount = false
     
     @State private var showActive = true
@@ -62,7 +53,7 @@ struct HomeView: View {
                         )
                         .accessibilityHidden(showCategories || showSave)
                         .accessibilityAddTraits(.isModal)
-                        .offset(y: showTabBar ? 0 : (isScreenLarge ? largeHeight * 2 : height * 2))
+                        .offset(y: showTabBar ? 0 : (Constants.isScreenLarge ? (Constants.screenHeight / 8.5) * 2 : (Constants.screenHeight / 7.5) * 2))
 
                     
                     if showSave {
@@ -74,7 +65,7 @@ struct HomeView: View {
                             Spacer()
                             
                             LottieView()
-                                .frame(width: screenWidth / 4, height: screenWidth / 4)
+                                .frame(width: Constants.screenWidth / 4, height: Constants.screenWidth / 4)
                             
                             Spacer()
                             
@@ -83,7 +74,7 @@ struct HomeView: View {
                             } label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: screenWidth / 3, height: 40)
+                                        .frame(width: Constants.screenWidth / 3, height: 40)
                                         .foregroundColor(Color("Blue1"))
                                     Text("OK")
                                         .foregroundColor(.white)
@@ -97,9 +88,9 @@ struct HomeView: View {
                         .background(
                         RoundedRectangle(cornerRadius: 10)
                             .foregroundColor(Color("Background"))
-                            .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
+                            .frame(width: Constants.screenWidth / 1.8 , height: Constants.screenWidth / 1.8)
                         )
-                        .frame(width: screenWidth / 1.8 , height: screenWidth / 1.8)
+                        .frame(width: Constants.screenWidth / 1.8 , height: Constants.screenWidth / 1.8)
                         .accessibilityAddTraits(.isModal)
                         .accessibilityLabel("Account saved")
                         .onAppear {
@@ -113,7 +104,7 @@ struct HomeView: View {
                     }
                     
                     CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
-                        .offset(x: showCategories ? 0 : -(screenWidth))
+                .offset(x: showCategories ? 0 : -(Constants.screenWidth))
                         .accessibilityAddTraits(.isModal)
                     
                     

@@ -10,8 +10,6 @@ import SwiftUI
 struct AllAccountsView: View {
     
     @Environment(\.managedObjectContext) var moc
-
-    let screen = UIScreen.main.bounds
     
     @Binding var showTotalAs: String
     
@@ -37,7 +35,7 @@ struct AllAccountsView: View {
             Text("You do not have any active accounts...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
-                .frame(width: screen.width / 1.5)
+                .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
             
@@ -45,7 +43,7 @@ struct AllAccountsView: View {
             Text("You do not have any inactive accounts...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
-                .frame(width: screen.width / 1.5)
+                .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
             
@@ -102,7 +100,7 @@ struct AllAccountsView: View {
                 
             }
             .padding(.horizontal)
-            .frame(height: screen.height / 1.7)
+            .frame(height: Constants.screenHeight / 1.7)
             
         }
     
@@ -115,10 +113,6 @@ struct AllAccountsView: View {
         .onChange(of: showTotalAs, perform: { _ in
                 calcTotal(showActive)
         })
-//        .onChange(of: accountSelected) { _ in
-//            password = KeychainWrapper.standard.string(forKey: "\(id)") ?? ""
-//            print(password)
-//        }
         
         }
         

@@ -31,7 +31,6 @@ struct AccountListView: View {
     
     @Binding var showActive: Bool
     
-    let screen = UIScreen.main.bounds
     
     @State private var totalPrice: Double = 0
     
@@ -102,7 +101,7 @@ struct AccountListView: View {
                             
                         }
                         .padding(.horizontal)
-                        .offset(y: (screen.height / 6) / 2.5)
+                        .offset(y: (Constants.screenHeight / 6) / 2.5)
                         
                     }
                     
@@ -151,7 +150,7 @@ struct AccountListView: View {
                 
                     Rectangle()
                         .fill(.clear)
-                        .frame(width: screen.width / 1.1, height: screen.height / 3)
+                        .frame(width: Constants.screenWidth / 1.1, height: Constants.screenHeight / 3)
                         .spotlight(enabled: spotlight.currentSpotlight == 4, title: "View all of your accounts here.\nSelect an account to view/edit your account information or swipe to delete an account.")
                     
                     if showActive && activeAccounts.count == 0 {
@@ -159,7 +158,7 @@ struct AccountListView: View {
                         Text("You haven't created any accounts yet...")
                             .foregroundColor(Color("PrimaryText"))
                             .font(.title3.weight(.light))
-                            .frame(width: screen.width / 1.5)
+                            .frame(width: Constants.screenWidth / 1.5)
                             .multilineTextAlignment(.center)
                             .padding(.top)
                         
@@ -167,14 +166,14 @@ struct AccountListView: View {
                         Text("You do not have any inactive accounts...")
                             .foregroundColor(Color("PrimaryText"))
                             .font(.title3.weight(.light))
-                            .frame(width: screen.width / 1.5)
+                            .frame(width: Constants.screenWidth / 1.5)
                             .multilineTextAlignment(.center)
                             .padding(.top)
                         
                     } else {
                         
                         
-                        // List of Accounts
+                        //MARK: List of Accounts
                         
                         switch selectedCategory {
                             

@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct AccountRow: View {
-    
-    let screen = UIScreen.main.bounds
-    
+        
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.name),
     ], predicate: NSPredicate(format: "isActive == true")) var activeAccounts: FetchedResults<AccountData>

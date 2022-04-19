@@ -133,7 +133,7 @@ struct EditAccountView: View {
                                                 .fill(
                                                     LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
                                                 )
-                                                .shadow(color: .black.opacity(0.2), radius: 10, x: 4, y: 4)
+                                                .shadow(color: .black.opacity(0.2), radius: 7, x: 5, y: 5)
                                             
                                             Image(systemName: i)
                                                 .foregroundColor(.white)

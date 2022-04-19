@@ -23,7 +23,6 @@ struct AccountView: View {
     
     @State private var showEdit = false
     
-    let screen = UIScreen.main.bounds
     @Environment(\.dismiss) var dismiss
         
     let id: UUID
@@ -79,7 +78,7 @@ struct AccountView: View {
                     
                 }
                 .frame(width: 65, height: 65)
-                .offset(y: (screen.height / 6) - 33)
+                .offset(y: (Constants.screenHeight / 6) - 33)
                 .onTapGesture {
                     print(password)
                 }
@@ -118,7 +117,7 @@ struct AccountView: View {
                     
                 }
                 .padding(.horizontal)
-                .offset(y: (screen.height / 6) / 2.7)
+                .offset(y: (Constants.screenHeight / 6) / 2.7)
                 
             }
             .padding(.bottom, 20)
@@ -248,7 +247,7 @@ struct AccountView: View {
                     .frame(height: 30)
                 
             }
-                .frame(maxHeight: screen.height / 1.7)
+                .frame(maxHeight: Constants.screenHeight / 1.7)
                 .padding(.bottom, 10)
                 
                 
@@ -264,7 +263,7 @@ struct AccountView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .foregroundColor(.red)
-                                .frame(width: screen.width / 3, height: 45)
+                                .frame(width: Constants.screenWidth / 3, height: 45)
                             Text("Delete")
                                 .font(.title3)
                                 .foregroundColor(.white)
@@ -279,7 +278,7 @@ struct AccountView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
                                 .foregroundColor(isActive ? Color("Blue1") : Color("Green1"))
-                                .frame(width: screen.width / 3, height: 45)
+                                .frame(width: Constants.screenWidth / 3, height: 45)
                             Text(isActive ? "Disable" : "Enable")
                                 .font(.title3)
                                 .foregroundColor(.white)

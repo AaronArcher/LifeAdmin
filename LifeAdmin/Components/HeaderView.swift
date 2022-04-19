@@ -12,8 +12,6 @@ struct HeaderView: View {
     
     
     var text: String
-    let screen = UIScreen.main.bounds
-
     
     var body: some View {
         ZStack {
@@ -26,14 +24,14 @@ struct HeaderView: View {
                 Text(text)
                     .font(.largeTitle.weight(.light))
                     .foregroundColor(.white)
-                    .frame(width: screen.width / 1.4, height: 40)
+                    .frame(width: Constants.screenWidth / 1.4, height: 40)
                     .fixedSize(horizontal: true, vertical: true)
                     .dynamicTypeSize(.large)
          
             
             
         }
-        .frame(height: screen.height / 6)
+        .frame(height: Constants.screenHeight / 6)
         
 
     }

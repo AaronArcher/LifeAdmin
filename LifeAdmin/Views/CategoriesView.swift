@@ -13,11 +13,6 @@ struct CategoriesView: View {
     @State private var newCategory = ""
     
     @Binding var showCategories: Bool
-    let screen = UIScreen.main.bounds
-    
-    var isScreenLarge: Bool {
-        UIScreen.main.bounds.height > 680
-    }
     
     @Binding var animatePath: Bool
     @Binding var animateBG: Bool
@@ -117,7 +112,7 @@ struct CategoriesView: View {
                     
                 }
             }
-                .frame(height: screen.height / 1.75)
+                .frame(height: Constants.screenHeight / 1.75)
                 
                 Spacer()
                 
@@ -183,13 +178,13 @@ struct CategoriesView: View {
                 
                 }
                 .padding(.horizontal)
-                .padding(.bottom, isScreenLarge ? 50 : 20)
+                .padding(.bottom, Constants.isScreenLarge ? 50 : 20)
               
 
             }
-            .frame(width: screen.width / 1.45)
+            .frame(width: Constants.screenWidth / 1.45)
             .padding()
-            .padding(.top, isScreenLarge ? 40 : 25)
+            .padding(.top, Constants.isScreenLarge ? 40 : 25)
             
         }
         .clipShape(CategoryShape(curveValue: animatePath ? 70 : 0))

@@ -10,8 +10,6 @@ import SwiftUI
 struct UtilitiesFilteredAccountView: View {
  
     @Environment(\.managedObjectContext) var moc
-
-    let screen = UIScreen.main.bounds
     
     @Binding var showTotalAs: String
     
@@ -37,7 +35,7 @@ struct UtilitiesFilteredAccountView: View {
             Text("You do not have any active accounts in this category...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
-                .frame(width: screen.width / 1.5)
+                .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top).onAppear {
                     calcTotal(showActive)
@@ -48,7 +46,7 @@ struct UtilitiesFilteredAccountView: View {
             Text("You do not have any inactive accounts in this category...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
-                .frame(width: screen.width / 1.5)
+                .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
                 .onAppear {
@@ -108,7 +106,7 @@ struct UtilitiesFilteredAccountView: View {
                 
             }
             .padding(.horizontal)
-            .frame(height: screen.height / 1.7)
+            .frame(height: Constants.screenHeight / 1.7)
             
         }
     

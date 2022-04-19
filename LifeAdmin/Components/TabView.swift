@@ -19,9 +19,6 @@ struct TabView: View {
     let height = UIScreen.main.bounds.height / 7.5
     let largeHeight = UIScreen.main.bounds.height / 8.5
     
-    var isScreenLarge: Bool {
-        UIScreen.main.bounds.height > 680
-    }
     
     @EnvironmentObject var spotlight: SpotlightVM
 
@@ -67,7 +64,7 @@ struct TabView: View {
 
                 
             }
-            .font(isScreenLarge ? .title.weight(.light) : .title2.weight(.light))
+            .font(Constants.isScreenLarge ? .title.weight(.light) : .title2.weight(.light))
             .foregroundColor(Color("TabText"))
             .padding(.horizontal, 20)
             
@@ -78,7 +75,7 @@ struct TabView: View {
                     .fill(Color("Green1"))
                     .frame(width: height)
                     .frame(width: 100)
-                    .offset(y: isActive ? (isScreenLarge ? largeHeight / 1.5 : height / 1.5) : (isScreenLarge ? largeHeight : height))
+                    .offset(y: isActive ? (Constants.isScreenLarge ? largeHeight / 1.5 : height / 1.5) : (Constants.isScreenLarge ? largeHeight : height))
                     .shadow(color: .black.opacity(isActive ? 0.2 : 0), radius: 10, x: 0, y: -10)
                 
                 Spacer()
@@ -87,7 +84,7 @@ struct TabView: View {
                     .fill(Color("Green1"))
                     .frame(width: height)
                     .frame(width: 100)
-                    .offset(y: isActive ? (isScreenLarge ? largeHeight : height) : (isScreenLarge ? largeHeight / 1.5 : height / 1.5))
+                    .offset(y: isActive ? (Constants.isScreenLarge ? largeHeight : height) : (Constants.isScreenLarge ? largeHeight / 1.5 : height / 1.5))
                     .shadow(color: .black.opacity(isActive ? 0 : 0.2), radius: 10, x: 0, y: -10)
 
                 
@@ -104,10 +101,10 @@ struct TabView: View {
                         .fill(
                             LinearGradient(colors: [Color("Blue1"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
                         )
-                        .frame(width: isScreenLarge ? largeHeight : height, height: isScreenLarge ? largeHeight : height)
+                        .frame(width: Constants.isScreenLarge ? largeHeight : height, height: Constants.isScreenLarge ? largeHeight : height)
                     
                     Image(systemName: "plus")
-                        .font(.system(size:isScreenLarge ? 60 : 50, weight: .thin))
+                        .font(.system(size:Constants.isScreenLarge ? 60 : 50, weight: .thin))
                         .foregroundColor(.white)
                 }
             }
@@ -118,7 +115,7 @@ struct TabView: View {
             .shadow(color: .black.opacity(0.2), radius: 15, x: 5, y: 10)
                         
         }
-        .frame(height: isScreenLarge ? largeHeight : height)
+        .frame(height: Constants.isScreenLarge ? largeHeight : height)
         .frame(maxHeight: .infinity, alignment:  .bottom)
         .ignoresSafeArea()
     }

@@ -60,12 +60,6 @@ struct FavouriteAddressView: View {
             if defaultAddress1 == "" && defaultAddress2 == "" && defaultPostcode == "" {
                 Text("No address saved...")
                     .fontWeight(.light)
-//                    .padding(10)
-//                    .background(
-//                        RoundedRectangle(cornerRadius: 10, style: .continuous)
-//                            .foregroundColor(Color("RowBackground"))
-//                            .shadow(color: .black.opacity(0.15), radius: 5, x: 2, y: 3)
-//                    )
                     .padding(.top, -5)
                     .padding(.bottom, 40)
 
