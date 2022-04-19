@@ -124,36 +124,46 @@ struct EditAccountView: View {
                         
                         
                         ScrollView(.horizontal, showsIndicators: false) {
-                            HStack {
-                                ForEach(Constants.iconList, id: \.self) { i in
-                                    
-                                    ZStack {
-                                        Circle()
-                                            .fill(
-                                                LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
-                                            )
-                                            .shadow(color: .black.opacity(0.2), radius: 10, x: 4, y: 4)
+                            ScrollViewReader { proxy in
+                                HStack {
+                                    ForEach(Constants.iconList, id: \.self) { i in
                                         
-                                        Image(systemName: i)
-                                            .foregroundColor(.white)
-                                            .font(.title.weight(.thin))
-                                        
-                                        if icon == i {
+                                        ZStack {
                                             Circle()
-                                                .stroke(Color("Green1"), lineWidth: 1)
+                                                .fill(
+                                                    LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
+                                                )
+                                                .shadow(color: .black.opacity(0.2), radius: 10, x: 4, y: 4)
+                                            
+                                            Image(systemName: i)
+                                                .foregroundColor(.white)
+                                                .font(.title.weight(.thin))
+                                            
+                                            if icon == i {
+                                                Circle()
+                                                    .stroke(Color("Green1"), lineWidth: 1)
+                                            }
+                                            
                                         }
-                                        
+                                        .opacity((i == icon || icon == "") ? 1 : 0.5)
+                                        .animation(.easeInOut, value: icon)
+                                        .onTapGesture {
+                                            icon = i
+                                        }
+                                        .onAppear(perform: {
+                                            if icon != "" {
+                                                DispatchQueue.main.async {
+                                                    proxy.scrollTo(icon, anchor: .center)
+                                                }
+                                            }
+                                        })
+                                        .frame(width: 55, height: 55)
                                     }
-                                    .opacity((i == icon || icon == "") ? 1 : 0.5)
-                                    .animation(.easeInOut, value: icon)
-                                    .onTapGesture {
-                                        icon = i
-                                    }
-                                    .frame(width: 55, height: 55)
+                                    
                                 }
+                                .padding(.top, 5)
+                                .padding(.bottom)
                             }
-                            .padding(.top, 5)
-                            .padding(.bottom)
                             
                         }
                         .padding(.horizontal)
