@@ -19,7 +19,6 @@
 		EE761A1E28033DAC000006BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1D28033DAC000006BB /* Extensions.swift */; };
 		EE761A20280345EA000006BB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1F280345EA000006BB /* CategoriesView.swift */; };
 		EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */; };
-		EE766B2427FCCFFD00AC046C /* FilterPredicates.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */; };
 		EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */; };
 		EE766B2C27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */; };
 		EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */; };
@@ -47,6 +46,8 @@
 		EEB55C5A27F24666006A90C7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB55C5927F24666006A90C7 /* CloudKit.framework */; };
 		EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C6227F65178006A90C7 /* SettingsView.swift */; };
 		EEEEE691280DDA6400805AFD /* HealthFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */; };
+		EEEEE693280F580000805AFD /* PredicateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE692280F580000805AFD /* PredicateFilter.swift */; };
+		EEEEE6952812015500805AFD /* FilteredAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE6942812015500805AFD /* FilteredAccountsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +62,6 @@
 		EE761A1D28033DAC000006BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EE761A1F280345EA000006BB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPredicates.swift; sourceTree = "<group>"; };
 		EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAccountsView.swift; sourceTree = "<group>"; };
 		EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentFilteredAccountView.swift; sourceTree = "<group>"; };
 		EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceFilteredAccountView.swift; sourceTree = "<group>"; };
@@ -91,6 +91,8 @@
 		EEB55C5B27F246DC006A90C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EEB55C6227F65178006A90C7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthFilteredAccountView.swift; sourceTree = "<group>"; };
+		EEEEE692280F580000805AFD /* PredicateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateFilter.swift; sourceTree = "<group>"; };
+		EEEEE6942812015500805AFD /* FilteredAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredAccountsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */,
 				EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */,
 				EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */,
+				EEEEE6942812015500805AFD /* FilteredAccountsView.swift */,
 			);
 			path = FilteredAccountsViews;
 			sourceTree = "<group>";
@@ -216,10 +219,10 @@
 			isa = PBXGroup;
 			children = (
 				EE750B4527FA13A6006768C4 /* Constants.swift */,
-				EE766B2327FCCFFD00AC046C /* FilterPredicates.swift */,
 				EE761A1D28033DAC000006BB /* Extensions.swift */,
 				EE707A35280623EC00704AB8 /* Bundle+Extension.swift */,
 				EE707A3B28077ADF00704AB8 /* Spotlight.swift */,
+				EEEEE692280F580000805AFD /* PredicateFilter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				EE761A1A28033457000006BB /* LottieView.swift in Sources */,
 				EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */,
 				EE750B4627FA13A6006768C4 /* Constants.swift in Sources */,
+				EEEEE693280F580000805AFD /* PredicateFilter.swift in Sources */,
 				EE761A20280345EA000006BB /* CategoriesView.swift in Sources */,
 				EEB55C4C27F242FD006A90C7 /* AccountView.swift in Sources */,
 				EE766B3027FCF18200AC046C /* OtherFilteredAccountView.swift in Sources */,
@@ -346,7 +350,7 @@
 				EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */,
 				EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */,
 				EE707A36280623EC00704AB8 /* Bundle+Extension.swift in Sources */,
-				EE766B2427FCCFFD00AC046C /* FilterPredicates.swift in Sources */,
+				EEEEE6952812015500805AFD /* FilteredAccountsView.swift in Sources */,
 				EEB55C5427F2437E006A90C7 /* HeaderView.swift in Sources */,
 				EEB55C3E27F1ACAE006A90C7 /* LifeAdmin.xcdatamodeld in Sources */,
 				EE766B2C27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift in Sources */,

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CategoriesView: View {
     
+    @EnvironmentObject var predicateFilter: PredicateFilter
+    
     @Binding var selectedCategory: String
     @State private var newCategory = ""
     
@@ -120,6 +122,8 @@ struct CategoriesView: View {
                     
                     Button {
                         
+                            predicateFilter.selectedCategoy = "None"
+                        
                         selectedCategory = "None"
                         newCategory = ""
                         withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
@@ -149,6 +153,8 @@ struct CategoriesView: View {
                     Spacer()
                     
                     Button {
+                        
+                            predicateFilter.selectedCategoy = newCategory
                         
                         selectedCategory = newCategory
                         withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {

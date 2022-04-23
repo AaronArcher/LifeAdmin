@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AllAccountsView: View {
     
@@ -26,26 +27,34 @@ struct AllAccountsView: View {
     @Binding var selectedID: UUID
     @Binding var totalPrice: Double
     @Binding var showTabBar: Bool
-    
+
 
     var body: some View {
         
         if showActive && activeAccounts.count == 0 {
             
-            Text("You do not have any active accounts...")
+            Text("You do not have any active accounts in this category...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
                 .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
+                .onAppear {
+                    calcTotal(showActive)
+                }
+
             
         } else if !showActive && inactiveAccounts.count == 0 {
-            Text("You do not have any inactive accounts...")
+            Text("You do not have any inactive accounts in this category...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
                 .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
+                .onAppear {
+                    calcTotal(showActive)
+                }
+
             
         } else {
             
@@ -81,7 +90,6 @@ struct AllAccountsView: View {
                         .padding(.bottom, account == activeAccounts.last ? 90 : 0)
                         .padding(.trailing, 8)
                         .buttonStyle(FlatButtonStyle())
-                        
 
                         
                     }
@@ -111,7 +119,8 @@ struct AllAccountsView: View {
             calcTotal(showActive)
         })
         .onChange(of: showTotalAs, perform: { _ in
-                calcTotal(showActive)
+            calcTotal(showActive)
+            
         })
         
         }
@@ -131,8 +140,7 @@ struct AllAccountsView: View {
                 }
             }
             totalPrice = total
-            print("New all calc total performed against month")
-            
+
         } else {
             var total: Double = 0
             let accounts = isActive ? activeAccounts : inactiveAccounts
@@ -145,7 +153,6 @@ struct AllAccountsView: View {
                 }
             }
             totalPrice = total
-            print("New all calc total performed against year")
         }
     }
 
@@ -154,6 +161,6 @@ struct AllAccountsView: View {
 
 struct AllAccountsView_Previews: PreviewProvider {
     static var previews: some View {
-        AllAccountsView(showTotalAs: .constant(""), showActive: .constant(true), showDelete: .constant(false), selectedID: .constant(UUID()), totalPrice: .constant(0), showTabBar: .constant(false))
+        EducationFilteredAccountView(showTotalAs: .constant(""), showActive: .constant(true), showDelete: .constant(false), selectedID: .constant(UUID()), totalPrice: .constant(0), showTabBar: .constant(false))
     }
 }

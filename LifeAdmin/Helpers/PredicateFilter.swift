@@ -1,11 +1,48 @@
 //
-//  FilterPredicates.swift
+//  CategoryFilter.swift
 //  LifeAdmin
 //
-//  Created by Aaron Johncock on 05/04/2022.
+//  Created by Aaron Johncock on 19/04/2022.
 //
 
 import Foundation
+import CoreData
+import SwiftUI
+
+@MainActor class PredicateFilter: ObservableObject {
+    
+    @Published var selectedCategoy: String = ""
+    @Published var showActive: Bool = true
+    
+    
+    var predicate: NSPredicate? {
+        switch(showActive, selectedCategoy) {
+        case (true, "Education"): return FilterPredicates.activeEducationPredicate
+        case (false, "Education"): return FilterPredicates.inactiveEducationPredicate
+        case (true, "Entertainment"): return FilterPredicates.activeEntertainmentPredicate
+        case (false, "Entertainment"): return FilterPredicates.inactiveEntertainmentPredicate
+        case (true, "Finance"): return FilterPredicates.activeFinancePredicate
+        case (false, "Finance"): return FilterPredicates.inactiveFinancePredicate
+        case (true, "Health"): return FilterPredicates.activeHealthPredicate
+        case (false, "Health"): return FilterPredicates.inactiveHealthPredicate
+        case (true, "Social Media"): return FilterPredicates.activeSocialMediaPredicate
+        case (false, "Social Media"): return FilterPredicates.inactiveSocialMediaPredicate
+        case (true, "Travel"): return FilterPredicates.activeTravelPredicate
+        case (false, "Travel"): return FilterPredicates.inactiveTravelPredicate
+        case (true, "Utilities"): return FilterPredicates.utilitiesPredicate
+        case (false, "Utilities"): return FilterPredicates.inactiveUtilitiesPredicate
+        case (true, "Other"): return FilterPredicates.activeOtherPredicate
+        case (false, "Other"): return FilterPredicates.inactiveOtherPredicate
+            
+        case (true, ""): return FilterPredicates.activePredicate
+        case (false, ""): return FilterPredicates.inactivePredicate
+        case (true, "None"): return FilterPredicates.activePredicate
+        case (false, "None"): return FilterPredicates.inactivePredicate
+            
+        default: return FilterPredicates.activePredicate
+        }
+    }
+}
 
 // Predicates
 struct FilterPredicates {

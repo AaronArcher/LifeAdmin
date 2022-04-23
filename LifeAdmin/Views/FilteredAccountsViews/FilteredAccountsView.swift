@@ -1,59 +1,69 @@
 //
-//  EducationFilteredAccountView.swift
+//  FilteredAccountsView.swift
 //  LifeAdmin
 //
-//  Created by Aaron Johncock on 05/04/2022.
+//  Created by Aaron Johncock on 21/04/2022.
 //
 
 import SwiftUI
+import CoreData
 
-struct EducationFilteredAccountView: View {
-    
+struct FilteredAccountsView: View {
     @Environment(\.managedObjectContext) var moc
     
+    @EnvironmentObject var predicateFilter: PredicateFilter
+    
+    @FetchRequest var filteredAccounts: FetchedResults<AccountData>
+    
+    init(predicate: NSPredicate?, showTotalAs: Binding<String>, showActive: Binding<Bool>, showDelete: Binding<Bool>, selectedID: Binding<UUID>, totalPrice: Binding<Double>, showTabBar: Binding<Bool>) {
+        let request: NSFetchRequest<AccountData> = AccountData.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \AccountData.name, ascending: true)]
+        if let predicate = predicate {
+            request.predicate = predicate
+        }
+        
+        _filteredAccounts = FetchRequest<AccountData>(fetchRequest: request)
+        _showTotalAs = showTotalAs
+        _showActive = showActive
+        _showDelete = showDelete
+        _selectedID = selectedID
+        _totalPrice = totalPrice
+        _showTabBar = showTabBar
+        
+    }
+    
     @Binding var showTotalAs: String
-    
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-    ], predicate: FilterPredicates.activeEducationPredicate) var activeAccounts: FetchedResults<AccountData>
-
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-    ], predicate: FilterPredicates.inactiveEducationPredicate) var inactiveAccounts: FetchedResults<AccountData>
-    
     @Binding var showActive: Bool
     @Binding var showDelete: Bool
     @Binding var selectedID: UUID
     @Binding var totalPrice: Double
     @Binding var showTabBar: Bool
-
+    
 
     var body: some View {
         
-        if showActive && activeAccounts.count == 0 {
+        if predicateFilter.showActive && filteredAccounts.count == 0 {
             
-            Text("You do not have any active accounts in this category...")
+            Text("You do not have any active accounts...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
                 .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
                 .onAppear {
-                    calcTotal(showActive)
+                    calcTotal()
                 }
-
             
-        } else if !showActive && inactiveAccounts.count == 0 {
-            Text("You do not have any inactive accounts in this category...")
+        } else if !predicateFilter.showActive && filteredAccounts.count == 0 {
+            Text("You do not have any inactive accounts...")
                 .foregroundColor(Color("PrimaryText"))
                 .font(.title3.weight(.light))
                 .frame(width: Constants.screenWidth / 1.5)
                 .multilineTextAlignment(.center)
                 .padding(.top)
                 .onAppear {
-                    calcTotal(showActive)
+                    calcTotal()
                 }
-
             
         } else {
             
@@ -61,7 +71,7 @@ struct EducationFilteredAccountView: View {
             ZStack {
                 ScrollView(showsIndicators: false) {
                     
-                    ForEach(showActive ? activeAccounts : inactiveAccounts) { account in
+                    ForEach(filteredAccounts) { account in
                         
                         NavigationLink {
 
@@ -86,9 +96,10 @@ struct EducationFilteredAccountView: View {
                             AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
 
                         }
-                        .padding(.bottom, account == activeAccounts.last ? 90 : 0)
+                        .padding(.bottom, account == filteredAccounts.last ? 90 : 0)
                         .padding(.trailing, 8)
                         .buttonStyle(FlatButtonStyle())
+                        
 
                         
                     }
@@ -112,55 +123,58 @@ struct EducationFilteredAccountView: View {
         }
     
         .onAppear {
-            calcTotal(showActive)
+            calcTotal()
         }
-        .onChange(of: showActive, perform: { _ in
-            print(showActive)
-            calcTotal(showActive)
+        .onChange(of: predicateFilter.selectedCategoy, perform: { _ in
+            print("OnChange Category")
+            calcTotal()
+        })
+        .onChange(of: predicateFilter.showActive, perform: { _ in
+            print("onChange Active\(predicateFilter.showActive)")
+            calcTotal()
         })
         .onChange(of: showTotalAs, perform: { _ in
-            calcTotal(showActive)
-            
+            calcTotal()
         })
-        
-        }
+            
+            }
         
     }
     
-    func calcTotal(_ isActive: Bool) {
+    func calcTotal() {
         if showTotalAs == "month" {
             var total: Double = 0
-            let accounts = isActive ? activeAccounts : inactiveAccounts
-            for active in accounts {
-                if active.per == "year" {
-                    total += active.price / 12
+//            let accounts = isActive ? activeAccounts : inactiveAccounts
+            for account in filteredAccounts {
+                if account.per == "year" {
+                    total += account.price / 12
                 }
                 else {
-                    total += active.price
+                    total += account.price
                 }
             }
-            totalPrice = total
-
+            DispatchQueue.main.async {
+                totalPrice = total
+            }
+            print("New all calc total performed against month total:\(totalPrice)")
+            
         } else {
             var total: Double = 0
-            let accounts = isActive ? activeAccounts : inactiveAccounts
-            for active in accounts {
-                if active.per == "month" {
-                    total += active.price * 12
+//            let accounts = isActive ? activeAccounts : inactiveAccounts
+            for account in filteredAccounts {
+                if account.per == "month" {
+                    total += account.price * 12
                 }
                 else {
-                    total += active.price
+                    total += account.price
                 }
             }
-            totalPrice = total
+            DispatchQueue.main.async {
+                totalPrice = total
+            }
+            print("New all calc total performed against year")
         }
     }
 
     
-}
-
-struct EducationFilteredAccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        EducationFilteredAccountView(showTotalAs: .constant(""), showActive: .constant(true), showDelete: .constant(false), selectedID: .constant(UUID()), totalPrice: .constant(0), showTabBar: .constant(false))
-    }
 }

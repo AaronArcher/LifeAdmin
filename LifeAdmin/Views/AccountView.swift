@@ -274,6 +274,7 @@ struct AccountView: View {
                     
                     Button{
                         disableAccount(id: id, accounts: allAccounts)
+                        dismiss()
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)

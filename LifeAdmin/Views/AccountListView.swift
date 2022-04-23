@@ -12,6 +12,9 @@ struct AccountListView: View {
     
     @Environment(\.managedObjectContext) var moc
     
+    @EnvironmentObject var predicateFilter: PredicateFilter
+
+    
     @AppStorage("showTotalAs") var showTotalAs = "month"
     
     @FetchRequest(sortDescriptors: [
@@ -47,6 +50,7 @@ struct AccountListView: View {
     @Binding var showTabBar: Bool
     
     @EnvironmentObject var spotlight: SpotlightVM
+    
 
     
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
@@ -105,7 +109,7 @@ struct AccountListView: View {
                         
                     }
                     
-                    // Total
+                    //MARK: Total
                     
                     HStack {
                         
@@ -175,37 +179,39 @@ struct AccountListView: View {
                         
                         //MARK: List of Accounts
                         
-                        switch selectedCategory {
-                            
-                        case "Education":
-                            EducationFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Entertainment":
-                            EntertainmentFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Finance":
-                            FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Health":
-                            HealthFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Other":
-                            OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Social Media":
-                            SocialMediaFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Travel":
-                            TravelFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        case "Utilities":
-                            UtilitiesFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                            
-                        default:
-                            AllAccountsView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                                                
-                        
-                        }
+//                        switch selectedCategory {
+//
+//                        case "Education":
+//                            EducationFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Entertainment":
+//                            EntertainmentFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Finance":
+//                            FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Health":
+//                            HealthFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Other":
+//                            OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Social Media":
+//                            SocialMediaFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Travel":
+//                            TravelFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        case "Utilities":
+//                            UtilitiesFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//                        default:
+//                        AllAccountsView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
+//
+//
+//
+//                        }
+                        FilteredAccountsView(predicate: predicateFilter.predicate, showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
                         
                     }
                         

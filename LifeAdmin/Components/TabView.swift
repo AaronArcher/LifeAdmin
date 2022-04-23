@@ -11,6 +11,7 @@ import SwiftUI
 
 struct TabView: View {
     
+    @EnvironmentObject var predicateFilter: PredicateFilter
     
     @State var isActive = true
     @Binding var showActive: Bool
@@ -21,6 +22,7 @@ struct TabView: View {
     
     
     @EnvironmentObject var spotlight: SpotlightVM
+
 
     var body: some View {
         
@@ -34,10 +36,15 @@ struct TabView: View {
             // Tab Text Buttons
             HStack {
                 Button {
+
+                    predicateFilter.showActive = true
+                    
                     showActive = true
                     withAnimation(.easeInOut) {
                         isActive = true
                     }
+                    print(predicateFilter.showActive)
+                    
                 } label: {
                     Text("Active")
                         .frame(width: 100)
@@ -49,10 +56,15 @@ struct TabView: View {
                 Spacer()
                 
                 Button {
+
+                    predicateFilter.showActive = false
+                    
                     showActive = false
                     withAnimation(.easeInOut) {
                         isActive = false
                     }
+                    print(predicateFilter.showActive)
+
                 } label: {
                     Text("Inactive")
                         .frame(width: 100)

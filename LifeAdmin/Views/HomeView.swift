@@ -27,6 +27,8 @@ struct HomeView: View {
     @State private var showSave = false
     
     @EnvironmentObject var spotlight: SpotlightVM
+    @EnvironmentObject var predicateFilter: PredicateFilter
+
     
     @State var showTabBar = true
     
@@ -35,18 +37,17 @@ struct HomeView: View {
         ZStack {
                     
                     AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, animatePath: $animatePath, animateBG: $animateBG, showSave: $showSave, showTabBar: $showTabBar)
+                        .environmentObject(predicateFilter)
                         .disabled(showCategories || showSave)
                         .overlay(
                             Color.black.opacity(showCategories || showSave ? 0.7 : 0)
                         )
                         .accessibilityHidden(showCategories || showSave)
                         .accessibilityAddTraits(.isModal)
-            
-                    
-
                         
                     
                     TabView(showActive: $showActive, showNewAccount: $showNewAccount)
+                        .environmentObject(predicateFilter)
                         .disabled(showCategories || showSave)
                         .overlay(
                             Color.black.opacity(showCategories || showSave ? 0.7 : 0)
@@ -54,6 +55,7 @@ struct HomeView: View {
                         .accessibilityHidden(showCategories || showSave)
                         .accessibilityAddTraits(.isModal)
                         .offset(y: showTabBar ? 0 : (Constants.isScreenLarge ? (Constants.screenHeight / 8.5) * 2 : (Constants.screenHeight / 7.5) * 2))
+
 
                     
                     if showSave {
@@ -104,8 +106,10 @@ struct HomeView: View {
                     }
                     
                     CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
-                .offset(x: showCategories ? 0 : -(Constants.screenWidth))
+                        .environmentObject(predicateFilter)
+                        .offset(x: showCategories ? 0 : -(Constants.screenWidth))
                         .accessibilityAddTraits(.isModal)
+
                     
                     
                     
