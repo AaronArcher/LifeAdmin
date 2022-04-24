@@ -89,7 +89,7 @@ struct FilteredAccountsView: View {
                                 isActive: account.isActive)
 
                         } label: {
-                            AccountRow(isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
+                            AccountRow(filteredAccounts: filteredAccounts, isActive: account.isActive, name: account.name ?? "Test", icon: account.icon ?? "plus", price: account.price, per: account.per ?? "", id: account.id ?? UUID(), selectedID: $selectedID, showDelete: $showDelete)
 
                         }
                         .padding(.bottom, account == filteredAccounts.last ? 90 : 0)

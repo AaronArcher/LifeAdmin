@@ -6,16 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AccountRow: View {
         
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-    ], predicate: NSPredicate(format: "isActive == true")) var activeAccounts: FetchedResults<AccountData>
-    
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-    ], predicate: NSPredicate(format: "isActive == false")) var inactiveAccounts: FetchedResults<AccountData>
+    var filteredAccounts: FetchedResults<AccountData>
+
             
     var isActive: Bool = true
     @State private var showAccount = false
@@ -25,7 +21,7 @@ struct AccountRow: View {
     var icon: String = "play.tv.fill"
     var price: Double = 6.99
     var per: String = ""
-    var id: UUID
+    var id = UUID()
     @Binding var selectedID: UUID
     @Binding var showDelete: Bool
     
@@ -151,18 +147,18 @@ struct AccountRow: View {
         .onChange(of: gestureOffset) { newValue in
             offset = (gestureOffset + lastStoredOffset) > 0 ? 0 : (gestureOffset + lastStoredOffset)
         }
-//        .opacity(showAccount ? 1 : 0)
+        .opacity(showAccount ? 1 : 0)
         .onAppear {
             // Show accounts one at a time
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.09)) {
+                withAnimation(.easeInOut(duration: 0.2).delay(Double(getIndex()) * 0.07)) {
                     showAccount = true
                 }
             }
 
             // Stop Background flashing first
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.0)) {
+                withAnimation(.easeInOut(duration: 0.2).delay(Double(getIndex()) * 0.1)) {
                     showBackground = true
                 }
             }
@@ -172,26 +168,21 @@ struct AccountRow: View {
         }
     
     }
-    
-    func getActiveIndex() -> Int {
-        return activeAccounts.firstIndex { currentAccount in
+    func getIndex() -> Int {
+        return filteredAccounts.firstIndex { currentAccount in
             return id == currentAccount.id
         } ?? 0
     }
     
-    func getInactiveIndex() -> Int {
-        return inactiveAccounts.firstIndex { currentAccount in
-            return id == currentAccount.id
-        } ?? 0
-    }
+
 
     
 }
 
-struct AccountRow_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        AccountRow(id: UUID(), selectedID: .constant(UUID()), showDelete: .constant(false))
-    }
-}
+//struct AccountRow_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//        AccountRow(id: UUID(), selectedID: .constant(UUID()), showDelete: .constant(false))
+//    }
+//}
 
