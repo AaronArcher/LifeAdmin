@@ -13,6 +13,8 @@ struct EditAccountView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
     
+    @EnvironmentObject var controlVM: ControlViewModel
+    
     @FetchRequest(sortDescriptors: []) var allAccounts: FetchedResults<AccountData>
     
     @AppStorage("defaultEmail") var defaultEmail = ""
@@ -46,7 +48,6 @@ struct EditAccountView: View {
     
     @State private var alertTitle = ""
     @State private var showAlert = false
-    @Binding var showSave: Bool
         
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
     
@@ -600,7 +601,7 @@ struct EditAccountView: View {
             let newAccount = AccountData(context: moc)
             
             newAccount.id = id
-            newAccount.name = accountName
+            newAccount.name = accountName.capitalizingFirstLetter()
             newAccount.isActive = true
             newAccount.icon = icon
             newAccount.category = selectedCategory
@@ -629,7 +630,7 @@ struct EditAccountView: View {
                 
                 showEditAccount = false
                 withAnimation {
-                    showSave = true
+                    controlVM.showSave = true
                 }
                 
                 
@@ -664,7 +665,7 @@ struct EditAccountView: View {
             
             for account in accounts {
                 if account.id == id {
-                    account.name = accountName
+                    account.name = accountName.capitalizingFirstLetter()
                     account.icon = icon
                     account.category = selectedCategory
                     account.email = email
@@ -704,7 +705,17 @@ struct EditAccountView: View {
 
 struct NewAccountView_Previews: PreviewProvider {
     static var previews: some View {
-        EditAccountView(showEditAccount: .constant(true), showSave: .constant(false))
+        EditAccountView(showEditAccount: .constant(true))
     }
 }
 
+// uncapitalised strings appear last in fetchrequest list, this func will capitalise the first letter when saving the account name
+extension String {
+    func capitalizingFirstLetter() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizingFirstLetter()
+    }
+}

@@ -162,7 +162,7 @@ struct AccountRow: View {
 
             // Stop Background flashing first
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.5)) {
+                withAnimation(.easeInOut(duration: 0.2).delay(Double(isActive ? getActiveIndex() : getInactiveIndex()) * 0.0)) {
                     showBackground = true
                 }
             }

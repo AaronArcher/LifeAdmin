@@ -9,15 +9,12 @@ import SwiftUI
 
 struct CategoriesView: View {
     
-    @EnvironmentObject var predicateFilter: PredicateFilter
+    @EnvironmentObject var filterVM: FilterViewModel
+    @EnvironmentObject var controlVM: ControlViewModel
     
-    @Binding var selectedCategory: String
     @State private var newCategory = ""
-    
-    @Binding var showCategories: Bool
-    
-    @Binding var animatePath: Bool
-    @Binding var animateBG: Bool
+        
+
     
     @Namespace var namespace
     
@@ -34,17 +31,19 @@ struct CategoriesView: View {
                 HStack {
 
                     Button {
-                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
-                            animatePath.toggle()
-                        }
-                        withAnimation {
-                            animateBG.toggle()
-                        }
-                        withAnimation(.spring().delay(0.1)) {
-                            showCategories.toggle()
-                        }
-                        if selectedCategory != newCategory {
-                            newCategory = ""
+                        DispatchQueue.main.async {
+                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                                controlVM.animatePath.toggle()
+                            }
+                            withAnimation {
+                                controlVM.animateBG.toggle()
+                            }
+                            withAnimation(.spring().delay(0.1)) {
+                                controlVM.showCategories.toggle()
+                            }
+                            if filterVM.selectedCategory != newCategory {
+                                newCategory = ""
+                            }
                         }
                         
                     } label: {
@@ -122,18 +121,22 @@ struct CategoriesView: View {
                     
                     Button {
                         
-                            predicateFilter.selectedCategoy = "None"
-                        
-                        selectedCategory = "None"
-                        newCategory = ""
-                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
-                            animatePath.toggle()
-                        }
-                        withAnimation {
-                            animateBG.toggle()
-                        }
-                        withAnimation(.spring().delay(0.1)) {
-                            showCategories.toggle()
+                        DispatchQueue.main.async {
+                            filterVM.selectedCategory = "None"
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                newCategory = ""
+                            }
+                            
+                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                                controlVM.animatePath.toggle()
+                            }
+                            withAnimation {
+                                controlVM.animateBG.toggle()
+                            }
+                            withAnimation(.spring().delay(0.1)) {
+                                controlVM.showCategories.toggle()
+                            }
                         }
                         
                     } label: {
@@ -154,17 +157,18 @@ struct CategoriesView: View {
                     
                     Button {
                         
-                            predicateFilter.selectedCategoy = newCategory
-                        
-                        selectedCategory = newCategory
-                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
-                            animatePath.toggle()
-                        }
-                        withAnimation {
-                            animateBG.toggle()
-                        }
-                        withAnimation(.spring().delay(0.1)) {
-                            showCategories.toggle()
+                        DispatchQueue.main.async {
+                            filterVM.selectedCategory = newCategory
+                            
+                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                                controlVM.animatePath.toggle()
+                            }
+                            withAnimation {
+                                controlVM.animateBG.toggle()
+                            }
+                            withAnimation(.spring().delay(0.1)) {
+                                controlVM.showCategories.toggle()
+                            }
                         }
                         
                     } label: {
@@ -178,8 +182,8 @@ struct CategoriesView: View {
                                     .foregroundColor(Color("Green1"))
                             )
                     }
-                    .opacity((selectedCategory == newCategory) || (newCategory == "") ? 0.7 : 1)
-                    .disabled((selectedCategory == newCategory) || (newCategory == ""))
+                    .opacity((filterVM.selectedCategory == newCategory) || (newCategory == "") ? 0.7 : 1)
+                    .disabled((filterVM.selectedCategory == newCategory) || (newCategory == ""))
                     
                 
                 }
@@ -193,11 +197,11 @@ struct CategoriesView: View {
             .padding(.top, Constants.isScreenLarge ? 40 : 25)
             
         }
-        .clipShape(CategoryShape(curveValue: animatePath ? 70 : 0))
+        .clipShape(CategoryShape(curveValue: controlVM.animatePath ? 70 : 0))
         .background(
             
-            CategoryShape(curveValue: animatePath ? 70 : 0)
-                .stroke(Color("Green1"), lineWidth: animatePath ? 4 : 0
+            CategoryShape(curveValue: controlVM.animatePath ? 70 : 0)
+                .stroke(Color("Green1"), lineWidth: controlVM.animatePath ? 4 : 0
                 )
         )
         .ignoresSafeArea()
@@ -207,7 +211,7 @@ struct CategoriesView: View {
 
 struct NewCategoriesView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesView(selectedCategory: .constant("All"), showCategories: .constant(true), animatePath: .constant(false), animateBG: .constant(false))
+        CategoriesView()
     }
 }
 

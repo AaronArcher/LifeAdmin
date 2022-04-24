@@ -9,14 +9,15 @@ import Foundation
 import CoreData
 import SwiftUI
 
-@MainActor class PredicateFilter: ObservableObject {
+@MainActor class FilterViewModel: ObservableObject {
     
-    @Published var selectedCategoy: String = ""
+    @Published var selectedCategory: String = "None"
     @Published var showActive: Bool = true
+    @Published var refreshTotal: Bool = true
     
     
     var predicate: NSPredicate? {
-        switch(showActive, selectedCategoy) {
+        switch(showActive, selectedCategory) {
         case (true, "Education"): return FilterPredicates.activeEducationPredicate
         case (false, "Education"): return FilterPredicates.inactiveEducationPredicate
         case (true, "Entertainment"): return FilterPredicates.activeEntertainmentPredicate

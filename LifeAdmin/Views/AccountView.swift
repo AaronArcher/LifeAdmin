@@ -14,8 +14,9 @@ import KeychainAccess
 struct AccountView: View {
     
     @Environment(\.scenePhase) var scenePhase
-    
     @Environment(\.managedObjectContext) var moc
+    @EnvironmentObject var controlVM: ControlViewModel
+
     
     @FetchRequest(sortDescriptors: []) var allAccounts: FetchedResults<AccountData>
     
@@ -46,9 +47,6 @@ struct AccountView: View {
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
     
     @State private var showSave = false
-    
-    @Binding var showTabBar: Bool
-
 
     
     var body: some View {
@@ -85,7 +83,13 @@ struct AccountView: View {
                 
                 HStack {
                     Button {
+                        DispatchQueue.main.async {
+                            withAnimation(.spring()) {
+                                controlVM.showTabBar = true
+                            }
+                        }
                         dismiss()
+                        
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.title2.weight(.light))
@@ -275,6 +279,12 @@ struct AccountView: View {
                     Button{
                         disableAccount(id: id, accounts: allAccounts)
                         dismiss()
+                        DispatchQueue.main.async {
+                            withAnimation(.spring()) {
+                                controlVM.showTabBar = true
+                            }
+                        }
+
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -297,13 +307,20 @@ struct AccountView: View {
             
         }
         .alert("Are you sure you want to delete this account?", isPresented: $showDelete, actions: {
-            Button("OK") { deleteAccount(id: id, accounts: allAccounts) }
+            Button("OK") {
+                deleteAccount(id: id, accounts: allAccounts)
+                DispatchQueue.main.async {
+                    withAnimation(.spring()) {
+                        controlVM.showTabBar = true
+                    }
+                }
+
+            }
             Button("Cancel", role: .cancel) { }
         })
         .onAppear(perform: {
-
             withAnimation(.spring()) {
-                showTabBar = false
+                controlVM.showTabBar = false
             }
             
             do {
@@ -350,8 +367,7 @@ struct AccountView: View {
                             per: per,
                             paymentDay:paymentDay,
                             paymentMonth: paymentMonth,
-                            selectedCategory: category,
-                            showSave: $showSave
+                            selectedCategory: category
             )
             
         }
@@ -425,7 +441,7 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
         
     static var previews: some View {
-        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true, showTabBar: .constant(false))
+        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true)
     }
 }
 

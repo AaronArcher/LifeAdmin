@@ -11,11 +11,11 @@ import SwiftUI
 
 struct TabView: View {
     
-    @EnvironmentObject var predicateFilter: PredicateFilter
+    @EnvironmentObject var filterVM: FilterViewModel
+    @EnvironmentObject var controlVM: ControlViewModel
     
     @State var isActive = true
-    @Binding var showActive: Bool
-    @Binding var showNewAccount: Bool
+//    @Binding var showActive: Bool
     
     let height = UIScreen.main.bounds.height / 7.5
     let largeHeight = UIScreen.main.bounds.height / 8.5
@@ -37,13 +37,11 @@ struct TabView: View {
             HStack {
                 Button {
 
-                    predicateFilter.showActive = true
+                    filterVM.showActive = true
                     
-                    showActive = true
                     withAnimation(.easeInOut) {
                         isActive = true
                     }
-                    print(predicateFilter.showActive)
                     
                 } label: {
                     Text("Active")
@@ -57,13 +55,11 @@ struct TabView: View {
                 
                 Button {
 
-                    predicateFilter.showActive = false
+                    filterVM.showActive = false
                     
-                    showActive = false
                     withAnimation(.easeInOut) {
                         isActive = false
                     }
-                    print(predicateFilter.showActive)
 
                 } label: {
                     Text("Inactive")
@@ -105,7 +101,7 @@ struct TabView: View {
             
             // New Account Button
             Button {
-                showNewAccount = true
+                controlVM.showNewAccount = true
 
             } label: {
                 ZStack {
@@ -135,9 +131,9 @@ struct TabView: View {
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
-        TabView(showActive: .constant(true), showNewAccount: .constant(false))
+        TabView()
         
-        TabView(showActive: .constant(true), showNewAccount: .constant(false))
+        TabView()
             .previewDevice("iPhone SE (2nd generation)")
 
     }

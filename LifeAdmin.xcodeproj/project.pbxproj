@@ -18,16 +18,9 @@
 		EE761A1C28033760000006BB /* success-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = EE761A1B28033760000006BB /* success-animation.json */; };
 		EE761A1E28033DAC000006BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1D28033DAC000006BB /* Extensions.swift */; };
 		EE761A20280345EA000006BB /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE761A1F280345EA000006BB /* CategoriesView.swift */; };
-		EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */; };
-		EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */; };
-		EE766B2C27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */; };
-		EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */; };
-		EE766B3027FCF18200AC046C /* OtherFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */; };
-		EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */; };
-		EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */; };
-		EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */; };
 		EE766B402800CBF200AC046C /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = EE766B3F2800CBF200AC046C /* KeychainAccess */; };
 		EE85A2A5280995B5009482B8 /* SpotlightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE85A2A4280995B5009482B8 /* SpotlightViewModel.swift */; };
+		EE9C474A28158C5A00FCB394 /* ControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9C474928158C5A00FCB394 /* ControlViewModel.swift */; };
 		EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */; };
 		EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */; };
 		EEB55C3227F1ACAD006A90C7 /* LifeAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C3127F1ACAD006A90C7 /* LifeAdminApp.swift */; };
@@ -45,8 +38,7 @@
 		EEB55C5627F24396006A90C7 /* AccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C5527F24396006A90C7 /* AccountDetailView.swift */; };
 		EEB55C5A27F24666006A90C7 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEB55C5927F24666006A90C7 /* CloudKit.framework */; };
 		EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB55C6227F65178006A90C7 /* SettingsView.swift */; };
-		EEEEE691280DDA6400805AFD /* HealthFilteredAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */; };
-		EEEEE693280F580000805AFD /* PredicateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE692280F580000805AFD /* PredicateFilter.swift */; };
+		EEEEE693280F580000805AFD /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE692280F580000805AFD /* FilterViewModel.swift */; };
 		EEEEE6952812015500805AFD /* FilteredAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEEE6942812015500805AFD /* FilteredAccountsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -61,15 +53,8 @@
 		EE761A1B28033760000006BB /* success-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "success-animation.json"; sourceTree = "<group>"; };
 		EE761A1D28033DAC000006BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EE761A1F280345EA000006BB /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAccountsView.swift; sourceTree = "<group>"; };
-		EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelFilteredAccountView.swift; sourceTree = "<group>"; };
-		EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesFilteredAccountView.swift; sourceTree = "<group>"; };
 		EE85A2A4280995B5009482B8 /* SpotlightViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightViewModel.swift; sourceTree = "<group>"; };
+		EE9C474928158C5A00FCB394 /* ControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewModel.swift; sourceTree = "<group>"; };
 		EEAFB65C27F74EBC00F203BC /* DefaultPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPhoneView.swift; sourceTree = "<group>"; };
 		EEAFB65E27F7633200F203BC /* FavouriteEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteEmailView.swift; sourceTree = "<group>"; };
 		EEB55C2E27F1ACAD006A90C7 /* LifeAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,8 +75,7 @@
 		EEB55C5927F24666006A90C7 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EEB55C5B27F246DC006A90C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EEB55C6227F65178006A90C7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthFilteredAccountView.swift; sourceTree = "<group>"; };
-		EEEEE692280F580000805AFD /* PredicateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateFilter.swift; sourceTree = "<group>"; };
+		EEEEE692280F580000805AFD /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		EEEEE6942812015500805AFD /* FilteredAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredAccountsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,23 +93,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EE65921927FB920D00BAEF99 /* FilteredAccountsViews */ = {
-			isa = PBXGroup;
-			children = (
-				EE766B2727FCDE0E00AC046C /* AllAccountsView.swift */,
-				EE766B1D27FCB6AF00AC046C /* EducationFilteredAccountView.swift */,
-				EE766B2B27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift */,
-				EE766B2D27FCF11700AC046C /* FinanceFilteredAccountView.swift */,
-				EEEEE690280DDA6400805AFD /* HealthFilteredAccountView.swift */,
-				EE766B2F27FCF18200AC046C /* OtherFilteredAccountView.swift */,
-				EE766B3127FCF1E700AC046C /* SocialMediaFilteredAccountView.swift */,
-				EE766B3327FCF26300AC046C /* TravelFilteredAccountView.swift */,
-				EE766B3527FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift */,
-				EEEEE6942812015500805AFD /* FilteredAccountsView.swift */,
-			);
-			path = FilteredAccountsViews;
-			sourceTree = "<group>";
-		};
 		EE761A162803341B000006BB /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,10 +162,10 @@
 			children = (
 				EEB55C3327F1ACAD006A90C7 /* HomeView.swift */,
 				EEB55C4927F242DC006A90C7 /* AccountListView.swift */,
+				EEEEE6942812015500805AFD /* FilteredAccountsView.swift */,
 				EEB55C4B27F242FD006A90C7 /* AccountView.swift */,
 				EEB55C4D27F24320006A90C7 /* EditAccountView.swift */,
 				EE761A1F280345EA000006BB /* CategoriesView.swift */,
-				EE65921927FB920D00BAEF99 /* FilteredAccountsViews */,
 				EEAFB65B27F74E7000F203BC /* Settings */,
 			);
 			path = Views;
@@ -222,7 +189,6 @@
 				EE761A1D28033DAC000006BB /* Extensions.swift */,
 				EE707A35280623EC00704AB8 /* Bundle+Extension.swift */,
 				EE707A3B28077ADF00704AB8 /* Spotlight.swift */,
-				EEEEE692280F580000805AFD /* PredicateFilter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -232,6 +198,8 @@
 			children = (
 				EEB55C3A27F1ACAE006A90C7 /* Persistence.swift */,
 				EE85A2A4280995B5009482B8 /* SpotlightViewModel.swift */,
+				EEEEE692280F580000805AFD /* FilterViewModel.swift */,
+				EE9C474928158C5A00FCB394 /* ControlViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -334,15 +302,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEB55C5027F2434A006A90C7 /* AccountRow.swift in Sources */,
-				EE766B3427FCF26300AC046C /* TravelFilteredAccountView.swift in Sources */,
 				EE761A1A28033457000006BB /* LottieView.swift in Sources */,
-				EE766B3227FCF1E700AC046C /* SocialMediaFilteredAccountView.swift in Sources */,
+				EE9C474A28158C5A00FCB394 /* ControlViewModel.swift in Sources */,
 				EE750B4627FA13A6006768C4 /* Constants.swift in Sources */,
-				EEEEE693280F580000805AFD /* PredicateFilter.swift in Sources */,
+				EEEEE693280F580000805AFD /* FilterViewModel.swift in Sources */,
 				EE761A20280345EA000006BB /* CategoriesView.swift in Sources */,
 				EEB55C4C27F242FD006A90C7 /* AccountView.swift in Sources */,
-				EE766B3027FCF18200AC046C /* OtherFilteredAccountView.swift in Sources */,
-				EE766B3627FCF2CE00AC046C /* UtilitiesFilteredAccountView.swift in Sources */,
 				EEB55C3B27F1ACAE006A90C7 /* Persistence.swift in Sources */,
 				EE707A3C28077ADF00704AB8 /* Spotlight.swift in Sources */,
 				EEAFB65F27F7633200F203BC /* FavouriteEmailView.swift in Sources */,
@@ -353,17 +318,12 @@
 				EEEEE6952812015500805AFD /* FilteredAccountsView.swift in Sources */,
 				EEB55C5427F2437E006A90C7 /* HeaderView.swift in Sources */,
 				EEB55C3E27F1ACAE006A90C7 /* LifeAdmin.xcdatamodeld in Sources */,
-				EE766B2C27FCF05E00AC046C /* EntertainmentFilteredAccountView.swift in Sources */,
 				EEB55C4E27F24320006A90C7 /* EditAccountView.swift in Sources */,
 				EE06E6B127F7684200658E13 /* FavouriteAddressView.swift in Sources */,
 				EEAFB65D27F74EBC00F203BC /* DefaultPhoneView.swift in Sources */,
-				EEEEE691280DDA6400805AFD /* HealthFilteredAccountView.swift in Sources */,
 				EEB55C5227F24365006A90C7 /* TabView.swift in Sources */,
-				EE766B2827FCDE0E00AC046C /* AllAccountsView.swift in Sources */,
-				EE766B2E27FCF11700AC046C /* FinanceFilteredAccountView.swift in Sources */,
 				EEB55C4A27F242DC006A90C7 /* AccountListView.swift in Sources */,
 				EE707A3A2806266400704AB8 /* SupportEmail.swift in Sources */,
-				EE766B1E27FCB6AF00AC046C /* EducationFilteredAccountView.swift in Sources */,
 				EE85A2A5280995B5009482B8 /* SpotlightViewModel.swift in Sources */,
 				EEB55C6327F65178006A90C7 /* SettingsView.swift in Sources */,
 				EE761A1E28033DAC000006BB /* Extensions.swift in Sources */,

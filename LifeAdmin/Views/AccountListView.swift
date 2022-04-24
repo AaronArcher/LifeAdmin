@@ -12,8 +12,9 @@ struct AccountListView: View {
     
     @Environment(\.managedObjectContext) var moc
     
-    @EnvironmentObject var predicateFilter: PredicateFilter
-
+    @EnvironmentObject var filterVM: FilterViewModel
+    @EnvironmentObject var controlVM: ControlViewModel
+    @EnvironmentObject var spotlight: SpotlightVM
     
     @AppStorage("showTotalAs") var showTotalAs = "month"
     
@@ -21,38 +22,12 @@ struct AccountListView: View {
         SortDescriptor(\.name),
     ]) var allAccounts: FetchedResults<AccountData>
     
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-    ], predicate: NSPredicate(format: "isActive == true")) var activeAccounts: FetchedResults<AccountData>
-    
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.name),
-    ], predicate: NSPredicate(format: "isActive == false")) var inactiveAccounts: FetchedResults<AccountData>
-    
-    
-    @Binding var showNewAccount: Bool
-    
-    @Binding var showActive: Bool
-    
     
     @State private var totalPrice: Double = 0
     
     @State private var showDelete = false
     @State var selectedID: UUID = UUID()
-    @Binding var showSettings: Bool
-    @Binding var showCategories: Bool
-    @Binding var selectedCategory: String
-    @Binding var animatePath: Bool
-    @Binding var animateBG: Bool
-    
-    @Binding var showSave: Bool
-    
-    @Binding var showTabBar: Bool
-    
-    @EnvironmentObject var spotlight: SpotlightVM
-    
-
-    
+            
     let keychain = Keychain(service: "AaronArcher.LifeAdmin").synchronizable(true)
 
     
@@ -65,19 +40,21 @@ struct AccountListView: View {
                     
                     ZStack(alignment: .top) {
                         
-                        HeaderView(text: showActive ? "Active Accounts" : "Inactive Accounts")
+                        HeaderView(text: filterVM.showActive ? "Active Accounts" : "Inactive Accounts")
                         
                         HStack {
                             
                             Button {
-                                withAnimation {
-                                    animateBG.toggle()
-                                }
-                                withAnimation(.spring()) {
-                                    showCategories.toggle()
-                                }
-                                withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
-                                    animatePath.toggle()
+                                DispatchQueue.main.async {
+                                    withAnimation {
+                                        controlVM.animateBG.toggle()
+                                    }
+                                    withAnimation(.spring()) {
+                                        controlVM.showCategories.toggle()
+                                    }
+                                    withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
+                                        controlVM.animatePath.toggle()
+                                    }
                                 }
                                 
                             } label: {
@@ -93,7 +70,7 @@ struct AccountListView: View {
                             Spacer()
                             
                             Button {
-                                showSettings = true
+                                controlVM.showSettings = true
                             } label: {
                                 Image(systemName: "gearshape.fill")
                                     .foregroundColor(.white)
@@ -113,14 +90,14 @@ struct AccountListView: View {
                     
                     HStack {
                         
-                        if selectedCategory != "None" {
+                        if filterVM.selectedCategory != "None" {
                             
                             VStack(alignment: .leading) {
                                 
                                 Text("Filtered by:")
                                     .foregroundColor(Color("Green1"))
                                 
-                                Text(selectedCategory)
+                                Text(filterVM.selectedCategory)
                                     .font(.title3.bold())
                                     .foregroundColor(Color("PrimaryText"))
                             }
@@ -157,63 +134,12 @@ struct AccountListView: View {
                         .frame(width: Constants.screenWidth / 1.1, height: Constants.screenHeight / 3)
                         .spotlight(enabled: spotlight.currentSpotlight == 4, title: "View all of your accounts here.\nSelect an account to view/edit your account information or swipe to delete an account.")
                     
-                    if showActive && activeAccounts.count == 0 {
-                        
-                        Text("You haven't created any accounts yet...")
-                            .foregroundColor(Color("PrimaryText"))
-                            .font(.title3.weight(.light))
-                            .frame(width: Constants.screenWidth / 1.5)
-                            .multilineTextAlignment(.center)
-                            .padding(.top)
-                        
-                    } else if !showActive && inactiveAccounts.count == 0 {
-                        Text("You do not have any inactive accounts...")
-                            .foregroundColor(Color("PrimaryText"))
-                            .font(.title3.weight(.light))
-                            .frame(width: Constants.screenWidth / 1.5)
-                            .multilineTextAlignment(.center)
-                            .padding(.top)
-                        
-                    } else {
                         
                         
                         //MARK: List of Accounts
+                        FilteredAccountsView(predicate: filterVM.predicate, showTotalAs: $showTotalAs, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
                         
-//                        switch selectedCategory {
-//
-//                        case "Education":
-//                            EducationFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Entertainment":
-//                            EntertainmentFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Finance":
-//                            FinanceFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Health":
-//                            HealthFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Other":
-//                            OtherFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Social Media":
-//                            SocialMediaFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Travel":
-//                            TravelFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        case "Utilities":
-//                            UtilitiesFilteredAccountView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//                        default:
-//                        AllAccountsView(showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-//
-//
-//
-//                        }
-                        FilteredAccountsView(predicate: predicateFilter.predicate, showTotalAs: $showTotalAs, showActive: $showActive, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice, showTabBar: $showTabBar)
-                        
-                    }
+                    
                         
                     }
               
@@ -226,59 +152,23 @@ struct AccountListView: View {
             .background(Color("Background"))
             .frame(maxHeight: .infinity)
             .ignoresSafeArea()
-            .onAppear(perform: {
-                withAnimation(.spring()) {
-                    showTabBar = true
-                }
-            })
             .alert("Are you sure you want to delete this account?", isPresented: $showDelete, actions: {
                 Button("OK") { deleteAccount(id: selectedID, accounts: allAccounts) }
                 Button("Cancel", role: .cancel) { }
             })
-            .fullScreenCover(isPresented: $showNewAccount, onDismiss: {
-                calcTotal(showActive)
+            .fullScreenCover(isPresented: $controlVM.showNewAccount, onDismiss: {
+                DispatchQueue.main.async {
+                    filterVM.refreshTotal.toggle()
+                }
             }) {
-                EditAccountView(showEditAccount: $showNewAccount, showSave: $showSave)
+                EditAccountView(showEditAccount: $controlVM.showNewAccount)
             }
-            .fullScreenCover(isPresented: $showSettings) {
+            .fullScreenCover(isPresented: $controlVM.showSettings) {
                 SettingsView()
         }
         }
         
         
-    }
-    
-    func calcTotal(_ isActive: Bool) {
-        if showTotalAs == "month" {
-            var total: Double = 0
-            let accounts = isActive ? activeAccounts : inactiveAccounts
-            for active in accounts {
-                if active.per == "year" {
-                    total += active.price / 12
-                }
-                else {
-                    total += active.price
-                }
-            }
-            totalPrice = total
-            print(" all calc total performed against month")
-
-
-        } else {
-            var total: Double = 0
-            let accounts = isActive ? activeAccounts : inactiveAccounts
-            for active in accounts {
-                if active.per == "month" {
-                    total += active.price * 12
-                }
-                else {
-                    total += active.price
-                }
-            }
-            totalPrice = total
-            print(" all calc total performed against year")
-
-        }
     }
     
     func deleteAccount(id: UUID, accounts: FetchedResults<AccountData>) {
@@ -301,8 +191,9 @@ struct AccountListView: View {
             // handle the Core Data error
             print("Error saving CoreData after delete")
         }
-        calcTotal(showActive)
-        
+        DispatchQueue.main.async {
+            filterVM.refreshTotal.toggle()
+        }
     }
     
 }
@@ -311,7 +202,7 @@ struct AccountListView: View {
 
 struct ActiveView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountListView(showNewAccount: .constant(false), showActive: .constant(true), selectedID: UUID(), showSettings: .constant(false), showCategories: .constant(false), selectedCategory: .constant("Entertainment"), animatePath: .constant(false), animateBG: .constant(false), showSave: .constant(false), showTabBar: .constant(true))
+        AccountListView()
     }
 }
 

@@ -15,7 +15,8 @@ struct LifeAdminApp: App {
     @AppStorage("isDarkMode") private var isDarkMode = false
     
     @StateObject var spotlight = SpotlightVM()
-    @StateObject var predicateFilter = PredicateFilter()
+    @StateObject var filterVM = FilterViewModel()
+    @StateObject var controlVM = ControlViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -23,7 +24,8 @@ struct LifeAdminApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .preferredColorScheme(isDarkMode ? .dark : .light)
                 .environmentObject(spotlight)
-                .environmentObject(predicateFilter)
+                .environmentObject(filterVM)
+                .environmentObject(controlVM)
         }
     }
 }

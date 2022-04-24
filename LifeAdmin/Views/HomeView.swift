@@ -11,54 +11,36 @@ struct HomeView: View {
     
     @AppStorage("showOnboarding") var showOnboarding = true
 
-    
-    @State private var showNewAccount = false
-    
-    @State private var showActive = true
-    
-    @State private var showSettings = false
-    
-    @State private var showCategories = false
-    @State private var animatePath = false
-    @State private var animateBG = false
-    
-    @State private var selectedCategory = "None"
-    
-    @State private var showSave = false
-    
+    @EnvironmentObject var controlVM: ControlViewModel
     @EnvironmentObject var spotlight: SpotlightVM
-    @EnvironmentObject var predicateFilter: PredicateFilter
+    @EnvironmentObject var filterVM: FilterViewModel
 
-    
-    @State var showTabBar = true
-    
+        
     var body: some View {
 
         ZStack {
                     
-                    AccountListView(showNewAccount: $showNewAccount, showActive: $showActive, showSettings: $showSettings, showCategories: $showCategories, selectedCategory: $selectedCategory, animatePath: $animatePath, animateBG: $animateBG, showSave: $showSave, showTabBar: $showTabBar)
-                        .environmentObject(predicateFilter)
-                        .disabled(showCategories || showSave)
+                    AccountListView()
+                .disabled(controlVM.showCategories || controlVM.showSave)
                         .overlay(
-                            Color.black.opacity(showCategories || showSave ? 0.7 : 0)
+                            Color.black.opacity(controlVM.showCategories || controlVM.showSave ? 0.7 : 0)
                         )
-                        .accessibilityHidden(showCategories || showSave)
+                        .accessibilityHidden(controlVM.showCategories || controlVM.showSave)
                         .accessibilityAddTraits(.isModal)
                         
                     
-                    TabView(showActive: $showActive, showNewAccount: $showNewAccount)
-                        .environmentObject(predicateFilter)
-                        .disabled(showCategories || showSave)
+                    TabView()
+                        .disabled(controlVM.showCategories || controlVM.showSave)
                         .overlay(
-                            Color.black.opacity(showCategories || showSave ? 0.7 : 0)
+                            Color.black.opacity(controlVM.showCategories || controlVM.showSave ? 0.7 : 0)
                         )
-                        .accessibilityHidden(showCategories || showSave)
+                        .accessibilityHidden(controlVM.showCategories || controlVM.showSave)
                         .accessibilityAddTraits(.isModal)
-                        .offset(y: showTabBar ? 0 : (Constants.isScreenLarge ? (Constants.screenHeight / 8.5) * 2 : (Constants.screenHeight / 7.5) * 2))
+                        .offset(y: controlVM.showTabBar ? 0 : (Constants.isScreenLarge ? (Constants.screenHeight / 8.5) * 2 : (Constants.screenHeight / 7.5) * 2))
 
 
                     
-                    if showSave {
+            if controlVM.showSave {
                         VStack {
                             Text("Saved!")
                                 .foregroundColor(Color("PrimaryText"))
@@ -72,7 +54,7 @@ struct HomeView: View {
                             Spacer()
                             
                             Button {
-                                    showSave.toggle()
+                                controlVM.showSave.toggle()
                             } label: {
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5)
@@ -97,17 +79,16 @@ struct HomeView: View {
                         .accessibilityLabel("Account saved")
                         .onAppear {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                if showSave {
-                                        showSave = false
+                                if controlVM.showSave {
+                                    controlVM.showSave = false
                                 }
                             }
                         }
                         
                     }
                     
-                    CategoriesView(selectedCategory: $selectedCategory, showCategories: $showCategories, animatePath: $animatePath, animateBG: $animateBG)
-                        .environmentObject(predicateFilter)
-                        .offset(x: showCategories ? 0 : -(Constants.screenWidth))
+                    CategoriesView()
+                .offset(x: controlVM.showCategories ? 0 : -(Constants.screenWidth))
                         .accessibilityAddTraits(.isModal)
 
                     
