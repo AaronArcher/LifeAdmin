@@ -117,6 +117,9 @@ struct DefaultPhoneView: View {
             Button("OK", role: .cancel) { }
 
         })
+        .onTapGesture(perform: {
+            hideKeyboard()
+        })
         .foregroundColor(Color("PrimaryText"))
         .padding([.top, .horizontal])
         .background(Color("Background").ignoresSafeArea())

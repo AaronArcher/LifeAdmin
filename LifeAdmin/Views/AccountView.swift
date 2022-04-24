@@ -83,12 +83,7 @@ struct AccountView: View {
                 
                 HStack {
                     Button {
-                        DispatchQueue.main.async {
-                            withAnimation(.spring()) {
-                                controlVM.showTabBar = true
-                            }
-                        }
-                        dismiss()
+                            dismiss()
                         
                     } label: {
                         Image(systemName: "chevron.left")

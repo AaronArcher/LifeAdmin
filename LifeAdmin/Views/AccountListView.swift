@@ -152,6 +152,14 @@ struct AccountListView: View {
             .background(Color("Background"))
             .frame(maxHeight: .infinity)
             .ignoresSafeArea()
+            .onAppear(perform: {
+                if !controlVM.showTabBar {
+                    withAnimation(.spring()) {
+                        controlVM.showTabBar = true
+                    }
+                }
+                
+            })
             .alert("Are you sure you want to delete this account?", isPresented: $showDelete, actions: {
                 Button("OK") { deleteAccount(id: selectedID, accounts: allAccounts) }
                 Button("Cancel", role: .cancel) { }

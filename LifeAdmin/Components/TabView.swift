@@ -31,7 +31,7 @@ struct TabView: View {
             Rectangle()
                 .fill(Color("RowBackground"))
                 .shadow(color: .black.opacity(0.15), radius: 20, y: -2)
-                .spotlight(enabled: spotlight.currentSpotlight == 6, title: "Switch between active and inactive/old accounts here.")
+                .spotlight(enabled: spotlight.currentSpotlight == 6, title: "Switch between active or inactive accounts here.")
             
             // Tab Text Buttons
             HStack {
