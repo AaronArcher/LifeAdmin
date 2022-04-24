@@ -22,7 +22,7 @@ struct HeaderView: View {
                 .shadow(color: .black.opacity(0.2), radius: 15, x: 0, y: 10)
 
                 Text(text)
-                    .font(.largeTitle.weight(.light))
+                .font(isAccountNameLong(text: text) ? .body : .largeTitle.weight(.light))
                     .foregroundColor(.white)
                     .frame(width: Constants.screenWidth / 1.4, height: 40)
                     .fixedSize(horizontal: true, vertical: true)
@@ -34,6 +34,14 @@ struct HeaderView: View {
         .frame(height: Constants.screenHeight / 6)
         
 
+    }
+    
+    func isAccountNameLong(text: String) -> Bool {
+        if text.count > 18 {
+            return true
+        } else {
+            return false
+        }
     }
 }
 struct HeaderView_Previews: PreviewProvider {

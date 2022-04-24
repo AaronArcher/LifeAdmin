@@ -21,7 +21,7 @@ struct HomeView: View {
         ZStack {
                     
                     AccountListView()
-                .disabled(controlVM.showCategories || controlVM.showSave)
+                        .disabled(controlVM.showCategories || controlVM.showSave)
                         .overlay(
                             Color.black.opacity(controlVM.showCategories || controlVM.showSave ? 0.7 : 0)
                         )

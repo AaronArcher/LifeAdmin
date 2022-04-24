@@ -199,6 +199,7 @@ struct SettingsView: View {
                             .foregroundColor(.white)
                             .fontWeight(.light)
                             .padding(10)
+                            .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .foregroundColor(Color("Blue1"))
@@ -214,6 +215,7 @@ struct SettingsView: View {
                             .foregroundColor(.white)
                             .fontWeight(.light)
                             .padding(10)
+                            .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
                                     .foregroundColor(Color("Green1"))
@@ -223,6 +225,14 @@ struct SettingsView: View {
                 }
                 .padding()
                 
+                HStack {
+                    Link("Privacy Policy", destination: URL(string: "https://github.com/AaronArcher/LifeAdmin-Privacy-Policy")!)
+                        .font(.caption)
+                        .foregroundColor(Color("Green1"))
+
+                }
+                .padding(.top, -10)
+                .padding(.bottom)
                 
                 Spacer()
             }
