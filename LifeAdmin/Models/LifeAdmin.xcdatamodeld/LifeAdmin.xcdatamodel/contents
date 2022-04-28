@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="AccountData" representedClassName="AccountData" syncable="YES" codeGenerationType="class">
         <attribute name="address1" optional="YES" attributeType="String"/>
         <attribute name="address2" optional="YES" attributeType="String"/>
@@ -9,6 +9,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="paymentDay" optional="YES" attributeType="String"/>
         <attribute name="paymentMonth" optional="YES" attributeType="String"/>
         <attribute name="per" optional="YES" attributeType="String"/>
@@ -18,7 +19,7 @@
     </entity>
     <entity name="DefaultDetails" representedClassName="DefaultDetails" syncable="YES" codeGenerationType="class"/>
     <elements>
-        <element name="AccountData" positionX="-63" positionY="-18" width="128" height="239"/>
+        <element name="AccountData" positionX="-63" positionY="-18" width="128" height="254"/>
         <element name="DefaultDetails" positionX="-63" positionY="90" width="128" height="29"/>
     </elements>
 </model>

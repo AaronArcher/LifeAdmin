@@ -45,6 +45,7 @@ struct EditAccountView: View {
     @State var paymentDay: String = ""
     @State var paymentMonth: String = ""
     @State var selectedCategory: String = ""
+    @State var notes: String = " "
     
     @State private var alertTitle = ""
     @State private var showAlert = false
@@ -106,6 +107,7 @@ struct EditAccountView: View {
                         TextField("Account Name", text: $accountName)
                                 .padding(10)
                                 .disableAutocorrection(true)
+                                .keyboardType(.alphabet)
                                 .foregroundColor(Color("PrimaryText"))
                                 .background(
                                     RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -204,6 +206,7 @@ struct EditAccountView: View {
                                 .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
                         )
                     
+                    Group {
                     
                     //MARK: Email
                     VStack(alignment: .leading, spacing: 2) {
@@ -314,6 +317,7 @@ struct EditAccountView: View {
                                 .padding(10)
                                 .foregroundColor(Color("PrimaryText"))
                                 .textInputAutocapitalization(TextInputAutocapitalization.never)
+                                .keyboardType(.alphabet)
                                 .disableAutocorrection(true)
                                 .background(
                                     RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -555,12 +559,32 @@ struct EditAccountView: View {
                         
                     }
                     
+                    //MARK: Notes
+                    VStack(alignment: .leading, spacing: 2) {
+                        
+                            Text("Notes")
+                                    .font(Constants.isScreenLarge ? .footnote.weight(.light) : .caption.weight(.light))
+                                    .foregroundColor(Color("Green1"))
+                                    .padding(.leading, 10)
+
+                        
+                        TextEditor(text: $notes)
+                                .padding(.leading, 10)
+                                .padding(.vertical, 5)
+                                .foregroundColor(Color("PrimaryText"))
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .frame(minHeight: 45)
+                                        .foregroundColor(Color("RowBackground"))
+                                        .shadow(color: .black.opacity(0.15), radius: 2, x: 2, y: 2)
+                            )
+                    }
                     
                     Rectangle()
                         .fill(.clear)
                         .frame(height: 40)
                     
-                    
+                }
                     
                     
                 }
@@ -614,6 +638,7 @@ struct EditAccountView: View {
             newAccount.per = per
             newAccount.paymentDay = paymentDay
             newAccount.paymentMonth = paymentMonth
+            newAccount.notes = notes
             
             do {
                 try moc.save()
@@ -677,6 +702,7 @@ struct EditAccountView: View {
                     account.per = per
                     account.paymentDay = paymentDay
                     account.paymentMonth = paymentMonth
+                    account.notes = notes
                 }
             }
             do {

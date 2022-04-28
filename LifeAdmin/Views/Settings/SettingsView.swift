@@ -15,6 +15,7 @@ struct SettingsView: View {
     
     @AppStorage("isDarkMode") var isDarkMode = false
     @AppStorage("showTotalAs") var showTotalAs = "month"
+    @AppStorage("showTotal") var showTotal = true
         
     private var bugEmail = SupportEmail(toAddress: "aaronarcherapps@outlook.com", subject: "LifeAdmin - Support Email", messageHeader: "Please describe the bug below:")
     
@@ -72,10 +73,15 @@ struct SettingsView: View {
                             .tint(Color("Green1"))
                             .font(.subheadline)
                         
+                        // Show total
+                        Toggle("Show total", isOn: $showTotal)
+                            .tint(Color("Green1"))
+                            .font(.subheadline)
+                        
                         // Total
                         HStack {
                             Text("Show total per")
-                                .font(.callout)
+                                .font(.subheadline)
                             
                             Spacer()
                             

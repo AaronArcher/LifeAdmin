@@ -10,6 +10,10 @@ import SwiftUI
 struct HomeView: View {
     
     @AppStorage("showOnboarding") var showOnboarding = true
+    
+    @State private var showIntro = true
+    @State private var showIntroLogo = false
+    @State private var showIntroColor = true
 
     @EnvironmentObject var controlVM: ControlViewModel
     @EnvironmentObject var spotlight: SpotlightVM
@@ -91,14 +95,66 @@ struct HomeView: View {
                 .offset(x: controlVM.showCategories ? 0 : -(Constants.screenWidth))
                         .accessibilityAddTraits(.isModal)
 
+            if showIntro {
+                ZStack {
+                    Color("Background")
+                        .ignoresSafeArea()
+                        .opacity(showIntroColor ? 1 : 0)
+                    
+                    VStack {
+                        
+                        Text("LifeAdmin")
+                            .font(.largeTitle.weight(.light))
+                            .foregroundColor(Color("PrimaryText"))
+                            .shadow(color: .black.opacity(0.4), radius: 8, x: 8, y: 8)
+                            .padding()
+                        
+                            Image("Logo")
+                                .resizable()
+                                .frame(width: 180, height: 180)
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(25)
+                                .shadow(color: .black.opacity(0.3), radius: 10, x: 10, y: 10)
+                         
+                        
+                    }
+                    .opacity(showIntroLogo ? 1 : 0)
+                    .onAppear {
+                        if showIntro {
+                            withAnimation(.easeInOut(duration: 0.8)) {
+                                showIntroLogo = true
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                                withAnimation(.easeInOut(duration: 0.7)) {
+                                    showIntroLogo = false
+                                }
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                withAnimation(.easeInOut(duration: 0.7)) {
+                                    showIntroColor = false
+                                }
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.3) {
+                                    showIntro = false
+                            }
+                        }
+                    }
+                    
+                    
+                }
+            }
+            
                     
                     
                     
                 }
                 .onAppear(perform: {
                     if showOnboarding {
-                        spotlight.isOnboarding = true
-                        spotlight.currentSpotlight = 1
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.9) {
+                                spotlight.isOnboarding = true
+                                spotlight.currentSpotlight = 1
+                            
+                        }
                     }
                 })
                 .background(Color("Background"))

@@ -17,6 +17,7 @@ struct AccountListView: View {
     @EnvironmentObject var spotlight: SpotlightVM
     
     @AppStorage("showTotalAs") var showTotalAs = "month"
+    @AppStorage("showTotal") var showTotal = true
     
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.name),
@@ -111,16 +112,20 @@ struct AccountListView: View {
                                 .foregroundColor(Color("Green1"))
                             
                             HStack(spacing: 3) {
-                                Text("£\(totalPrice, specifier: "%.2f")")
-                                    .font(.title3.bold())
-                                    
-                                Text("/\(showTotalAs)")
-                                    .font(.caption)
+                                Text(showTotal ? "£\(totalPrice, specifier: "%.2f")" : "Disabled")
+                                    .font(showTotal ? .title3.bold() : .footnote)
+                                
+                                if showTotal {
+                                    Text("/\(showTotalAs)")
+                                        .font(.caption)
+                                }
+                               
                             }
                             .foregroundColor(Color("PrimaryText"))
                             
                         }
-                        .spotlight(enabled: spotlight.currentSpotlight == 3, title: "Your total expenditure is shown here, you can toggle this between monthly or yearly in the settings page.")
+                        .spotlight(enabled: spotlight.currentSpotlight == 3, title: "View your accounts total cost here, you can toggle this between monthly or yearly in the settings page or hide it completely.")
+                        
                         
                     }
                     .padding(.trailing, 8)

@@ -27,7 +27,7 @@ struct CategoriesView: View {
             
             VStack(alignment: .leading) {
 
-                // Header
+                //MARK: Header
                 HStack {
 
                     Button {
@@ -56,7 +56,7 @@ struct CategoriesView: View {
                     Spacer()
 
                     Text("Categories")
-                        .font(.title.weight(.light))
+                        .font(Constants.isScreenLarge ? .largeTitle.weight(.light) : .title.weight(.light))
                         .foregroundColor(Color("Green1"))
 
                     Spacer()
@@ -65,11 +65,14 @@ struct CategoriesView: View {
                         .frame(width: 30, height: 30)
                 }
                 .padding(.bottom)
+                .padding(.bottom, Constants.isScreenLarge ? 20 : 0)
+                
                 
                 Text("Filter your accounts by:")
-                    .font(.title3.weight(.light))
+                    .font(Constants.isScreenLarge ? .title2.weight(.light) : .title3.weight(.light))
                     .foregroundColor(Color("PrimaryText"))
-                    .padding(.bottom, 25)
+                    .padding(.bottom, Constants.isScreenLarge ? 40 : 25)
+                
 
                 ScrollView(showsIndicators: false) {
                     
@@ -84,8 +87,10 @@ struct CategoriesView: View {
                             ZStack {
                                 if newCategory == category {
                                     RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .fill(
+                                            LinearGradient(colors: [Color("Green1"), Color("Green1"), Color("Green2")], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                        )
                                         .frame(height: 40)
-                                        .foregroundColor(Color("Green1"))
                                         .matchedGeometryEffect(id: "category", in: namespace)
                                     
                                     Text(category)

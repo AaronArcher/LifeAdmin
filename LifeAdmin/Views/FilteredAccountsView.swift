@@ -86,6 +86,7 @@ struct FilteredAccountsView: View {
                                 per: account.per ?? "",
                                 paymentDay: account.paymentDay ?? "",
                                 paymentMonth: account.paymentMonth ?? "",
+                                notes: account.notes ?? "",
                                 isActive: account.isActive)
 
                         } label: {

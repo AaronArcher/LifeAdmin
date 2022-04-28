@@ -40,6 +40,7 @@ struct AccountView: View {
     let per: String
     let paymentDay: String
     let paymentMonth: String
+    let notes: String
     let isActive: Bool
     
     @State private var showPass = false
@@ -242,11 +243,14 @@ struct AccountView: View {
 
                         }
                     
+                //MARK: Notes
+                    AccountDetailField(title: "Notes", text: notes)
+                    
                 Color.clear
                     .frame(height: 30)
                 
             }
-                .frame(maxHeight: Constants.screenHeight / 1.7)
+                .frame(maxHeight: Constants.screenHeight / 1.6)
                 .padding(.bottom, 10)
                 
                 
@@ -362,7 +366,8 @@ struct AccountView: View {
                             per: per,
                             paymentDay:paymentDay,
                             paymentMonth: paymentMonth,
-                            selectedCategory: category
+                            selectedCategory: category,
+                            notes: notes
             )
             
         }
@@ -436,7 +441,7 @@ struct AccountView: View {
 struct AccountView_Previews: PreviewProvider {
         
     static var previews: some View {
-        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", isActive: true)
+        AccountView(id: UUID(), accountName: "Amazon Prime", icon: "play.tv.fill", category: "Entertainment", email: "test@test.com", phone: "01234 098576", password: "TestPass1", address1: "1 Test Lane", address2: "Test Town", postcode: "LE16 9EL", price: 7.99, per: "month", paymentDay: "16th", paymentMonth: "March", notes: "Notes", isActive: true)
     }
 }
 

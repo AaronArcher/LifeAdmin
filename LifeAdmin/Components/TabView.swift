@@ -15,7 +15,6 @@ struct TabView: View {
     @EnvironmentObject var controlVM: ControlViewModel
     
     @State var isActive = true
-//    @Binding var showActive: Bool
     
     let height = UIScreen.main.bounds.height / 7.5
     let largeHeight = UIScreen.main.bounds.height / 8.5
@@ -117,14 +116,14 @@ struct TabView: View {
                 }
             }
             //MARK: Spotlight
-            .spotlight(enabled: spotlight.currentSpotlight == 1, title: "Welcome to LifeAdmin! \n \n \nThe best app to keep all of your individual account information securely in one place!")
-            .spotlight(enabled: spotlight.currentSpotlight == 2, title: "Set up new accounts using this button.")
+            .spotlight(enabled: spotlight.currentSpotlight == 1, title: "Welcome to LifeAdmin! \n \n \nThe ultimate app to track all of your account information in one place!")
+            .spotlight(enabled: spotlight.currentSpotlight == 2, title: "Create new accounts using this button.")
             .offset(y: -height / 2)
             .shadow(color: .black.opacity(0.2), radius: 15, x: 5, y: 10)
                         
         }
         .frame(height: Constants.isScreenLarge ? largeHeight : height)
-        .frame(maxHeight: .infinity, alignment:  .bottom)
+        .frame(maxHeight: Constants.screenHeight, alignment:  .bottom)
         .ignoresSafeArea()
     }
 }

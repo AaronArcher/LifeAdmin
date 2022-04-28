@@ -65,7 +65,7 @@ struct AccountDetailField: View {
                                 .foregroundColor(Color("PrimaryText"))
                                 .font(.title3)
                                 .padding(10)
-                                .lineLimit(title == "Address" ? 3 : 1)
+                                .lineLimit(title == "Address" || title == "Notes" ? 20 : 1)
 
                         } else {
                             Text("-")
