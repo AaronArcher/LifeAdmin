@@ -147,9 +147,11 @@ struct AccountView: View {
                     
                 //MARK: Email
                 AccountDetailField(title: "Email", text: email)
+                        .padding(.horizontal, 5)
                 
                 //MARK: Phone
                 AccountDetailField(title: "Phone", text: phone)
+                        .padding(.horizontal, 5)
                 
                 //MARK: Secure Password
                 VStack(alignment: .leading, spacing: 2) {
@@ -221,23 +223,33 @@ struct AccountView: View {
                     )
                     
                 }
+                .padding(.horizontal, 5)
                 
                 //MARK: Address
                 AccountDetailField(title: "Address", text: "\(address1)\n\(address2)\n\(postcode)")
+                        .padding(.horizontal, 5)
 
                         HStack(alignment: .top) {
                         //MARK: Price
                         AccountDetailField(title: "Price", isPrice: true, price: price, per: per)
+                                .padding(.leading, 5)
+
 
                         Spacer()
 
                         //MARK: payment date
                         if per == "" {
                             AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)")
+                                .padding(.trailing, 5)
+
                         } else if per == "month" {
                             AccountDetailField(title: "Payment Date", text: "\(paymentDay)")
+                                .padding(.trailing, 5)
+
                         } else {
                             AccountDetailField(title: "Payment Date", text: "\(paymentDay) \(paymentMonth)")
+                                .padding(.trailing, 5)
+
                         }
 
 
@@ -245,6 +257,7 @@ struct AccountView: View {
                     
                 //MARK: Notes
                     AccountDetailField(title: "Notes", text: notes)
+                        .padding(.horizontal, 5)
                     
                 Color.clear
                     .frame(height: 30)

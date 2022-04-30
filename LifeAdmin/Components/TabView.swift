@@ -47,6 +47,8 @@ struct TabView: View {
                         .frame(width: 100)
                         .offset(y: isActive ? -10 : 0)
                         .scaleEffect(isActive ? 1.1 : 1)
+                        .dynamicTypeSize(.large)
+
                 }
                 .buttonStyle(FlatButtonStyle())
                 
@@ -65,6 +67,7 @@ struct TabView: View {
                         .frame(width: 100)
                         .offset(y: isActive ? 0 : -10)
                         .scaleEffect(isActive ? 1 : 1.1)
+                        .dynamicTypeSize(.large)
 
                 }
                 .buttonStyle(FlatButtonStyle())

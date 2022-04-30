@@ -78,73 +78,76 @@ struct SettingsView: View {
                             .tint(Color("Green1"))
                             .font(.subheadline)
                         
-                        // Total
-                        HStack {
-                            Text("Show total per")
-                                .font(.subheadline)
-                            
-                            Spacer()
-                            
-                            VStack(spacing: 0) {
-                                Button {
-                                    withAnimation {
-                                        showTotalAs = "month"
+                        // Total per
+                        if showTotal {
+                            HStack {
+                                Text("Show total per")
+                                    .font(.subheadline)
+                                
+                                Spacer()
+                                
+                                VStack(spacing: 0) {
+                                    Button {
+                                        withAnimation {
+                                            showTotalAs = "month"
+                                            
+                                        }
+                                        print("changed showtotal to month")
+                                    } label: {
+                                        if showTotalAs == "month" {
+                                            Text("Month")
+                                                .font(.callout)
+                                                .bold()
+                                                .foregroundColor(Color("Green1"))
+                                        } else {
+                                            Text("Month")
+                                                .font(.callout)
+
+                                        }
                                         
                                     }
-                                    print("changed showtotal to month")
-                                } label: {
-                                    if showTotalAs == "month" {
-                                        Text("Month")
-                                            .font(.callout)
-                                            .bold()
-                                            .foregroundColor(Color("Green1"))
-                                    } else {
-                                        Text("Month")
-                                            .font(.callout)
-
-                                    }
+                                    .buttonStyle(FlatButtonStyle())
+                                    .padding(3)
                                     
-                                }
-                                .buttonStyle(FlatButtonStyle())
-                                .padding(3)
-                                
-                                if showTotalAs == "month" {
-                                    Rectangle()
-                                        .frame(width: 35 ,height: 1)
-                                        .matchedGeometryEffect(id: "underline", in: namespace)
-                                }
-                            }
-                            
-                            VStack(spacing: 0) {
-                                Button {
-                                    withAnimation {
-                                        showTotalAs = "year"
-                                        
+                                    if showTotalAs == "month" {
+                                        Rectangle()
+                                            .frame(width: 35 ,height: 1)
+                                            .matchedGeometryEffect(id: "underline", in: namespace)
                                     }
-                                    print("Settings - changed showtotal to year")
+                                }
+                                
+                                VStack(spacing: 0) {
+                                    Button {
+                                        withAnimation {
+                                            showTotalAs = "year"
+                                            
+                                        }
+                                        print("Settings - changed showtotal to year")
 
-                                } label: {
+                                    } label: {
+                                        if showTotalAs == "year" {
+                                            Text("Year")
+                                                .font(.callout)
+                                                .bold()
+                                                .foregroundColor(Color("Green1"))
+                                        } else {
+                                            Text("Year")
+                                                .font(.callout)
+                                            
+                                        }
+                                    }
+                                    .buttonStyle(FlatButtonStyle())
+                                    .padding(3)
+                                    
                                     if showTotalAs == "year" {
-                                        Text("Year")
-                                            .font(.callout)
-                                            .bold()
-                                            .foregroundColor(Color("Green1"))
-                                    } else {
-                                        Text("Year")
-                                            .font(.callout)
-                                        
+                                        Rectangle()
+                                            .frame(width: 25 ,height: 1)
+                                            .matchedGeometryEffect(id: "underline", in: namespace)
                                     }
                                 }
-                                .buttonStyle(FlatButtonStyle())
-                                .padding(3)
                                 
-                                if showTotalAs == "year" {
-                                    Rectangle()
-                                        .frame(width: 25 ,height: 1)
-                                        .matchedGeometryEffect(id: "underline", in: namespace)
-                                }
                             }
-                            
+
                         }
                         
                     }, header: {

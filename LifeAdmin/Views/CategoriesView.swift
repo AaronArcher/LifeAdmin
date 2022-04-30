@@ -20,6 +20,8 @@ struct CategoriesView: View {
     
     var body: some View {
 
+        ZStack {
+            
         ZStack(alignment: .leading) {
             
             Color("Background")
@@ -72,6 +74,7 @@ struct CategoriesView: View {
                     .font(Constants.isScreenLarge ? .title2.weight(.light) : .title3.weight(.light))
                     .foregroundColor(Color("PrimaryText"))
                     .padding(.bottom, Constants.isScreenLarge ? 40 : 25)
+                    .dynamicTypeSize(.xLarge)
                 
 
                 ScrollView(showsIndicators: false) {
@@ -148,6 +151,7 @@ struct CategoriesView: View {
                         Text("Clear filter")
                             .font(.callout)
                             .foregroundColor(.white)
+                            .dynamicTypeSize(.large)
                             .padding(.horizontal)
                             .padding(.vertical, 10)
                             .background(
@@ -180,6 +184,7 @@ struct CategoriesView: View {
                         Text("Apply filter")
                             .font(.callout)
                             .foregroundColor(.white)
+                            .dynamicTypeSize(.large)
                             .padding(.horizontal)
                             .padding(.vertical, 10)
                             .background(
@@ -200,6 +205,7 @@ struct CategoriesView: View {
             .frame(width: Constants.screenWidth / 1.45)
             .padding()
             .padding(.top, Constants.isScreenLarge ? 40 : 25)
+       
             
         }
         .clipShape(CategoryShape(curveValue: controlVM.animatePath ? 70 : 0))
@@ -210,7 +216,35 @@ struct CategoriesView: View {
                 )
         )
         .ignoresSafeArea()
+        
+            //MARK: clear tappable area to close categories
+            HStack {
+                Spacer()
+                
+            Rectangle()
+                    .fill(.white.opacity(0.001))
+                .frame(width: Constants.screenWidth / 4, alignment: .trailing)
+                .onTapGesture {
+                    DispatchQueue.main.async {
+                        withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.4, blendDuration: 0.3)) {
+                            controlVM.animatePath.toggle()
+                        }
+                        withAnimation {
+                            controlVM.animateBG.toggle()
+                        }
+                        withAnimation(.spring().delay(0.1)) {
+                            controlVM.showCategories.toggle()
+                        }
+                        if filterVM.selectedCategory != newCategory {
+                            newCategory = ""
+                        }
+                    }
+                }
+            
+        }
+    }
 
+        
     }
 }
 
