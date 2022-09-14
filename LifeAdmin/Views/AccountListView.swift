@@ -34,104 +34,18 @@ struct AccountListView: View {
     
     var body: some View {
         
-        
       
         NavigationView {
             VStack {
                     
-                    ZStack(alignment: .top) {
-                        
-                        HeaderView(text: filterVM.showActive ? "Active Accounts" : "Inactive Accounts")
-                        
-                        HStack {
-                            
-                            Button {
-                                DispatchQueue.main.async {
-                                    withAnimation {
-                                        controlVM.animateBG.toggle()
-                                    }
-                                    withAnimation(.spring()) {
-                                        controlVM.showCategories.toggle()
-                                    }
-                                    withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
-                                        controlVM.animatePath.toggle()
-                                    }
-                                }
-                                
-                            } label: {
-                                Image(systemName: "slider.horizontal.3")
-                                    .foregroundColor(.white)
-                                    .font(.title2)
-                                    .dynamicTypeSize(.medium)
-                                    .accessibilityLabel("Category filter")
-                            }
-                            .spotlight(enabled: spotlight.currentSpotlight == 5, title: "Filter your accounts by category using this button.")
-                            
-                            
-                            Spacer()
-                            
-                            Button {
-                                controlVM.showSettings = true
-                            } label: {
-                                Image(systemName: "gearshape.fill")
-                                    .foregroundColor(.white)
-                                    .font(.title2)
-                                    .dynamicTypeSize(.medium)
-                                    .accessibilityLabel("Settings")
-
-                            }
-                            
-                        }
-                        .padding(.horizontal)
-                        .offset(y: (Constants.screenHeight / 6) / 2.5)
-                        
-                    }
+                // MARK: Header
+                    header
                     
                     //MARK: Total
-                    
-                    HStack {
-                        
-                        if filterVM.selectedCategory != "None" {
-                            
-                            VStack(alignment: .leading) {
-                                
-                                Text("Filtered by:")
-                                    .foregroundColor(Color("Green1"))
-                                
-                                Text(filterVM.selectedCategory)
-                                    .font(.title3.bold())
-                                    .foregroundColor(Color("PrimaryText"))
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        VStack(alignment: .leading) {
-                            
-                            Text("Total")
-                                .foregroundColor(Color("Green1"))
-                            
-                            HStack(spacing: 3) {
-                                Text(showTotal ? "£\(totalPrice, specifier: "%.2f")" : "Disabled")
-                                    .font(showTotal ? .title3.bold() : .footnote)
-                                
-                                if showTotal {
-                                    Text("/\(showTotalAs)")
-                                        .font(.caption)
-                                }
-                               
-                            }
-                            .foregroundColor(Color("PrimaryText"))
-                            
-                        }
-                        .spotlight(enabled: spotlight.currentSpotlight == 3, title: "View your accounts total cost here, you can toggle this between monthly or yearly in the settings page or hide it completely.")
-                        
-                        
-                    }
-                    .padding(.trailing, 8)
-                    .padding()
+                    total
                     
                 
+                //MARK: List of Accounts
                 ZStack(alignment: .top) {
                 
                     Rectangle()
@@ -139,19 +53,15 @@ struct AccountListView: View {
                         .frame(width: Constants.screenWidth / 1.1, height: Constants.screenHeight / 3)
                         .spotlight(enabled: spotlight.currentSpotlight == 4, title: "View all of your accounts here.\nSelect an account to view/edit your account information or swipe to delete an account.")
                     
-                        
-                        
-                        //MARK: List of Accounts
-                        FilteredAccountsView(predicate: filterVM.predicate, showTotalAs: $showTotalAs, showDelete: $showDelete, selectedID: $selectedID, totalPrice: $totalPrice)
-                        
-                    
-                        
+                        FilteredAccountsView(predicate: filterVM.predicate,
+                                             showTotalAs: $showTotalAs,
+                                             showDelete: $showDelete,
+                                             selectedID: $selectedID,
+                                             totalPrice: $totalPrice)
                     }
-              
                     
                     Spacer()
                 }
-          
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .background(Color("Background"))
@@ -163,7 +73,6 @@ struct AccountListView: View {
                         controlVM.showTabBar = true
                     }
                 }
-                
             })
             .alert("Are you sure you want to delete this account?", isPresented: $showDelete, actions: {
                 Button("OK") { deleteAccount(id: selectedID, accounts: allAccounts) }
@@ -182,6 +91,100 @@ struct AccountListView: View {
         }
         
         
+    }
+    
+    var header: some View {
+        ZStack(alignment: .top) {
+            
+            HeaderView(text: filterVM.showActive ? "Active Accounts" : "Inactive Accounts")
+            
+            HStack {
+                
+                Button {
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            controlVM.animateBG.toggle()
+                        }
+                        withAnimation(.spring()) {
+                            controlVM.showCategories.toggle()
+                        }
+                        withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.4, blendDuration: 0.3).delay(0.2)) {
+                            controlVM.animatePath.toggle()
+                        }
+                    }
+                    
+                } label: {
+                    Image(systemName: "slider.horizontal.3")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .dynamicTypeSize(.medium)
+                        .accessibilityLabel("Category filter")
+                }
+                .spotlight(enabled: spotlight.currentSpotlight == 5, title: "Filter your accounts by category using this button.")
+                
+                
+                Spacer()
+                
+                Button {
+                    controlVM.showSettings = true
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                        .dynamicTypeSize(.medium)
+                        .accessibilityLabel("Settings")
+
+                }
+                
+            }
+            .padding(.horizontal)
+            .offset(y: (Constants.screenHeight / 6) / 2.5)
+            
+        }
+    }
+    
+    var total: some View {
+        HStack {
+            
+            if filterVM.selectedCategory != "None" {
+                
+                VStack(alignment: .leading) {
+                    
+                    Text("Filtered by:")
+                        .foregroundColor(Color("Green1"))
+                    
+                    Text(filterVM.selectedCategory)
+                        .font(.title3.bold())
+                        .foregroundColor(Color("PrimaryText"))
+                }
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .leading) {
+                
+                Text("Total")
+                    .foregroundColor(Color("Green1"))
+                
+                HStack(spacing: 3) {
+                    Text(showTotal ? "£\(totalPrice, specifier: "%.2f")" : "Disabled")
+                        .font(showTotal ? .title3.bold() : .footnote)
+                    
+                    if showTotal {
+                        Text("/\(showTotalAs)")
+                            .font(.caption)
+                    }
+                   
+                }
+                .foregroundColor(Color("PrimaryText"))
+                
+            }
+            .spotlight(enabled: spotlight.currentSpotlight == 3, title: "View your accounts total cost here, you can toggle this between monthly or yearly in the settings page or hide it completely.")
+            
+            
+        }
+        .padding(.trailing, 8)
+        .padding()
     }
     
     func deleteAccount(id: UUID, accounts: FetchedResults<AccountData>) {

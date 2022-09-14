@@ -71,7 +71,6 @@
 		EEB55C5127F24365006A90C7 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		EEB55C5327F2437E006A90C7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		EEB55C5527F24396006A90C7 /* AccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailView.swift; sourceTree = "<group>"; };
-		EEB55C5727F24663006A90C7 /* LifeAdmin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeAdmin.entitlements; sourceTree = "<group>"; };
 		EEB55C5927F24666006A90C7 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		EEB55C5B27F246DC006A90C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EEB55C6227F65178006A90C7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -134,7 +133,6 @@
 			children = (
 				EEB55C5B27F246DC006A90C7 /* Info.plist */,
 				EE761A1B28033760000006BB /* success-animation.json */,
-				EEB55C5727F24663006A90C7 /* LifeAdmin.entitlements */,
 				EEB55C3127F1ACAD006A90C7 /* LifeAdminApp.swift */,
 				EEB55C4427F24137006A90C7 /* Views */,
 				EEB55C4527F24141006A90C7 /* Components */,
