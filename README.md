@@ -31,4 +31,8 @@ Preview:
 Screenshots:
 
 
+![LifeAdmin3](https://user-images.githubusercontent.com/89655771/190382054-a6d7104a-3435-4cb0-81a2-4db92d814658.PNG)
+![LifeAdmin4](https://user-images.githubusercontent.com/89655771/190382057-c7d3047b-cf1c-4643-b689-bc0e00e766b7.PNG)
+![LifeAdmin1](https://user-images.githubusercontent.com/89655771/190382060-b7964371-7781-44bc-8457-ecd1b5780844.png)
+![LifeAdmin2](https://user-images.githubusercontent.com/89655771/190382061-0b5abaa3-512c-4018-ad85-df3ebc7e0c8c.PNG)
 
