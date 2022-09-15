@@ -20,6 +20,10 @@ Key features include:
 
 
 Preview:
+
+
+
+
 ![LifeAdmin GIF](https://user-images.githubusercontent.com/89655771/190381471-0de32125-46f9-4d3b-922f-311f0b34c443.gif)
 
 
