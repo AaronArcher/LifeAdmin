@@ -20,7 +20,8 @@ Key features include:
 
 
 Preview:
-![LifeAdmin GIF](https://user-images.githubusercontent.com/89655771/190381388-2e64d0fe-c14c-407e-9c5d-66da692e79dd.gif)
+![LifeAdmin GIF](https://user-images.githubusercontent.com/89655771/190381471-0de32125-46f9-4d3b-922f-311f0b34c443.gif)
+
 
 
 Screenshots:
