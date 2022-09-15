@@ -20,7 +20,8 @@ Key features include:
 
 
 Preview:
-https://thumbs.gfycat.com/HiddenFarflungGreatdane-size_restricted.gif
+![LifeAdmin GIF](https://user-images.githubusercontent.com/89655771/190381012-72da58a0-be80-4c36-b62f-d3f2adc8ff3e.gif)
+
 
 
 Screenshots:
