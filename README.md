@@ -20,7 +20,7 @@ Key features include:
 
 
 Preview:
-
+https://thumbs.gfycat.com/HiddenFarflungGreatdane-size_restricted.gif
 
 
 Screenshots:
